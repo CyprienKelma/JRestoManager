@@ -1,18 +1,24 @@
-## Getting Started
+## Introduction
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Système de gestion de restaurant basé sur Java, développé dans le cadre d'un projet scolaire.
+    - Traitement des commandes des clients.
+    - La gestion des employés.
+    - Contrôle des stocks.
 
-## Folder Structure
 
-The workspace contains two folders by default, where:
+### Organisation du projet
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+L'espace de travail contient deux dossiers :
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- 'src' : le dossier pour gérer les sources
+- 'lib' : le dossier pour gérer les dépendances
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Dans 'src/main' ce trouve le contenue du projet :
 
-## Dependency Management
+- 'luncher' : le package pour lancer l'application. Contient le code des différents écrans et le main.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- 'staff' : le package qui contient les informations sur les équipes et les employés qui les composent.
+
+- 'place' : le package qui contient le coeur de la gestion du restaurant. Le système de transaction, de gestion du restaurant, ect...
+
+- 'stock' : le package de gestion du stockage des ingrédients, de l'état des plats et des différentes cartes disponibles.

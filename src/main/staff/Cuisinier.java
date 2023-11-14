@@ -2,7 +2,7 @@ package main.staff;
 
 import java.util.List;
 
-import main.App;
+import main.luncher.App;
 
 public class Cuisinier extends Employé {
 
