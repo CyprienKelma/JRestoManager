@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Equipe {
 
-    // TODO Vérifier le nombre [min, max] d'employés de chaque type dans une unique
-    // équipe
+    // TODO Vérifier le nombre [min, max] d'employés de chaque type
+    // autorisé, dans chaque équipe
 
     private Manager manager; // Un unique manager par équipe ?
     private List<Serveur> serveursList; // 2 serveur minimum
@@ -66,7 +66,7 @@ public class Equipe {
     /**
      * @return List<Barman> return the barmans
      */
-    public List<Barman> getbBarmans() {
+    public List<Barman> getBarmans() {
         return barmansList;
     }
 
