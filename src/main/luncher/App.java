@@ -10,32 +10,33 @@ public class App {
         print("3- Ecran bar");
         print("4- Ecran Monitoring");
 
-        Scanner scanner = new Scanner(System.in);
-        int choixEcran = scanner.nextInt();
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choixEcran = scanner.nextInt();
 
-        switch (choixEcran) {
-            case 1:
-                // Appeler la fonction pour l'écran de prise de commande
-                break;
-            case 2:
-                // Appeler la fonction pour l'écran de cuisine
-                break;
-            case 3:
-                // Appeler la fonction pour l'écran de bar
-                break;
-            case 4:
-                // Appeler la fonction pour l'écran de monitoring
-                // => Suivi des performances du restaurant
-                // => Impression de la liste de course
-                break;
-            case 5:
-                // Appeler la fonction pour l'écran de gestion des employés
-                break;
-            case 6:
-                // Appeler la fonction pour l'écran de gestion de la réserve d'aliments
-                break;
-            default:
-                System.out.println("Choix invalide");
+            switch (choixEcran) {
+                case 1:
+                    // Appeler la fonction pour l'écran de prise de commande
+                    break;
+                case 2:
+                    // Appeler la fonction pour l'écran de cuisine
+                    break;
+                case 3:
+                    // Appeler la fonction pour l'écran de bar
+                    break;
+                case 4:
+                    // Appeler la fonction pour l'écran de monitoring
+                    // => Suivi des performances du restaurant
+                    // => Impression de la liste de course
+                    break;
+                case 5:
+                    // Appeler la fonction pour l'écran de gestion des employés
+                    break;
+                case 6:
+                    // Appeler la fonction pour l'écran de gestion de la réserve d'aliments
+                    break;
+                default:
+                    System.out.println("Choix invalide");
+            }
         }
     }
 
