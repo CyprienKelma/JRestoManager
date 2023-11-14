@@ -1,12 +1,14 @@
+package main;
+
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Quel écran souhaitez-vous afficher?");
-        System.out.println("1- Ecran prise de commande");
-        System.out.println("2- Ecran cuisine");
-        System.out.println("3- Ecran bar");
-        System.out.println("4- Ecran Monitoring");
+        print("Quel écran souhaitez-vous afficher?");
+        print("1- Ecran prise de commande");
+        print("2- Ecran cuisine");
+        print("3- Ecran bar");
+        print("4- Ecran Monitoring");
 
         Scanner scanner = new Scanner(System.in);
         int choixEcran = scanner.nextInt();
@@ -23,9 +25,22 @@ public class App {
                 break;
             case 4:
                 // Appeler la fonction pour l'écran de monitoring
+                // => Suivi des performances du restaurant
+                // => Impression de la liste de course
+                break;
+            case 5:
+                // Appeler la fonction pour l'écran de gestion des employés
+                break;
+            case 6:
+                // Appeler la fonction pour l'écran de gestion de la réserve d'aliments
                 break;
             default:
                 System.out.println("Choix invalide");
         }
     }
+
+    public static void print(String message) {
+        System.out.println(message);
+    }
+
 }
