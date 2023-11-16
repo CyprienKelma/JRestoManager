@@ -4,6 +4,4 @@ public class aliment {
 
     int quantité;
     String nom;
-    
-    
 }
