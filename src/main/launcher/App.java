@@ -1,4 +1,4 @@
-package main.luncher;
+package main.launcher;
 
 import java.util.*;
 
