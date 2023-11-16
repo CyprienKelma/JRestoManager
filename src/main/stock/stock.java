@@ -1,6 +1,7 @@
-package main.carte;
+package main.stock;
 import java.io.IOException;
-import main.carte.aliment;
+
+import main.stock.aliment;
 
 public class stock {
 

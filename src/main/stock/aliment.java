@@ -1,4 +1,4 @@
-package main.carte;
+package main.stock;
 
 public class aliment {
 
