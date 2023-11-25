@@ -11,7 +11,7 @@ import main.stock.*;
  */
 public class Restaurant {
 
-    // Définit si le restaurant est ouvert ou fermé
+    // Définie si le restaurant est ouvert ou fermé
     // Pour passer en ouvert, il faut que le manager ait consitué une
     // équipe valide (=> bon nombre d'employé de chaque type)
     private static boolean isOpen;

@@ -15,7 +15,6 @@ public class Serveur extends Employé {
         this.nombreDeTablesServies = 0;
     }
 
-    @Override
     public void effectuerTache() {
         System.out.println("Le serveur prend les commandes des clients");
         nombreDeTablesServies++;

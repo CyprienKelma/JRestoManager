@@ -12,8 +12,6 @@ public abstract class Employé {
         this.salaire = salaire;
     }
 
-    public abstract void effectuerTache();
-
     /**
      * @return String return the nom
      */
