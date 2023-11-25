@@ -4,6 +4,11 @@ import java.util.List;
 import main.staff.*;
 import main.stock.*;
 
+/*
+ * Classe pricipale qui représente le coeur du restaurant
+ * Elle contient toutes les informations relatives à l'état du restaurant
+ * (employés, stock, équipe, transactions) dans le service actuellement en cours
+ */
 public class Restaurant {
 
     // Définit si le restaurant est ouvert ou fermé
@@ -16,42 +21,51 @@ public class Restaurant {
     private static List<Employé> employésList;
 
     // L'équipe actuellement en service
-    private Equipe equipeActuelle;
+    private static Equipe equipeActuelle;
 
     // Le stock actuel du restaurant
-    private Stock stockActuelle;
+    private static Stock stockActuelle;
 
     // La liste des transactions effectuées par le restaurant
-    private List<Transaction> transactionsList;
+    private static List<Transaction> transactionsList;
 
-    private Carte carte;
+    // Carte indiquant en tant réel les plats disponibles ou non (en fonction du
+    // stock)
+    // private static Carte carte; // TODO : Netoyer le package stock avant
+    // d'importer la classe Carte
 
-    /**
-     * @return boolean return the isOpen
-     */
-    public boolean isIsOpen() {
+    private Restaurant() {
+        // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
+        // Ce sont des classes utilitaires qui contiennent que des méthodes statiques
+        throw new IllegalStateException("Classe Restaurant : pas d'instances requises");
+    }
+
+    public static boolean isOpen() {
         return isOpen;
     }
 
-    /**
-     * @param isOpen the isOpen to set
-     */
-    public void setIsOpen(boolean isOpen) {
-        this.isOpen = isOpen;
+    public static void setIsOpen(boolean isOpen) {
+        Restaurant.isOpen = isOpen;
     }
 
-    /**
-     * @return Equipe return the equipeActuelle
-     */
-    public Equipe getEquipeActuelle() {
+    public static List<Employé> getEmployésList() {
+        return employésList;
+    }
+
+    public static void setEmployésList(List<Employé> employésList) {
+        Restaurant.employésList = employésList;
+    }
+
+    public static Equipe getEquipeActuelle() {
         return equipeActuelle;
     }
 
-    /**
-     * @param equipeActuelle the equipeActuelle to set
-     */
-    public void setEquipeActuelle(Equipe equipeActuelle) {
-        this.equipeActuelle = equipeActuelle;
+    public static void setEquipeActuelle(Equipe equipeActuelle) {
+        Restaurant.equipeActuelle = equipeActuelle;
+    }
+
+    public static Stock getStockActuelle() {
+        return stockActuelle;
     }
 
 }

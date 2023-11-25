@@ -26,6 +26,8 @@ public class OrderTakingScreen {
         print("\n3- Retour au menu principal\n");
         int choixEcran = menuScanner.nextInt();
 
+        // TODO : Implémenter la suite de la fonction dès que la classe "Equipe" sera
+        // implémentée
     }
 
     public static void print(String text) {

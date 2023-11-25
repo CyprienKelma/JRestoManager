@@ -16,6 +16,7 @@ public class TeamScreen {
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 
+    // Ecran principal de gestion des employés (5)
     public static void showTeamScreen(Scanner menuScanner) {
         clearConsole();
         print("==========================================================================\n");
