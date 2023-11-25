@@ -18,7 +18,13 @@ public class Restaurant {
     // L'équipe actuellement en service
     private Equipe equipeActuelle;
 
-    private Stock stock;
+    // Le stock actuel du restaurant
+    private Stock stockActuelle;
+
+    // La liste des transactions effectuées par le restaurant
+    private List<Transaction> transactionsList;
+
+    private Carte carte;
 
     /**
      * @return boolean return the isOpen
