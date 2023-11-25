@@ -1,9 +1,8 @@
 package main.stock;
 
-public class aliment {
+public class Aliment {
 
     int quantité;
     String nom;
-    
-    
+
 }

@@ -1,25 +1,19 @@
 package main.stock;
+
 import java.io.IOException;
 
-import main.stock.aliment;
+import main.stock.Aliment;
 
-public class stock {
+public class Stock {
 
-    public static String LireFichier(String fichier) throws IOException{
-        
+    public static String LireFichier(String fichier) throws IOException {
     }
 
-    public static String AjouterAliment(String fichier) throws IOException{
-        
+    public static String AjouterAliment(String fichier) throws IOException {
+
     }
 
-    public static String RetirerAliment(String fichier) throws IOException{
-        
-    }
+    public static String RetirerAliment(String fichier) throws IOException {
 
-
-    public static void main(String[] args) {
-       
-        
     }
 }

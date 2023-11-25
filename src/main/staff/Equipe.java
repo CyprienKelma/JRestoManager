@@ -4,35 +4,32 @@ import java.util.*;
 
 public class Equipe {
 
-    // TODO Vérifier le nombre [min, max] d'employés de chaque type
-    // autorisé, dans chaque équipe
+    /*
+     * Une équipe est composée d'un manager, de 2 serveurs, d'un barman et de 4
+     * cuisiniers
+     * Elle est créée par le manager et indispensable pour ouvrir le restaurant
+     * Pour créer une équipe, on choisi des employé parmis la liste des employés
+     * disponibles du restaurant
+     */
+    private Manager manager;
+    private Serveur serveur1;
+    private Serveur serveur2;
+    private Barman barman;
+    private Cuisinier cuisinier1;
+    private Cuisinier cuisinier2;
+    private Cuisinier cuisinier3;
+    private Cuisinier cuisinier4;
 
-    private Manager manager; // Un unique manager par équipe ?
-    private List<Serveur> serveursList; // 2 serveur minimum
-    private List<Barman> barmansList; // 1 barman minimum
-    private List<Cuisinier> cuisiniersList; // 4 cuisiniers minimum
-
-    public Equipe(Manager manager, List<Serveur> serveurs, List<Barman> barmans, List<Cuisinier> cuisiniers) {
+    Equipe(Manager manager, Serveur serveur1, Serveur serveur2, Barman barman, Cuisinier cuisinier1,
+            Cuisinier cuisinier2, Cuisinier cuisinier3, Cuisinier cuisinier4) {
         this.manager = manager;
-        this.serveursList = serveurs;
-        this.barmansList = barmans;
-        this.cuisiniersList = cuisiniers;
-    }
-
-    /*
-     * "T" employé : l'employé que l'on veut ajouter
-     * employésList : la liste dans laquelle on veut l'ajouter (de type T)
-     */
-    public <T extends Employé> void ajouterEmployé(T employé, List<T> employésList) {
-        employésList.add(employé);
-    }
-
-    /*
-     * "T" employé : l'employé que l'on veut suppprimer
-     * employésList : la liste (de type T) où l'on veut supprimer l'employé
-     */
-    public <T extends Employé> void supprimerEmployé(T employé, List<T> employésList) {
-        employésList.remove(employé);
+        this.serveur1 = serveur1;
+        this.serveur2 = serveur2;
+        this.barman = barman;
+        this.cuisinier1 = cuisinier1;
+        this.cuisinier2 = cuisinier2;
+        this.cuisinier3 = cuisinier3;
+        this.cuisinier4 = cuisinier4;
     }
 
     /**
@@ -50,30 +47,101 @@ public class Equipe {
     }
 
     /**
-     * @return List<Serveur> return the serveurs
+     * @return Serveur return the serveur1
      */
-    public List<Serveur> getServeurs() {
-        return serveursList;
+    public Serveur getServeur1() {
+        return serveur1;
     }
 
     /**
-     * @param serveurs the serveurs to set
+     * @param serveur1 the serveur1 to set
      */
-    public void setServeurs(List<Serveur> serveurs) {
-        this.serveursList = serveurs;
+    public void setServeur1(Serveur serveur1) {
+        this.serveur1 = serveur1;
     }
 
     /**
-     * @return List<Barman> return the barmans
+     * @return Serveur return the serveur2
      */
-    public List<Barman> getBarmans() {
-        return barmansList;
+    public Serveur getServeur2() {
+        return serveur2;
     }
 
     /**
-     * @param barmans the barmans to set
+     * @param serveur2 the serveur2 to set
      */
-    public void setBarmans(List<Barman> barmans) {
-        this.barmansList = barmans;
+    public void setServeur2(Serveur serveur2) {
+        this.serveur2 = serveur2;
     }
+
+    /**
+     * @return Barman return the barman
+     */
+    public Barman getBarman() {
+        return barman;
+    }
+
+    /**
+     * @param barman the barman to set
+     */
+    public void setBarman(Barman barman) {
+        this.barman = barman;
+    }
+
+    /**
+     * @return Cuisinier return the cuisinier1
+     */
+    public Cuisinier getCuisinier1() {
+        return cuisinier1;
+    }
+
+    /**
+     * @param cuisinier1 the cuisinier1 to set
+     */
+    public void setCuisinier1(Cuisinier cuisinier1) {
+        this.cuisinier1 = cuisinier1;
+    }
+
+    /**
+     * @return Cuisinier return the cuisinier2
+     */
+    public Cuisinier getCuisinier2() {
+        return cuisinier2;
+    }
+
+    /**
+     * @param cuisinier2 the cuisinier2 to set
+     */
+    public void setCuisinier2(Cuisinier cuisinier2) {
+        this.cuisinier2 = cuisinier2;
+    }
+
+    /**
+     * @return Cuisinier return the cuisinier3
+     */
+    public Cuisinier getCuisinier3() {
+        return cuisinier3;
+    }
+
+    /**
+     * @param cuisinier3 the cuisinier3 to set
+     */
+    public void setCuisinier3(Cuisinier cuisinier3) {
+        this.cuisinier3 = cuisinier3;
+    }
+
+    /**
+     * @return Cuisinier return the cuisinier4
+     */
+    public Cuisinier getCuisinier4() {
+        return cuisinier4;
+    }
+
+    /**
+     * @param cuisinier4 the cuisinier4 to set
+     */
+    public void setCuisinier4(Cuisinier cuisinier4) {
+        this.cuisinier4 = cuisinier4;
+    }
+
 }

@@ -12,7 +12,7 @@ public class Cuisinier extends Employé {
 
     // TODO : Create the Plat class
     @Override
-    public List<Plat> travailler(List<Plat> platsAFaire) {
+    public List<Plat> effectuerTache(List<Plat> platsAFaire) {
         System.out.println("Le cuisinier commence à préparer les plats");
 
         return List.of(/* A faire */);
