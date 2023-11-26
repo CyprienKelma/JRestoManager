@@ -127,7 +127,7 @@ public class TeamScreen {
             print("==========================================================================\n");
             print("La liste des employés est vide.\n");
             print("1 - Revenir à la page précédente");
-            print("2 - Revenir au menu principale");
+            print("2 - Revenir au menu principale\n\n");
             int input = menuScanner.nextInt();
 
             if (input == 1) {
@@ -137,6 +137,7 @@ public class TeamScreen {
             }
         }
 
+        clearConsole();
         print("==========================================================================\n");
         print("Liste de tout les employés :\n");
         print("\n--------------------------------------------------------------------------");
@@ -329,7 +330,7 @@ public class TeamScreen {
         print("2 - Choisir les cuisiniers");
         print("3 - Choisir le barman");
         print("4 - Choisir le manager");
-        print("\n5 - Page précédente\n");
+        print("\n5 - Page précédente");
         print("6 - Retour au menu principal\n");
 
         int choixEcran = menuScanner.nextInt();
@@ -348,7 +349,7 @@ public class TeamScreen {
 
                 break;
             case 5:
-
+                showTeamScreen(menuScanner);
                 break;
             case 6:
                 App.showMainMenu();
