@@ -53,7 +53,7 @@ public class TeamScreen {
         print("1 - Ajouter un employé");
         print("2 - Supprimer un employé");
 
-        print("\n3 - Page précédente\n");
+        print("\n3 - Page précédente");
         print("4 - Retour au menu principal\n");
         int choixEcran = menuScanner.nextInt();
 
@@ -87,7 +87,7 @@ public class TeamScreen {
         print("2 - Cuisinier");
         print("3 - Barman");
         print("4 - Manager");
-        print("\n5 - Page précédente\n");
+        print("\n5 - Page précédente");
         print("6 - Retour au menu principal\n");
         int choixEcran = menuScanner.nextInt();
 
@@ -133,11 +133,17 @@ public class TeamScreen {
         print("Veuillez entrer le nom de l'employé :\n");
         String nom = menuScanner.next();
 
-        print("Veuillez entrer le prénom de l'employé :\n");
+        print("\nVeuillez entrer le prénom de l'employé :\n");
         String prenom = menuScanner.next();
 
-        print("Veuillez entrer le salaire de l'employé (la paye pour un service complet) :\n");
-        double salaire = menuScanner.nextDouble();
+        print("\nVeuillez entrer le salaire de l'employé (x euros/heure net) :\n");
+        // On prend une valeur de type String, pour éviter des erreurs fréquentes
+        // lorsque l'on utilise un scanner pour une valeur de type double
+        String tmpSalaire = menuScanner.next();
+
+        // On convertie ensuite cette valeur tmpSalaire(String) en salaire(double) pour
+        // respecter l'appel des constructeurs de Serveur, Cuisinier, etc...
+        double salaire = Double.parseDouble(tmpSalaire);
 
         switch (typeEmployé) {
 
@@ -197,6 +203,40 @@ public class TeamScreen {
             }
         }
 
+        clearConsole();
+        print("==========================================================================\n");
+        print("SUPPRIMER UN EMPLOYÉ :\n");
+        print("Veuillez entrer le numéro de l'employé que vous souhaitez supprimer : \n\n");
+
+        // TODO : faire en sorte que l'on voit la liste sur plusieurs pages s'il y a
+        // trop d'employés dans la liste
+        for (int i = 0; i < employésList.size(); i++) {
+
+            // L'employé d'indice i
+            Employé employé = employésList.get(i);
+
+            // Le type d'employé (Manager, Serveur, ect...)
+            String type = employé.getClass().getSimpleName();
+
+            // On affiche chaque employé d'indice i
+            print((i + 1) + ") " + employé.getNom() + ", " + employé.getPrenom() + ", "
+                    + employé.getSalaire() + " euros/h net.");
+        }
+
+        print("\n--------------------------------------------------------------------------");
+        print("Employé numéro :\n");
+        int input = menuScanner.nextInt();
+
+        // SelectedOne désigne l'employé d'indice i (i = input - 1)
+        Employé selectedOne = employésList.get(input - 1);
+        String selectedOneType = selectedOne.getClass().getSimpleName();
+
+        // On retire l'employé d'indice i = input - 1 (puisque l'utilisateur vois la
+        // liste des i + 1)
+        employésList.remove(selectedOne);
+
+        // Enfin on affiche un message de confirmation pour confirmer que
+        showConfirmationEmployeeChange(menuScanner, selectedOneType, false);
     }
 
     // Affiche un message de confirmation, suivit d'un menu pour choisir la suite
