@@ -24,13 +24,17 @@ public class TeamScreen {
         clearConsole(); // Nettoie la console pour une meilleure lisibilité
         print("==========================================================================\n");
         print("GESTION DES EMPLOYÉS\n");
+        print("0 - Afficher la liste des employés");
         print("1 - Ajouter/Supprimer un employé");
         print("2 - Programmer les employés pour la soirée (i.e. former l'équipe)");
 
-        print("\n3- Retour au menu principal\n");
+        print("\n3 - Retour au menu principal\n");
         int choixEcran = menuScanner.nextInt();
 
         switch (choixEcran) {
+            case 0:
+                showEmployeeList(menuScanner);
+                break;
             case 1:
                 showAddRemoveEmployeeScreen(menuScanner);
                 break;
@@ -114,6 +118,51 @@ public class TeamScreen {
                 showAddEmployee(menuScanner);
         }
 
+    }
+
+    public static void showEmployeeList(Scanner menuScanner) {
+
+        if (Restaurant.getEmployésList().isEmpty()) {
+            clearConsole();
+            print("==========================================================================\n");
+            print("La liste des employés est vide.\n");
+            print("1 - Revenir à la page précédente");
+            print("2 - Revenir au menu principale");
+            int input = menuScanner.nextInt();
+
+            if (input == 1) {
+                showTeamScreen(menuScanner);
+            } else {
+                App.showMainMenu();
+            }
+        }
+
+        print("==========================================================================\n");
+        print("Liste de tout les employés :\n");
+        print("\n--------------------------------------------------------------------------");
+
+        for (int i = 0; i < Restaurant.getEmployésList().size(); i++) {
+
+            // L'employé d'indice i
+            Employé employé = Restaurant.getEmployésList().get(i);
+
+            // Le type d'employé (Manager, Serveur, ect...)
+            String type = employé.getClass().getSimpleName();
+
+            // On affiche chaque employé d'indice i
+            print((i + 1) + ") " + type + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
+                    + employé.getSalaire() + " euros/h net.");
+        }
+        print("--------------------------------------------------------------------------");
+        print("\n1 - Revenir à la page précédente");
+        print("2 - Revenir au menu principale");
+        int input = menuScanner.nextInt();
+
+        if (input == 1) {
+            showTeamScreen(menuScanner);
+        } else {
+            App.showMainMenu();
+        }
     }
 
     /**
