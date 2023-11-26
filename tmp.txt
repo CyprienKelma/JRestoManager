@@ -1,0 +1,60 @@
+if(employésList.isEmpty()){
+            clearConsole();
+            print("==========================================================================\n");
+            print("SUPPRIMER UN EMPLOYÉ :\n");
+            print("Il n'y a aucun employé à supprimer !\n");
+            print("1 - Revenir à la page précédente\n");
+            print("2 - Retour au menu principal\n");
+            int choixEcran = menuScanner.nextInt();
+
+            switch (choixEcran) {
+                case 1:
+                    showAddRemoveEmployeeScreen(menuScanner);
+                    break;
+                case 2:
+                    App.showMainMenu();
+                    break;
+                default:
+                    showRemoveEmployee(menuScanner);
+            }
+        } else {
+            clearConsole();
+            print("==========================================================================\n");
+            print("SUPPRIMER UN EMPLOYÉ :\n");
+            print("Quel employé voulez-vous supprimer ?\n");
+
+            for (int i = 0; i < employésList.size(); i++) {
+                print((i + 1) + " - " + employésList.get(i).getNom() + " " + employésList.get(i).getPrenom());
+            }
+
+            print("\n" + (employésList.size() + 1) + " - Page précédente\n");
+            print((employésList.size() + 2) + " - Retour au menu principal\n");
+            int choixEcran = menuScanner.nextInt();
+
+            if (choixEcran == employésList.size() + 1)
+                showAddRemoveEmployeeScreen(menuScanner);
+            else if (choixEcran == employésList.size() + 2)
+                App.showMainMenu();
+            else {
+                removeEmployee(menuScanner, employésList.get(choixEcran - 1));
+            }
+        }
+
+
+
+
+
+        // ************************************************************
+
+
+        if(Restaurant.isOpen()) {
+            print("L'équipe actuelle est composée de :\n");
+            print("Manager : " + Restaurant.getEquipeActuelle().getManager().getNom() + "\n");
+            print("Serveur 1 : " + Restaurant.getEquipeActuelle().getServeur1().getNom() + "\n");
+            print("Serveur 2 : " + Restaurant.getEquipeActuelle().getServeur2().getNom() + "\n");
+            print("Barman : " + Restaurant.getEquipeActuelle().getBarman().getNom() + "\n");
+            print("Cuisinier 1 : " + Restaurant.getEquipeActuelle().getCuisinier1().getNom() + "\n");
+            print("Cuisinier 2 : " + Restaurant.getEquipeActuelle().getCuisinier2().getNom() + "\n");
+            print("Cuisinier 3 : " + Restaurant.getEquipeActuelle().getCuisinier3().getNom() + "\n");
+            print("Cuisinier 4 : " + Restaurant.getEquipeActuelle().getCuisinier4().getNom() + "\n\n");
+        }

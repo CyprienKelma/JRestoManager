@@ -22,15 +22,15 @@ public class App {
         print("==========================================================================\n\n");
 
         print("Bienvenue dans l'application JRESTO MANAGER PRO® !\n\n");
-        print("Etat actuelle du restaurant : " + (Restaurant.isOpen() ? "OUVERT" : "FERMÉ") + "\n\n");
+        print("Etat actuel du restaurant : " + (Restaurant.isOpen() ? "OUVERT" : "FERMÉ") + "\n\n");
 
         print("Quel écran souhaitez-vous afficher?\n\n");
-        print("1- Ecran prise de commande\n");
-        print("2- Ecran cuisine\n");
-        print("3- Ecran bar\n");
-        print("4- Ecran Monitoring\n");
-        print("5- Ecran gestion des employés\n");
-        print("6- Ecran gestion de la réserve d'aliments\n\n\n");
+        print("1 - Ecran prise de commande\n");
+        print("2 - Ecran cuisine\n");
+        print("3 - Ecran bar\n");
+        print("4 - Ecran Monitoring\n");
+        print("5 - Ecran gestion des employés\n");
+        print("6 - Ecran gestion de la réserve d'aliments\n\n\n");
 
         Scanner menuScanner = new Scanner(System.in);
         int choixEcran = menuScanner.nextInt();

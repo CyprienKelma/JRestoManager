@@ -1,6 +1,6 @@
 package main.place;
 
-import java.util.List;
+import java.util.*;
 import main.staff.*;
 import main.stock.*;
 
@@ -18,7 +18,7 @@ public class Restaurant {
 
     // La liste de tous les employés du restaurant et
     // de tout type (Manager, Serveur, Barman, Cuisinier)
-    private static List<Employé> employésList;
+    private static List<Employé> employésList = new ArrayList<>();
 
     // L'équipe actuellement en service
     private static Equipe equipeActuelle;
@@ -36,7 +36,7 @@ public class Restaurant {
 
     private Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
-        // Ce sont des classes utilitaires qui contiennent que des méthodes statiques
+        // C'est une classe utilitaire puisqu'on travaille avec un seul restaurant
         throw new IllegalStateException("Classe Restaurant : pas d'instances requises");
     }
 
