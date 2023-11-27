@@ -1,7 +1,9 @@
-package main.launcher;
+package main.launcher.employee;
 
 import java.util.List;
 import java.util.Scanner;
+
+import main.launcher.App;
 import main.place.Restaurant;
 import main.staff.*;
 
@@ -11,11 +13,12 @@ import main.staff.*;
  *  A. Ajouter/Supprimer un employé
  *  B. Programmer les employés pour la soirée (i.e. former l'équipe)
  */
-public class TeamScreen {
+public class EmployeeScreen {
 
-    private TeamScreen() {
+    private EmployeeScreen() {
         // Constructeur privé pour empêcher l'instanciation des classes "Screen"
-        // Ce sont des classes utilitaires qui ne contiennent que des méthodes statiques
+        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 
@@ -24,24 +27,24 @@ public class TeamScreen {
         clearConsole(); // Nettoie la console pour une meilleure lisibilité
         print("==========================================================================\n");
         print("GESTION DES EMPLOYÉS\n");
-        print("0 - Afficher la liste des employés");
-        print("1 - Ajouter/Supprimer un employé");
-        print("2 - Programmer les employés pour la soirée (i.e. former l'équipe)");
+        print("1 - Afficher la liste des employés");
+        print("2 - Ajouter/Supprimer un employé");
+        print("3 - Programmer les employés pour la soirée (i.e. former l'équipe)");
 
-        print("\n3 - Retour au menu principal\n");
+        print("\n4 - Retour au menu principal\n");
         int choixEcran = menuScanner.nextInt();
 
         switch (choixEcran) {
-            case 0:
+            case 1:
                 showEmployeeList(menuScanner);
                 break;
-            case 1:
+            case 2:
                 showAddRemoveEmployeeScreen(menuScanner);
                 break;
-            case 2:
-                showTeamFormationScreen(menuScanner);
-                break;
             case 3:
+                TeamScreen.showTeamFormationScreen(menuScanner);
+                break;
+            case 4:
                 App.showMainMenu();
                 break;
             default:
@@ -319,44 +322,6 @@ public class TeamScreen {
             showAddRemoveEmployeeScreen(menuScanner);
         else if (choixEcran == 3)
             App.showMainMenu();
-    }
-
-    // Sous-écran B : Programmer les employés pour la soirée (i.e. former l'équipe)
-    public static void showTeamFormationScreen(Scanner menuScanner) {
-        clearConsole();
-        print("==========================================================================\n");
-        print("FORMER L'EQUIPE DE CE SOIR :\n");
-        print("1 - Choisir les serveurs");
-        print("2 - Choisir les cuisiniers");
-        print("3 - Choisir le barman");
-        print("4 - Choisir le manager");
-        print("\n5 - Page précédente");
-        print("6 - Retour au menu principal\n");
-
-        int choixEcran = menuScanner.nextInt();
-
-        switch (choixEcran) {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
-                showTeamScreen(menuScanner);
-                break;
-            case 6:
-                App.showMainMenu();
-                break;
-            default:
-
-        }
     }
 
     // utiliser pour afficher un texte plus rapidement

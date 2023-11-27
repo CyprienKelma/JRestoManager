@@ -7,7 +7,8 @@ public class KitchenScreen {
 
     private KitchenScreen() {
         // Constructeur privé pour empêcher l'instanciation des classes "Screen"
-        // Ce sont des classes utilitaires qui contiennent que des méthodes statiques
+        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 

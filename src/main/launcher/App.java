@@ -1,6 +1,8 @@
 package main.launcher;
 
 import java.util.*;
+
+import main.launcher.employee.EmployeeScreen;
 import main.place.*;
 
 // Classe principale qui gère le lancement de l'application
@@ -56,7 +58,7 @@ public class App {
                 break;
             case 5:
                 // Appelle la fonction de l'écran de gestion des employés
-                TeamScreen.showTeamScreen(menuScanner);
+                EmployeeScreen.showTeamScreen(menuScanner);
                 break;
             case 6:
                 // Appelle la fonction de l'écran de gestion de la réserve d'aliments
