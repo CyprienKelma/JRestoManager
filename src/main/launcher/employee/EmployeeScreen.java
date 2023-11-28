@@ -309,7 +309,7 @@ public class EmployeeScreen {
         } else {
             print("1 - Supprimer un autre employé");
         }
-        print("2 - Revenir à la page précédente\n");
+        print("2 - Revenir à la page précédente");
         print("3 - Retour au menu principal\n");
 
         int choixEcran = menuScanner.nextInt();

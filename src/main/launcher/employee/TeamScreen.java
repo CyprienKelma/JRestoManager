@@ -1,10 +1,16 @@
 package main.launcher.employee;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import main.launcher.App;
+import main.place.Restaurant;
+import main.staff.Employé;
 
 public class TeamScreen {
+
+    static List<Employé> createEmployésList = Restaurant.getEmployésList();
 
 
     private TeamScreen() {
@@ -63,7 +69,62 @@ public class TeamScreen {
         }
     }
 
+    public static void showSelectServer(Scanner menuScanner) {
+        clearConsole();
+        print("==========================================================================\n");
+        print("CHOISIR LES SERVEURS :\n");
 
+        print("Vous devez choisir 2 serveurs qui travailleront durant tout ce service.\n");
+
+        print("1 - Serveur 1 : A SELECTIONNER");
+        print("2 - Serveur 2 : A SELECTIONNER");
+        print("\n3 - Confirmer la selection");
+        print("\n4 - Page précédente");
+        print("5 - Retour au menu principal\n");
+
+        int choixEcran = menuScanner.nextInt();
+
+        switch (choixEcran) {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+                showTeamFormationScreen(menuScanner);
+                break;
+            case 5:
+                App.showMainMenu();
+                break;
+            default:
+
+        }
+    }
+
+    public static void showEmployeeListByType(Scanner menuScanner, String type, int whichOne){
+
+        clearConsole();
+        print("==========================================================================\n");
+        if(whichOne == 1){
+            print("Selectionner un premier " + type + "à ajouter parmis la liste :");
+        } else {
+            print("Selectionner un " + whichOne + "ème " + type + "à ajouter parmis la liste :");
+        }
+        
+        
+        for(int i = 0; i < createEmployésList.size(); i++){
+            Employé employé = createEmployésList.get(i);
+
+            if(employé.getClass().getSimpleName().equals(type)){
+                print((i + 1) + ") " + type + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
+                    + employé.getSalaire() + " euros/h net.");
+            }
+        }
+    }
 
 
     // utiliser pour afficher un texte plus rapidement
