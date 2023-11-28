@@ -36,7 +36,7 @@ public class App {
         print("                                 " + (Restaurant.isOpen() ? "OUVERT" : "FERMÉ\n\n"));
 
         print("--------------------------------------------------------------------------");
-        print("                    Quel écran souhaitez-vous afficher?");
+        print("                   Quel écran souhaitez-vous afficher ?");
         print("--------------------------------------------------------------------------\n");
         print("1 - Ecran prise de commande\n");
         print("2 - Ecran cuisine\n");

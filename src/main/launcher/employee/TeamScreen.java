@@ -55,7 +55,7 @@ public class TeamScreen {
 
         print("Avant de pouvoir ouvrir le restaurant, vous devez former l'équipe de ce soir.\n");
         print("Pour former cette équipe, vous devez choisir les employés qui travailleront");
-        print("durant tout ce service.\n");
+        print("durant tout le service.\n");
 
         print("1 - Choisir les serveurs");
         print("2 - Choisir les cuisiniers");
@@ -140,9 +140,7 @@ public class TeamScreen {
     // on peut choisir lequel on ajoute parmis ceux du bon type
     public static void showEmployeeListByType(Scanner menuScanner, String type, int whichOne) {
 
-        // On récupère la liste de tout les employés à chaque appele de cette fonction
-        // pour être sûr d'avoir la liste à jour
-        List<Employé> createEmployésList = Restaurant.getEmployésList();
+        // On va créer une liste temporaire pour stocker les employés du type voulu
         List<Employé> tmpList = new ArrayList<>();
 
         clearConsole();
@@ -159,9 +157,9 @@ public class TeamScreen {
 
         // On affiche la liste des employés du type qui nous concerne
         // Par exemple n'afficher que les serveurs quand on selectionne nos 2 serveurs
-        for (int i = 0; i < createEmployésList.size(); i++) {
+        for (int i = 0; i < Restaurant.getEmployésList().size(); i++) {
 
-            Employé employé = createEmployésList.get(i);
+            Employé employé = Restaurant.getEmployésList().get(i);
 
             // On affiche que les employés du type qui nous concerne (i.e. du paramètre
             // 'type')

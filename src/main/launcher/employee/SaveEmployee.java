@@ -15,6 +15,8 @@ import java.util.*;
  */
 public class SaveEmployee {
 
+    // Sauvegarde la liste des employés dans le fichier lorsqu'on la met à jour
+    // Par exemple lorsqu'on ajoute ou supprime un employé
     public static void saveEmployeeListToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("src\\main\\data\\employeeList.txt"))) {
             for (Employé employé : Restaurant.getEmployésList()) {
@@ -31,6 +33,8 @@ public class SaveEmployee {
         }
     }
 
+    // Charge la liste des employés depuis le fichier, lors du lancement de
+    // l'application
     public static void loadEmployeeListFromTheFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\data\\employeeList.txt"))) {
             String line;
