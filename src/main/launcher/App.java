@@ -23,10 +23,13 @@ public class App {
         print("**************************** Portail Employé *****************************");
         print("==========================================================================\n\n");
 
-        print("Bienvenue dans l'application JRESTO MANAGER PRO® !\n\n");
-        print("Etat actuel du restaurant : " + (Restaurant.isOpen() ? "OUVERT" : "FERMÉ") + "\n\n");
+        print("           Bienvenue dans l'application JRESTO MANAGER PRO® !\n");
+        print("                      Etat actuel du restaurant :");
+        print("                                 " + (Restaurant.isOpen() ? "OUVERT" : "FERMÉ\n\n"));
 
-        print("Quel écran souhaitez-vous afficher?\n\n");
+        print("--------------------------------------------------------------------------");
+        print("                    Quel écran souhaitez-vous afficher?");
+        print("--------------------------------------------------------------------------\n");
         print("1 - Ecran prise de commande\n");
         print("2 - Ecran cuisine\n");
         print("3 - Ecran bar\n");

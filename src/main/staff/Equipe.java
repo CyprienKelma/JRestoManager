@@ -5,31 +5,36 @@ import java.util.*;
 public class Equipe {
 
     /*
-     * Une équipe est composée d'un manager, de 2 serveurs, d'un barman et de 4
-     * cuisiniers
+     * Une équipe est composée de 2 serveurs, 4 cuisiniers, 1 barman et 1 manager
      * Elle est créée par le manager et indispensable pour ouvrir le restaurant
      * Pour créer une équipe, on choisi des employé parmis la liste des employés
      * disponibles du restaurant
      */
-    private Manager manager;
     private Serveur serveur1;
     private Serveur serveur2;
-    private Barman barman;
     private Cuisinier cuisinier1;
     private Cuisinier cuisinier2;
     private Cuisinier cuisinier3;
     private Cuisinier cuisinier4;
+    private Barman barman;
+    private Manager manager;
 
-    Equipe(Manager manager, Serveur serveur1, Serveur serveur2, Barman barman, Cuisinier cuisinier1,
-            Cuisinier cuisinier2, Cuisinier cuisinier3, Cuisinier cuisinier4) {
-        this.manager = manager;
+    /*
+     * !!! ATTENTION !!!
+     * NE PAS CHANGER L'ORDRE DES PARAMETRES DU CONSTRUCTEUR NI LES SETTERS
+     * Sinon le code des écrans de crations d'équipe ne fonctionneront plus
+     */
+
+    public Equipe(Serveur serveur1, Serveur serveur2, Cuisinier cuisinier1, Cuisinier cuisinier2, Cuisinier cuisinier3,
+            Cuisinier cuisinier4, Barman barman, Manager manager) {
         this.serveur1 = serveur1;
         this.serveur2 = serveur2;
-        this.barman = barman;
         this.cuisinier1 = cuisinier1;
         this.cuisinier2 = cuisinier2;
         this.cuisinier3 = cuisinier3;
         this.cuisinier4 = cuisinier4;
+        this.barman = barman;
+        this.manager = manager;
     }
 
     /**
