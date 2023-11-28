@@ -3,16 +3,24 @@ package main.launcher;
 import java.util.*;
 
 import main.launcher.employee.EmployeeScreen;
+import main.launcher.employee.SaveEmployee;
 import main.place.*;
 
 // Classe principale qui gère le lancement de l'application
 public class App {
     public static void main(String[] args) {
+
+        // Charge tout les fichiers de sauvegarde du projet
+        loadAllFile();
         try {
             showMainMenu(); // Affiche le menu principal
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void loadAllFile() {
+        SaveEmployee.loadEmployeeListFromTheFile();
     }
 
     public static void showMainMenu() {

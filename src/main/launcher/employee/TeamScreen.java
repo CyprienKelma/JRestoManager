@@ -153,13 +153,13 @@ public class TeamScreen {
             print("Selectionner un " + whichOne + "ème " + type + "à ajouter parmis la liste :");
         }
 
+        // Puisque la liste va être filtrée (on ne veut que les serveurs par exemple)
+        // On va utiliser une variable j pour afficher les numéros des employés
+        int j = 0;
+
         // On affiche la liste des employés du type qui nous concerne
         // Par exemple n'afficher que les serveurs quand on selectionne nos 2 serveurs
         for (int i = 0; i < createEmployésList.size(); i++) {
-
-            // Puisque la liste va être filtrée (on ne veut que les serveurs par exemple)
-            // On va utiliser une variable j pour afficher les numéros des employés
-            int j = 0;
 
             Employé employé = createEmployésList.get(i);
 
@@ -246,7 +246,7 @@ public class TeamScreen {
         if (whichOne == 1)
             print("Une fois l'équipe confirmé, il sera le " + type.toLowerCase() + " du service de se soir.");
         else
-            print("Une fois l'équipe confirmé, il sera le " + type.toLowerCase() + "N°" + whichOne
+            print("Une fois l'équipe confirmé, il sera le " + type.toLowerCase() + " N°" + whichOne
                     + " du service de ce soir\n\n\n");
 
         print("\n--------------------------------------------------------------------------");

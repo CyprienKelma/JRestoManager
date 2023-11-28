@@ -205,6 +205,9 @@ public class EmployeeScreen {
                 Serveur serveur = new Serveur(nom, prenom, salaire);
                 Restaurant.getEmployésList().add(serveur);
 
+                // Sauvegarde la modification dans le fichier (data/employeeList.txt)
+                SaveEmployee.saveEmployeeListToFile();
+
                 showConfirmationEmployeeChange(menuScanner, typeEmployé, true);
                 break;
 
@@ -212,6 +215,9 @@ public class EmployeeScreen {
             case "Cuisinier":
                 Cuisinier cuisinier = new Cuisinier(nom, prenom, salaire);
                 Restaurant.getEmployésList().add(cuisinier);
+
+                // Sauvegarde la modification dans le fichier (data/employeeList.txt)
+                SaveEmployee.saveEmployeeListToFile();
 
                 showConfirmationEmployeeChange(menuScanner, typeEmployé, true);
                 break;
@@ -221,6 +227,9 @@ public class EmployeeScreen {
                 Barman barman = new Barman(nom, prenom, salaire);
                 Restaurant.getEmployésList().add(barman);
 
+                // Sauvegarde la modification dans le fichier (data/employeeList.txt)
+                SaveEmployee.saveEmployeeListToFile();
+
                 showConfirmationEmployeeChange(menuScanner, typeEmployé, true);
                 break;
 
@@ -228,6 +237,9 @@ public class EmployeeScreen {
             case "Manager":
                 Manager manager = new Manager(nom, prenom, salaire);
                 Restaurant.getEmployésList().add(manager);
+
+                // Sauvegarde la modification dans le fichier (data/employeeList.txt)
+                SaveEmployee.saveEmployeeListToFile();
 
                 showConfirmationEmployeeChange(menuScanner, typeEmployé, true);
                 break;
@@ -287,6 +299,9 @@ public class EmployeeScreen {
         // On retire l'employé d'indice i = input - 1 (puisque l'utilisateur vois la
         // liste des i + 1)
         employésList.remove(selectedOne);
+
+        // Sauvegarde la modification dans le fichier (data/employeeList.txt)
+        SaveEmployee.saveEmployeeListToFile();
 
         // Enfin on affiche un message de confirmation pour confirmer que
         showConfirmationEmployeeChange(menuScanner, selectedOneType, false);
