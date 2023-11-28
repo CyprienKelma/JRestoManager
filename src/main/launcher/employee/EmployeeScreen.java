@@ -17,7 +17,7 @@ public class EmployeeScreen {
 
     private EmployeeScreen() {
         // Constructeur privé pour empêcher l'instanciation des classes "Screen"
-        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // Les classes portant l'inscription "Screen" sont des utilitaires. Elles n'ont
         // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }

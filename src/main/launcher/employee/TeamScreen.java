@@ -6,23 +6,38 @@ import java.util.Scanner;
 
 import main.launcher.App;
 import main.place.Restaurant;
-import main.staff.Employé;
+import main.staff.*;
 
 public class TeamScreen {
 
-    static List<Employé> createEmployésList = Restaurant.getEmployésList();
+    // Le but est selectionner des employés de chaque type pour former l'équipe
+    // On va donc les récupérer dans la liste de tout les employés (=>
+    // Restaurant.getEmployésList())
+    // et les ajouter dans des variables temporaires.
+    // Une fois que l'équipe est formée, on va créer une instance de la classe
+    // Equipe avec ces variables
 
+    // On a donc :
+    private static Serveur serveur1Tmp = null;
+    private static Serveur serveur2Tmp = null;
+    private static Cuisinier cuisinier1Tmp = null;
+    private static Cuisinier cuisinier2Tmp = null;
+    private static Cuisinier cuisinier3Tmp = null;
+    private static Cuisinier cuisinier4Tmp = null;
+    private static Barman barmanTmp = null;
+    private static Manager managerTmp = null;
+
+    // TODO : utiliser une HashMap pour stocker les employés sélectionnés plutôt que
+    // des variables temporaires
 
     private TeamScreen() {
         // Constructeur privé pour empêcher l'instanciation des classes "Screen"
-        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // Les classes portant l'inscription "Screen" sont des utilitaires. Elles n'ont
         // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 
-
-
-        // Programmer les employés pour la soirée (i.e. former l'équipe)
+    // Ecran : Programmer les employés pour la soirée (i.e. former l'équipe)
     public static void showTeamFormationScreen(Scanner menuScanner) {
         clearConsole();
         print("==========================================================================\n");
@@ -44,7 +59,7 @@ public class TeamScreen {
 
         switch (choixEcran) {
             case 1:
-
+                showSelectServer(menuScanner);
                 break;
             case 2:
 
@@ -56,7 +71,7 @@ public class TeamScreen {
 
                 break;
             case 5:
-                
+
                 break;
             case 6:
                 EmployeeScreen.showTeamScreen(menuScanner);
@@ -69,6 +84,7 @@ public class TeamScreen {
         }
     }
 
+    // Ecran pour choisir les 2 serveurs
     public static void showSelectServer(Scanner menuScanner) {
         clearConsole();
         print("==========================================================================\n");
@@ -78,54 +94,119 @@ public class TeamScreen {
 
         print("1 - Serveur 1 : A SELECTIONNER");
         print("2 - Serveur 2 : A SELECTIONNER");
-        print("\n3 - Confirmer la selection");
-        print("\n4 - Page précédente");
-        print("5 - Retour au menu principal\n");
+        print("\n3 - Page précédente");
+        print("4 - Retour au menu principal\n");
 
         int choixEcran = menuScanner.nextInt();
 
         switch (choixEcran) {
             case 1:
-
+                // Redirige vers la fonction qui affiche la liste des serveurs
+                showEmployeeListByType(menuScanner, "Serveur", 1);
                 break;
             case 2:
-
+                // Même chose pour le deuxième serveur à selectionner
+                showEmployeeListByType(menuScanner, "Serveur", 2);
                 break;
             case 3:
-
-                break;
-            case 4:
+                // Page précédente
                 showTeamFormationScreen(menuScanner);
                 break;
-            case 5:
+            case 4:
+                // Retour au menu principal
                 App.showMainMenu();
                 break;
             default:
+                // Si le choix n'est pas valide, on relance la fonction
+                showSelectServer(menuScanner);
 
         }
     }
 
-    public static void showEmployeeListByType(Scanner menuScanner, String type, int whichOne){
+    // Cette fonction affiche la liste des employés du type voulu. Comme ça,
+    // on peut choisir lequel on ajoute à l'équipe parmis ceux du type voulu
+    public static void showEmployeeListByType(Scanner menuScanner, String type, int whichOne) {
+
+        // On récupère la liste de tout les employés à chaque appele de cette fonction
+        // pour être sûr d'avoir la liste à jour
+        List<Employé> createEmployésList = Restaurant.getEmployésList();
+        List<Employé> tmpList = new ArrayList<>();
 
         clearConsole();
         print("==========================================================================\n");
-        if(whichOne == 1){
+        if (whichOne == 1) {
             print("Selectionner un premier " + type + "à ajouter parmis la liste :");
         } else {
             print("Selectionner un " + whichOne + "ème " + type + "à ajouter parmis la liste :");
         }
-        
-        
-        for(int i = 0; i < createEmployésList.size(); i++){
+
+        // On affiche la liste des employés du type qui nous concerne
+        // Par exemple n'afficher que les serveurs quand on selectionne nos 2 serveurs
+        for (int i = 0; i < createEmployésList.size(); i++) {
+
+            // Puisque la liste va être filtrée (on ne veut que les serveurs par exemple)
+            // On va utiliser une variable j pour afficher les numéros des employés
+            int j = 0;
+
             Employé employé = createEmployésList.get(i);
 
-            if(employé.getClass().getSimpleName().equals(type)){
-                print((i + 1) + ") " + type + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
-                    + employé.getSalaire() + " euros/h net.");
+            // On affiche que les employés du type qui nous concerne (i.e. du paramètre
+            // 'type')
+            if (employé.getClass().getSimpleName().equals(type)) {
+
+                // On affiche l'employé seulement si il n'est pas déjà sélectionné :
+                if (!(serveur1Tmp == employé || serveur2Tmp == employé)) {
+                    // Vérifier que l'employé n'est pas déja dans l'équipe :
+                    print((j + 1) + ") " + type + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
+                            + employé.getSalaire() + " euros/h net.");
+
+                    tmpList.add(employé);
+
+                    j++; // On incrémente j seulement si on affiche l'employé
+                    // i.e. s'il est du type qui nous concerne ET qu'il n'est pas déjà sélectionné
+                }
             }
         }
-    }
 
+        print("\n--------------------------------------------------------------------------");
+        print("Employé numéro :\n");
+        int input = menuScanner.nextInt();
+
+        // SelectedOne désigne l'employé d'indice j (où j = input - 1)
+        Employé selectedOne = tmpList.get(input - 1);
+
+        // On ajoute l'employé sélectionné à l'équipe
+        // Pour cela on l'ajoute dans sa variable temporaires
+        switch (type) {
+            case "Serveur":
+                if (whichOne == 1) {
+                    serveur1Tmp = (Serveur) selectedOne;
+                } else {
+                    serveur2Tmp = (Serveur) selectedOne;
+                }
+                break;
+            case "Cuisinier":
+                if (whichOne == 1) {
+                    cuisinier1Tmp = (Cuisinier) selectedOne;
+                } else if (whichOne == 2) {
+                    cuisinier2Tmp = (Cuisinier) selectedOne;
+                } else if (whichOne == 3) {
+                    cuisinier3Tmp = (Cuisinier) selectedOne;
+                } else {
+                    cuisinier4Tmp = (Cuisinier) selectedOne;
+                }
+                break;
+            case "Barman":
+                barmanTmp = (Barman) selectedOne;
+                break;
+            case "Manager":
+                managerTmp = (Manager) selectedOne;
+                break;
+            default:
+                // Renvoie une erreur :
+                throw new IllegalStateException("Erreur : type d'employé inconnu dans TeamScreen.java");
+        }
+    }
 
     // utiliser pour afficher un texte plus rapidement
     public static void print(String text) {
