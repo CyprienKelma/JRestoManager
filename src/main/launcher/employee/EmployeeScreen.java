@@ -32,19 +32,19 @@ public class EmployeeScreen {
         print("3 - Programmer les employés pour la soirée (i.e. former l'équipe)");
 
         print("\n4 - Retour au menu principal\n");
-        int choixEcran = menuScanner.nextInt();
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case 1:
+            case "1":
                 showEmployeeList(menuScanner);
                 break;
-            case 2:
+            case "2":
                 showAddRemoveEmployeeScreen(menuScanner);
                 break;
-            case 3:
+            case "3":
                 TeamScreen.showTeamFormationScreen(menuScanner);
                 break;
-            case 4:
+            case "4":
                 App.showMainMenu();
                 break;
             default:
@@ -62,19 +62,19 @@ public class EmployeeScreen {
 
         print("\n3 - Page précédente");
         print("4 - Retour au menu principal\n");
-        int choixEcran = menuScanner.nextInt();
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case 1:
+            case "1":
                 showAddEmployee(menuScanner);
                 break;
-            case 2:
+            case "2":
                 showRemoveEmployee(menuScanner);
                 break;
-            case 3:
+            case "3":
                 showTeamScreen(menuScanner);
                 break;
-            case 4:
+            case "4":
                 App.showMainMenu();
                 break;
             default:
@@ -96,25 +96,25 @@ public class EmployeeScreen {
         print("4 - Manager");
         print("\n5 - Page précédente");
         print("6 - Retour au menu principal\n");
-        int choixEcran = menuScanner.nextInt();
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case 1:
+            case "1":
                 addNewEmployee(menuScanner, "Serveur");
                 break;
-            case 2:
+            case "2":
                 addNewEmployee(menuScanner, "Cuisinier");
                 break;
-            case 3:
+            case "3":
                 addNewEmployee(menuScanner, "Barman");
                 break;
-            case 4:
+            case "4":
                 addNewEmployee(menuScanner, "Manager");
                 break;
-            case 5:
+            case "5":
                 showAddRemoveEmployeeScreen(menuScanner);
                 break;
-            case 6:
+            case "6":
                 App.showMainMenu();
                 break;
             default:

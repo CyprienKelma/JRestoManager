@@ -34,7 +34,7 @@ public class Restaurant {
     // private static Carte carte; // TODO : Netoyer le package stock avant
     // d'importer la classe Carte
 
-    private Restaurant() {
+    Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
         // C'est une classe utilitaire puisqu'on travaille avec un seul restaurant
         throw new IllegalStateException("Classe Restaurant : pas d'instances requises");

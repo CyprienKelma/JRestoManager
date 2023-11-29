@@ -25,12 +25,6 @@ public class TeamScreen {
     private static Barman barmanTmp = null;
     private static Manager managerTmp = null;
 
-    // Le tableau suivant est utilisé plus bas pour créer l'instance de la
-    // classe Equipe, lors de la confirmation
-    private static Employé[] actualTmpTeamTab = { (Serveur) serveur1Tmp, (Serveur) serveur2Tmp,
-            (Cuisinier) cuisinier1Tmp, (Cuisinier) cuisinier2Tmp, (Cuisinier) cuisinier3Tmp,
-            (Cuisinier) cuisinier4Tmp, (Barman) barmanTmp, (Manager) managerTmp };
-
     /*
      * Note importante :
      * On aurait pu utiliser ici une HashMap pour stocker les employés temporaires.
@@ -65,28 +59,28 @@ public class TeamScreen {
         print("\n6 - Page précédente");
         print("7 - Retour au menu principal\n");
 
-        int choixEcran = menuScanner.nextInt();
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case 1:
-                showSelectEmployeesScreen(menuScanner, "Serveur", 2);
+            case "1":
+                showSelectEmployeesScreen(menuScanner, Serveur.class, 2);
                 break;
-            case 2:
-                showSelectEmployeesScreen(menuScanner, "Cuisinier", 4);
+            case "2":
+                showSelectEmployeesScreen(menuScanner, Cuisinier.class, 4);
                 break;
-            case 3:
-                showSelectEmployeesScreen(menuScanner, "Barman", 1);
+            case "3":
+                showSelectEmployeesScreen(menuScanner, Barman.class, 1);
                 break;
-            case 4:
-                showSelectEmployeesScreen(menuScanner, "Manager", 1);
+            case "4":
+                showSelectEmployeesScreen(menuScanner, Manager.class, 1);
                 break;
-            case 5:
+            case "5":
                 confirmFinalNewTeam(menuScanner);
                 break;
-            case 6:
+            case "6":
                 EmployeeScreen.showTeamScreen(menuScanner);
                 break;
-            case 7:
+            case "7":
                 App.showMainMenu();
                 break;
             default:
@@ -95,16 +89,16 @@ public class TeamScreen {
     }
 
     // Ecran pour choisir les employés pour former l'équipe parmis ceux requis
-    public static void showSelectEmployeesScreen(Scanner menuScanner, String type, int numberOfEmployees) {
+    public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees) {
         clearConsole();
         print("==========================================================================\n");
         if (numberOfEmployees == 1) { // Pour le barman et manager
-            print("CHOISIR LE " + type.toUpperCase() + " :\n");
-            print("Vous devez choisir le " + type.toLowerCase()
+            print("CHOISIR LE " + type.getSimpleName().toUpperCase() + " :\n");
+            print("Vous devez choisir le " + type.getSimpleName().toLowerCase()
                     + " qui travaillera durant tout ce service.\n");
         } else { // Pour les serveurs et cuisiniers
-            print("CHOISIR LES " + type.toUpperCase() + "S :\n");
-            print("Vous devez choisir " + numberOfEmployees + " " + type.toLowerCase()
+            print("CHOISIR LES " + type.getSimpleName().toUpperCase() + "S :\n");
+            print("Vous devez choisir " + numberOfEmployees + " " + type.getSimpleName().toLowerCase()
                     + "s qui travailleront durant tout ce service.\n");
 
         }
@@ -112,7 +106,7 @@ public class TeamScreen {
         // En fonction du nombre d'employé de ce type qu'il faut
         // Ex : 4 cuisiniers, 1 barman, etc...
         for (int i = 1; i <= numberOfEmployees; i++) {
-            print(i + " - " + type + " " + i + " : A SELECTIONNER");
+            print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
         }
 
         print("\n" + (numberOfEmployees + 1) + " - Page précédente");
@@ -138,7 +132,7 @@ public class TeamScreen {
 
     // Cette fonction affiche la liste des employés du type voulu. Comme ça,
     // on peut choisir lequel on ajoute parmis ceux du bon type
-    public static void showEmployeeListByType(Scanner menuScanner, String type, int whichOne) {
+    public static <T> void showEmployeeListByType(Scanner menuScanner, Class<T> type, int whichOne) {
 
         // On va créer une liste temporaire pour stocker les employés du type voulu
         List<Employé> tmpList = new ArrayList<>();
@@ -146,9 +140,9 @@ public class TeamScreen {
         clearConsole();
         print("==========================================================================\n");
         if (whichOne == 1) {
-            print("Selectionner un premier " + type + "à ajouter parmis la liste :");
+            print("Selectionner un premier " + type.getSimpleName() + "à ajouter parmis la liste :");
         } else {
-            print("Selectionner un " + whichOne + "ème " + type + "à ajouter parmis la liste :");
+            print("Selectionner un " + whichOne + "ème " + type.getSimpleName() + "à ajouter parmis la liste :");
         }
 
         // Puisque la liste va être filtrée (on ne veut que les serveurs par exemple)
@@ -163,21 +157,17 @@ public class TeamScreen {
 
             // On affiche que les employés du type qui nous concerne (i.e. du paramètre
             // 'type')
-            if (employé.getClass().getSimpleName().equals(type)) {
+            if (employé.getClass().equals(type) && !(serveur1Tmp == employé || serveur2Tmp == employé)) {
 
-                // On affiche l'employé seulement si il n'est pas déjà sélectionné :
-                if (!(serveur1Tmp == employé || serveur2Tmp == employé)) {
+                // Vérifier que l'employé n'est pas déja dans l'équipe :
+                print((j + 1) + ") " + type.getSimpleName() + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
+                        + employé.getSalaire() + " euros/h net.");
 
-                    // Vérifier que l'employé n'est pas déja dans l'équipe :
-                    print((j + 1) + ") " + type + " : " + employé.getNom() + ", " + employé.getPrenom() + ", "
-                            + employé.getSalaire() + " euros/h net.");
+                j++; // On incrémente j seulement si on affiche l'employé
+                // i.e. s'il est du type qui nous concerne ET qu'il n'est pas déjà sélectionné
 
-                    j++; // On incrémente j seulement si on affiche l'employé
-                    // i.e. s'il est du type qui nous concerne ET qu'il n'est pas déjà sélectionné
+                tmpList.add(employé);
 
-                    tmpList.add(employé);
-
-                }
             }
         }
 
@@ -190,61 +180,49 @@ public class TeamScreen {
 
         // On ajoute l'employé sélectionné dans l'équipe
         // Pour cela on l'ajoute dans sa variable temporaires
-        switch (type) {
-            case "Serveur":
-                if (whichOne == 1) {
-                    serveur1Tmp = (Serveur) selectedOne;
-                    actualTmpTeamTab[0] = serveur1Tmp;
-                    notifyAddTeam(menuScanner, serveur1Tmp, 1, "Serveur");
-                } else {
-                    serveur2Tmp = (Serveur) selectedOne;
-                    actualTmpTeamTab[1] = serveur2Tmp;
-                    notifyAddTeam(menuScanner, serveur2Tmp, 2, "Serveur");
-                }
-                break;
-            case "Cuisinier":
-                if (whichOne == 1) {
-                    cuisinier1Tmp = (Cuisinier) selectedOne;
-                    actualTmpTeamTab[2] = cuisinier1Tmp;
-                    notifyAddTeam(menuScanner, serveur1Tmp, 1, "Cuisinier");
-                } else if (whichOne == 2) {
-                    cuisinier2Tmp = (Cuisinier) selectedOne;
-                    actualTmpTeamTab[3] = cuisinier2Tmp;
-                    notifyAddTeam(menuScanner, serveur1Tmp, 2, "Cuisinier");
-                } else if (whichOne == 3) {
-                    cuisinier3Tmp = (Cuisinier) selectedOne;
-                    actualTmpTeamTab[4] = cuisinier3Tmp;
-                    notifyAddTeam(menuScanner, serveur1Tmp, 3, "Cuisinier");
-                } else {
-                    cuisinier4Tmp = (Cuisinier) selectedOne;
-                    actualTmpTeamTab[5] = cuisinier4Tmp;
-                    notifyAddTeam(menuScanner, serveur1Tmp, 4, "Cuisinier");
-                }
-                break;
-            case "Barman":
-                barmanTmp = (Barman) selectedOne;
-                actualTmpTeamTab[6] = barmanTmp;
-                notifyAddTeam(menuScanner, serveur1Tmp, 1, "Barman");
-                break;
-            case "Manager":
-                managerTmp = (Manager) selectedOne;
-                actualTmpTeamTab[7] = managerTmp;
-                notifyAddTeam(menuScanner, serveur1Tmp, 1, "Manager");
-                break;
-            default:
-                // Renvoie une erreur :
-                throw new IllegalStateException("Erreur : type d'employé inconnu dans TeamScreen.java");
+        if (Serveur.class.equals(type)) {
+            if (whichOne == 1) {
+                serveur1Tmp = (Serveur) selectedOne;
+                notifyAddTeam(menuScanner, serveur1Tmp, 1, Serveur.class);
+            } else {
+                serveur2Tmp = (Serveur) selectedOne;
+                notifyAddTeam(menuScanner, serveur2Tmp, 2, Serveur.class);
+            }
+        } else if (Cuisinier.class.equals(type)) {
+            if (whichOne == 1) {
+                cuisinier1Tmp = (Cuisinier) selectedOne;
+                notifyAddTeam(menuScanner, cuisinier1Tmp, 1, Cuisinier.class);
+            } else if (whichOne == 2) {
+                cuisinier2Tmp = (Cuisinier) selectedOne;
+                notifyAddTeam(menuScanner, cuisinier2Tmp, 2, Cuisinier.class);
+            } else if (whichOne == 3) {
+                cuisinier3Tmp = (Cuisinier) selectedOne;
+                notifyAddTeam(menuScanner, cuisinier3Tmp, 3, Cuisinier.class);
+            } else {
+                cuisinier4Tmp = (Cuisinier) selectedOne;
+                notifyAddTeam(menuScanner, cuisinier4Tmp, 4, Cuisinier.class);
+            }
+        } else if (Barman.class.equals(type)) {
+            barmanTmp = (Barman) selectedOne;
+            notifyAddTeam(menuScanner, barmanTmp, 1, Barman.class);
+        } else if (Manager.class.equals(type)) {
+            managerTmp = (Manager) selectedOne;
+            notifyAddTeam(menuScanner, managerTmp, 1, Manager.class);
+        } else {
+            // Renvoie une erreur :
+            throw new IllegalStateException("Erreur : type d'employé inconnu dans TeamScreen.java");
         }
     }
 
-    public static void notifyAddTeam(Scanner menuScanner, Employé selectedOne, int whichOne, String type) {
+    public static <T extends Employé> void notifyAddTeam(Scanner menuScanner, Employé selectedOne, int whichOne,
+            Class<T> type) {
         clearConsole();
         print("==========================================================================\n");
-        print(selectedOne.getPrenom() + " " + selectedOne.getNom() + "a été ajouté à l'équipe !");
-        if (whichOne == 1)
-            print("Une fois l'équipe confirmé, il sera le " + type.toLowerCase() + " du service de se soir.");
+        print(selectedOne.getPrenom() + " " + selectedOne.getNom() + " a été ajouté à l'équipe !\n");
+        if (Barman.class.equals(type) || Manager.class.equals(type))
+            print("Une fois l'équipe confirmé, il sera le " + type.getSimpleName().toLowerCase() + " du service de se soir.");
         else
-            print("Une fois l'équipe confirmé, il sera le " + type.toLowerCase() + " N°" + whichOne
+            print("Une fois l'équipe confirmé, il sera le " + type.getSimpleName().toLowerCase() + " N°" + whichOne
                     + " du service de ce soir\n\n\n");
 
         print("\n--------------------------------------------------------------------------");
@@ -256,9 +234,9 @@ public class TeamScreen {
         // Pour rappeller la fonction précédente (showSelectEmployeesScreen)
         // On doit redonner en paramètre le nombre d'employé (qui dépend du type)
         int numberOfEmployees = 0;
-        if (type.equals("Serveur"))
+        if (Serveur.class.equals(type))
             numberOfEmployees = 2;
-        else if (type.equals("Cuisinier"))
+        else if (Cuisinier.class.equals(type))
             numberOfEmployees = 4;
         else
             numberOfEmployees = 1;
@@ -275,23 +253,44 @@ public class TeamScreen {
 
     public static void confirmFinalNewTeam(Scanner menuScanner) {
 
-        // On vérifie que l'équipe est complète
-        for (int i = 0; i < actualTmpTeamTab.length; i++) {
-            // Dans le cas on une valeur n'est pas donné (=null)
-            if (actualTmpTeamTab[i] == null) {
-                if (i == 0 || i == 1)
-                    // On redirige vers un message d'erreur
-                    missingTeamMembers(menuScanner, "Serveur");
-                else if (i >= 2 && i <= 5)
-                    missingTeamMembers(menuScanner, "Cuisinier");
-                else if (i == 6)
-                    missingTeamMembers(menuScanner, "Barman");
-                else
-                    missingTeamMembers(menuScanner, "Manager");
-                break;
-            }
+        // On vérifie si l'quipe est incomplète
+
+        if(serveur1Tmp == null || serveur2Tmp == null){
+            missingTeamMembers(menuScanner, "Serveur");
+        } else if(cuisinier1Tmp == null || cuisinier2Tmp == null || cuisinier3Tmp == null || cuisinier4Tmp == null){
+            missingTeamMembers(menuScanner, "Cuisinier");
+        } else if(barmanTmp == null){
+            missingTeamMembers(menuScanner, "Barman");
+        } else if(managerTmp == null){
+            missingTeamMembers(menuScanner, "Manager");
         }
 
+        clearConsole();
+        print("==========================================================================\n");
+        print("CONFIRMER VOTRE ÉQUIPE :\n");
+
+        print("Etes-vous sûr de vouloir confirmer la création d'équipe ?");
+        print("Il ne sera plus possible de la modifier jusqu'au prochain service.\n");
+
+        print("1 - Confirmer la selection et finaliser l'équipe\n");
+        print("2 - Page précédente");
+        print("3 - Retour au menu principal");
+
+        String choixEcran = menuScanner.next();
+
+        switch (choixEcran) {
+            case "1":
+                instanciateTeam();
+                break;
+            case "2":
+                showTeamFormationScreen(menuScanner);
+                break;
+            case "3":
+                App.showMainMenu();
+                break;
+            default:
+                confirmFinalNewTeam(menuScanner);
+        }
     }
 
     public static void missingTeamMembers(Scanner menuScanner, String missingMember) {
@@ -299,7 +298,7 @@ public class TeamScreen {
         print("==========================================================================\n");
         print("ERREUR : L'équipe n'est pas complète !");
         print("Vous devez d'abord choisir tous les employés qui travailleront durant le service.\n");
-        print("Il manque encore au moins un " + missingMember + " dans l'équipe.\n\n");
+        print("Il manque encore au moins un " + missingMember.toLowerCase() + " dans l'équipe.\n\n");
 
         print("\n--------------------------------------------------------------------------");
         print("1 - Page précédente");
@@ -318,9 +317,8 @@ public class TeamScreen {
 
     public static void instanciateTeam() {
         // On instancie l'équipe avec les employés temporaires
-        Equipe newTeam = new Equipe((Serveur) actualTmpTeamTab[0], (Serveur) actualTmpTeamTab[1],
-                (Cuisinier) actualTmpTeamTab[2], (Cuisinier) actualTmpTeamTab[3], (Cuisinier) actualTmpTeamTab[4],
-                (Cuisinier) actualTmpTeamTab[5], (Barman) actualTmpTeamTab[6], (Manager) actualTmpTeamTab[7]);
+        Equipe newTeam = new Equipe(serveur1Tmp, serveur2Tmp, cuisinier1Tmp, cuisinier2Tmp, cuisinier3Tmp, cuisinier4Tmp,
+                barmanTmp, managerTmp);
 
         // On définit alors l'équipe actuelle du restaurant
         Restaurant.setEquipeActuelle(newTeam);
