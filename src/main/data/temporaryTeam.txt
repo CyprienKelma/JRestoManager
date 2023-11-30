@@ -1,0 +1,1 @@
+Serveur{nom='Kelma', prenom='Cyprien', salaire=9.2, nombreDeTables=0, nombreDeTablesServies=0}

@@ -4,6 +4,7 @@ import java.util.*;
 
 import main.launcher.employee.EmployeeScreen;
 import main.launcher.employee.SaveEmployee;
+import main.launcher.employee.SaveTmpTeam;
 import main.place.*;
 
 // Classe principale qui gère le lancement de l'application
@@ -21,6 +22,7 @@ public class App {
 
     public static void loadAllFile() {
         SaveEmployee.loadEmployeeListFromTheFile();
+        SaveTmpTeam.loadTemporaryVariablesFromFile();
     }
 
     public static void showMainMenu() {
