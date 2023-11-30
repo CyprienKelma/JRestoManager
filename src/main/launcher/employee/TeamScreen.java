@@ -338,6 +338,9 @@ public class TeamScreen {
         // On définit alors l'équipe actuelle du restaurant
         Restaurant.setEquipeActuelle(newTeam);
 
+        // On ouvre le restaurant :
+        Restaurant.setIsOpen(true);
+
         // On affiche un message de confirmation
         clearConsole();
         print("==========================================================================\n");
