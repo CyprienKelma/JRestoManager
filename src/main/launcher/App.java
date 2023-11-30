@@ -1,5 +1,6 @@
 package main.launcher;
 
+import java.io.IOException;
 import java.util.*;
 
 import main.launcher.employee.EmployeeScreen;
@@ -9,7 +10,7 @@ import main.place.*;
 
 // Classe principale qui gère le lancement de l'application
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // Charge tout les fichiers de sauvegarde du projet
         loadAllFile();
@@ -20,7 +21,7 @@ public class App {
         }
     }
 
-    public static void loadAllFile() {
+    public static void loadAllFile() throws Exception {
         SaveEmployee.loadEmployeeListFromTheFile();
         SaveTmpTeam.loadTemporaryVariablesFromFile();
     }
