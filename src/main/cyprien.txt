@@ -1,1 +1,11 @@
-Path chemin = new File(cheminFichier).toPath();
+try {
+    long tailleFichier = Files.size(chemin);
+    
+    if (tailleFichier == 0) {
+        System.out.println("Le fichier est vide.");
+    } else {
+        System.out.println("Le fichier n'est pas vide. Taille : " + tailleFichier + " octets.");
+    }
+} catch (IOException e) {
+    System.err.println("Erreur lors de la vérification de la taille du fichier : " + e.getMessage());
+}
