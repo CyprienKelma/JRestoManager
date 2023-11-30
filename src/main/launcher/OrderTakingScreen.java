@@ -35,6 +35,8 @@ public class OrderTakingScreen {
             } else {
                 tryShowingOrderTakingScreen(menuScanner);
             }
+        } else {
+            showOrderTakingScreen(menuScanner);
         }
     }
 
@@ -79,13 +81,24 @@ public class OrderTakingScreen {
 
         // Affiche la liste des transactions en cours sous le format :
         // [Numéro de la table] : [Etat de la transaction]
-        for (int i = 0; i < Restaurant.getTransactionsList().size(); i++) {
+        for (int i = 0; i < Restaurant.getTransactionsListSize(); i++) {
             print((i + 1) + " - " + Restaurant.getTransactionsList().get(i).getTable().getNuméro() + " : "
                     + Restaurant.getTransactionsList().get(i).getState().getDescription().toLowerCase());
         }
 
         print("\n\n");
         String choixEcran = menuScanner.next();
+
+        switch (choixEcran) {
+            case "0":
+                // Appelle la fonction de l'écran de prise de commande
+                addNewTransactionScreen(menuScanner, whichWaiter);
+                break;
+            default:
+                // Appelle la fonction de l'écran de prise de commande
+                showOrderSelectionScreen(menuScanner, whichWaiter);
+                break;
+        }
 
         // TODO : Ajouter fonction de traitement des transaction existantes
 
@@ -133,10 +146,10 @@ public class OrderTakingScreen {
 
         print("Voici les tables disponibles pour " + nbrClientsStr + " client(s) :");
         print("Rappel : Pensez à ne pas proposer une table de 10 pour 3 clients !");
-        print("--------------------------------------------------------------------------");
+        print("--------------------------------------------------------------------------\n");
 
         // ! TODO : Il faudra changer la liste des tables disponibles en fonction du
-        // choix du manager
+        // ! choix du manager
 
         // On répertorie les tables disponibles :
         List<Table> availableTablesTmp = new ArrayList<>();
@@ -148,10 +161,13 @@ public class OrderTakingScreen {
             if (Restaurant.getTablesList().get(i).isDisponible()) {
 
                 // ... et aussi s'il y a assez de couverts ou non :
-                if (Restaurant.getTablesList().get(i).getNbrCouvert() >= Integer.parseInt(nbrClientsStr))
-                    print("Table n°" + Restaurant.getTablesList().get(i).getNuméro() + " :"
+                if (Restaurant.getTablesList().get(i).getNbrCouvert() >= Integer.parseInt(nbrClientsStr)){
+                    print((i+1) + ") Table n°" + Restaurant.getTablesList().get(i).getNuméro() + " :"
                             + Restaurant.getTablesList().get(i).getNbrCouvert() + " couverts");
-                availableTablesTmp.add(Restaurant.getTablesList().get(i));
+                    
+                    // Si oui, on l'ajoute à la liste temporaire des tables disponibles :
+                    availableTablesTmp.add(Restaurant.getTablesList().get(i));
+                }
             }
         }
 
@@ -184,14 +200,22 @@ public class OrderTakingScreen {
             }
         }
 
+        // * TODO : Faire en sorte que l'on choisisse le numéro de table et pas le numéro dans la liste
+
         print("--------------------------------------------------------------------------");
-        print("Quelle numéro de table les clients ont choisis :\n");
+        print("Quelle table les clients ont choisis ?");
+        print("Entrez le numéro de la liste (ex : 1 pour la première table affiché) :");
 
         String choixEcran = menuScanner.next();
+        int indexTable = Integer.parseInt(choixEcran) - 1;
+
+        // donne l'indice du numéro de table choisi dans la liste des tables disponibles
 
         // SelectedOne désigne la table d'indice choixEcran - 1
         // (puisque les indices des listes commencent à 0)
-        Table selectedOne = availableTablesTmp.get(Integer.parseInt(choixEcran) - 1);
+        // int nbrTableTmp = availableTablesTmp.get(Integer.parseInt(choixEcran) - 1).getNbrCouvert();
+
+        Table selectedOne = availableTablesTmp.get(indexTable);
 
         // Redirige vers confirmation de table :
         showTableConfirmationScreen(menuScanner, whichWaiter, selectedOne, nbrClientInt);

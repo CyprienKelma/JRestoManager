@@ -27,7 +27,7 @@ public class Restaurant {
     private static Stock stockActuelle;
 
     // La liste des transactions effectuées par le restaurant
-    private static List<Transaction> transactionsList;
+    private static List<Transaction> transactionsList = new ArrayList<>();
 
     // La liste des tables du restaurant
     // Le nombre de tables est fixe et défini par le manager (voir écran monitoring)
@@ -89,6 +89,14 @@ public class Restaurant {
 
     public static List<Transaction> getTransactionsList() {
         return transactionsList;
+    }
+
+    public static int getTransactionsListSize() {
+        if(transactionsList == null){
+            return 0;
+        } else {
+            return transactionsList.size();
+        }
     }
 
     public static void setTransactionsList(List<Transaction> transactionsList) {
