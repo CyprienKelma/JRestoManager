@@ -16,14 +16,14 @@ public class TeamScreen {
     // Equipe avec ces variables
 
     // On a donc :
-    private static Serveur serveur1Tmp = null;
-    private static Serveur serveur2Tmp = null;
-    private static Cuisinier cuisinier1Tmp = null;
-    private static Cuisinier cuisinier2Tmp = null;
-    private static Cuisinier cuisinier3Tmp = null;
-    private static Cuisinier cuisinier4Tmp = null;
-    private static Barman barmanTmp = null;
-    private static Manager managerTmp = null;
+    protected static Serveur serveur1Tmp = null;
+    protected static Serveur serveur2Tmp = null;
+    protected static Cuisinier cuisinier1Tmp = null;
+    protected static Cuisinier cuisinier2Tmp = null;
+    protected static Cuisinier cuisinier3Tmp = null;
+    protected static Cuisinier cuisinier4Tmp = null;
+    protected static Barman barmanTmp = null;
+    protected static Manager managerTmp = null;
 
     /*
      * Note importante :
@@ -169,7 +169,10 @@ public class TeamScreen {
 
             // On affiche que les employés du type qui nous concerne (i.e. du paramètre
             // 'type')
-            if (employé.getClass().equals(type) && !(serveur1Tmp == employé || serveur2Tmp == employé)) {
+            if ( employé.getClass().equals(type) &&
+              !(serveur1Tmp == employé || 
+               serveur2Tmp == employé)
+               ) {
 
                 // Vérifier que l'employé n'est pas déja dans l'équipe :
                 print((j + 1) + ") " + type.getSimpleName() + " : " + employé.getNom() + ", " + employé.getPrenom()
@@ -229,6 +232,7 @@ public class TeamScreen {
 
     public static <T extends Employé> void notifyAddTeam(Scanner menuScanner, Employé selectedOne, int whichOne,
             Class<T> type) {
+
         clearConsole();
         print("==========================================================================\n");
         print(selectedOne.getPrenom() + " " + selectedOne.getNom() + " a été ajouté à l'équipe !\n");
@@ -340,6 +344,8 @@ public class TeamScreen {
 
         // On ouvre le restaurant :
         Restaurant.setIsOpen(true);
+
+        SaveTmpTeam.saveTemporaryVariablesToFile();
 
         // On affiche un message de confirmation
         clearConsole();

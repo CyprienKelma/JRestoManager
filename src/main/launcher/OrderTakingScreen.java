@@ -215,7 +215,16 @@ public class OrderTakingScreen {
         // (puisque les indices des listes commencent à 0)
         // int nbrTableTmp = availableTablesTmp.get(Integer.parseInt(choixEcran) - 1).getNbrCouvert();
 
-        Table selectedOne = availableTablesTmp.get(indexTable);
+        
+
+
+        int newIndexTable=0;
+        for(Table table : availableTablesTmp){
+            if(table.getNuméro() == indexTable){
+                newIndexTable = availableTablesTmp.indexOf(table);
+            }
+        }
+        Table selectedOne = availableTablesTmp.get(newIndexTable);
 
         // Redirige vers confirmation de table :
         showTableConfirmationScreen(menuScanner, whichWaiter, selectedOne, nbrClientInt);
