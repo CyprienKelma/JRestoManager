@@ -29,10 +29,25 @@ public class Restaurant {
     // La liste des transactions effectuées par le restaurant
     private static List<Transaction> transactionsList;
 
+    // La liste des tables du restaurant
+    // Le nombre de tables est fixe et défini par le manager (voir écran monitoring)
+    private static List<Table> tablesList = new ArrayList<>();
+
+    // TODO : Ajouter gestion des tables dans l'écran monitoring
+    // TEMPORAIRE : 5 tables de 2 et 4 personnes
+    // C'est pour créer le système de commande sans créer de table
+    static {
+        tablesList.add(new Table(1, 2, true));
+        tablesList.add(new Table(2, 2, true));
+        tablesList.add(new Table(3, 2, true));
+        tablesList.add(new Table(4, 4, true));
+        tablesList.add(new Table(5, 4, true));
+    }
+
     // Carte indiquant en tant réel les plats disponibles ou non (en fonction du
     // stock)
-    // private static Carte carte; // TODO : Netoyer le package stock avant
-    // d'importer la classe Carte
+    // private static Carte carte;
+    // TODO : Netoyer le package stock avant d'importer la classe Carte
 
     Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
@@ -68,4 +83,23 @@ public class Restaurant {
         return stockActuelle;
     }
 
+    public static void setStockActuelle(Stock stockActuelle) {
+        Restaurant.stockActuelle = stockActuelle;
+    }
+
+    public static List<Transaction> getTransactionsList() {
+        return transactionsList;
+    }
+
+    public static void setTransactionsList(List<Transaction> transactionsList) {
+        Restaurant.transactionsList = transactionsList;
+    }
+
+    public static List<Table> getTablesList() {
+        return tablesList;
+    }
+
+    public static void setTablesList(List<Table> tablesList) {
+        Restaurant.tablesList = tablesList;
+    }
 }

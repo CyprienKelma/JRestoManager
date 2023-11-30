@@ -26,6 +26,12 @@ public class Serveur extends Employé {
         System.out.println("Le serveur associé à cette table apporte les boissons et plats des clients");
     }
 
+    @Override
+    public String toString() {
+        return "Serveur{nom='" + getNom() + "', prenom='" + getPrenom() + "', salaire=" + getSalaire() +
+                ", nombreDeTables=" + nombreDeTables + ", nombreDeTablesServies=" + nombreDeTablesServies + '}';
+    }
+
     /**
      * @return int return the nombreDeTables
      */

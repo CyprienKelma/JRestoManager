@@ -3,7 +3,7 @@ package main.carte;
 import java.util.ArrayList;
 import java.util.List;
 
-public class carte {
+public class Carte {
 
     List<String> liste1 = new ArrayList<>() {
         {
@@ -74,6 +74,7 @@ public class carte {
     };
 
     List<String> plat = new ArrayList<>();
+
     public void initialiserPlat() {
         plat.addAll(liste1);
         plat.addAll(liste2);
@@ -81,14 +82,15 @@ public class carte {
     }
 
     List<String> boisson = new ArrayList<>();
+
     public void initialiserBoisson() {
         plat.addAll(liste4);
         plat.addAll(liste5);
     }
 
-
     public void verifieDispoPlat(List<String> plats, List<String> stock) {
-        // Ajoutez ici la logique de vérification de la disponibilité des plats par rapport au stock.
+        // Ajoutez ici la logique de vérification de la disponibilité des plats par
+        // rapport au stock.
     }
 
     public static void afficherMenu(List<String> plats, List<String> boissons) {

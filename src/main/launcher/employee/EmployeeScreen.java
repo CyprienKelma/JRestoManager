@@ -9,9 +9,6 @@ import main.staff.*;
 
 /*
  * Classe qui gère l'écran de gestion des employés (5)
- * Comprend les sous-écrans suivants :
- *  A. Ajouter/Supprimer un employé
- *  B. Programmer les employés pour la soirée (i.e. former l'équipe)
  */
 public class EmployeeScreen {
 
@@ -273,8 +270,6 @@ public class EmployeeScreen {
         print("SUPPRIMER UN EMPLOYÉ :\n");
         print("Veuillez entrer le numéro de l'employé que vous souhaitez supprimer : \n\n");
 
-        // TODO : faire en sorte que l'on voit la liste sur plusieurs pages s'il y a
-        // trop d'employés dans la liste
         for (int i = 0; i < employésList.size(); i++) {
 
             // L'employé d'indice i

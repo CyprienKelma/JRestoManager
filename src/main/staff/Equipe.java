@@ -21,8 +21,8 @@ public class Equipe {
 
     /*
      * !!! ATTENTION !!!
-     * NE PAS CHANGER L'ORDRE DES PARAMETRES DU CONSTRUCTEUR NI LES SETTERS
-     * Sinon le code des écrans de crations d'équipe ne fonctionneront plus
+     * NE PAS CHANGER LES SETTERS NI L'ORDRE DES PARAMETRES DU CONSTRUCTEUR
+     * Sinon le code des écrans de crations d'équipe ne fonctionnera plus
      */
 
     public Equipe(Serveur serveur1, Serveur serveur2, Cuisinier cuisinier1, Cuisinier cuisinier2, Cuisinier cuisinier3,

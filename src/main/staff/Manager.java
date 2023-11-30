@@ -6,4 +6,8 @@ public class Manager extends Employé {
         super(nom, prenom, salaire);
     }
 
+    @Override
+    public String toString() {
+        return "Manager{nom='" + getNom() + "', prenom='" + getPrenom() + "', salaire=" + getSalaire() + "}";
+    }
 }

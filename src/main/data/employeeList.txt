@@ -5,10 +5,8 @@ Cuisinier, Pousset, Paul, 9.6
 Cuisinier, Durieux, Florient, 12.2
 Cuisinier, Pichard, Nicolas, 9.2
 Cuisinier, Razi, Abdel, 9.6
-Cuisinier, McKinsey, Lea, 9.8
+Cuisinier, Durieux, Lea, 9.8
 Barman, Marceau, Stephane, 10.3
 Barman, Puchini, Leonard, 12.4
 Manager, Kondo, Yang, 16.3
 Serveur, Doma, Molchat, 12.2
-Serveur, Vitse, Hugo, 12.6
-Serveur, Soulas, BenJ, 12.9
