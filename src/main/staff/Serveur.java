@@ -6,7 +6,6 @@ public class Serveur extends Employé {
     private int nombreDeTables;
 
     // Sert à mesurer le nombre total de table que le serveur a servi sur la journée
-    // :
     private int nombreDeTablesServies;
 
     public Serveur(String nom, String prenom, double salaire) {
