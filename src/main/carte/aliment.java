@@ -1,10 +1,10 @@
 package main.carte;
 
-public class Aliment {
+public class aliment {
     private String nom;
     private int quantite;
 
-    public Aliment(String nom, int quantite) {
+    public aliment(String nom, int quantite) {
         this.nom = nom;
         this.quantite = quantite;
     }

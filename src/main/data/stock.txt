@@ -1,0 +1,9 @@
+tomate,24
+champignon,10
+salade,19
+oignon,10
+pain,20
+viande,20
+fromage,10
+pâte,10
+chorizo,10

@@ -9,12 +9,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stock {
+public class stock {
 
-    public static List<Aliment> lireFichier(String nomFichier) throws IOException {
+    public static List<aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
         Charset charset = Charset.forName("windows-1252");
-        List<Aliment> listeAliments = new ArrayList<>();
+        List<aliment> listeAliments = new ArrayList<>();
 
         if (Files.exists(fichier)) {
             boolean estAccessible = Files.isRegularFile(fichier)
@@ -29,7 +29,7 @@ public class Stock {
                         if (elements.length == 2) {
                             String nom = elements[0].trim();
                             int quantite = Integer.parseInt(elements[1].trim());
-                            Aliment aliment = new Aliment(nom, quantite);
+                            aliment aliment = new aliment(nom, quantite);
                             listeAliments.add(aliment);
                         }
                     }
@@ -40,38 +40,86 @@ public class Stock {
         return listeAliments;
     }
 
-    public static void ajouterAliment(String nomFichier, Aliment aliment) throws IOException {
+    public static void ajouterAliment(String nomFichier, aliment aliment) throws IOException {
+        List<aliment> listeAliments = lireFichier(nomFichier);
+    
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
-            // Écrivez les détails de l'aliment dans le fichier
-            // Format : nom,quantite
-            writer.write(aliment.getNom() + "," + aliment.getQuantite());
-        }
-    }
-
-    public static void retirerAliment(String nomFichier, String nomAliment) throws IOException {
-        List<Aliment> listeAliments = lireFichier(nomFichier);
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
-            for (Aliment aliment : listeAliments) {
-                if (!aliment.getNom().equals(nomAliment)) {
-                    // Réécrire l'aliment dans le fichier sauf celui correspondant à l'aliment à
-                    // retirer
-                    writer.write(aliment.getNom() + "," + aliment.getQuantite());
+            for (aliment existingAliment : listeAliments) {
+                if (existingAliment.getNom().equals(aliment.getNom())) {
+                    // Additionner la quantité existante avec la quantité de l'aliment à ajouter
+                    int nouvelleQuantite = existingAliment.getQuantite() + aliment.getQuantite();
+    
+                    // Écrire l'aliment mis à jour avec la nouvelle quantité dans le fichier
+                    writer.write(existingAliment.getNom() + "," + nouvelleQuantite);
+                    writer.newLine();
+                } else {
+                    // Réécrire les autres aliments tels quels dans le fichier
+                    writer.write(existingAliment.getNom() + "," + existingAliment.getQuantite());
                     writer.newLine();
                 }
+            }
+    
+            // Si l'aliment à ajouter n'était pas présent dans la liste existante, l'ajouter à la fin du fichier
+            if (!listeAliments.stream().anyMatch(a -> a.getNom().equals(aliment.getNom()))) {
+                writer.write(aliment.getNom() + "," + aliment.getQuantite());
+                writer.newLine();
+            }
+        }
+    }
+    
+
+    public static void retirerAliment(String nomFichier, aliment aliment) throws IOException {
+        List<aliment> listeAliments = lireFichier(nomFichier);
+    
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
+            for (aliment existingAliment : listeAliments) {
+                if (existingAliment.getNom().equals(aliment.getNom())) {
+                    int nouvelleQuantite;
+                    // Additionner la quantité existante avec la quantité de l'aliment à ajouter
+                    if(existingAliment.getQuantite()>aliment.getQuantite()){
+                        nouvelleQuantite = existingAliment.getQuantite() - aliment.getQuantite();
+                    }
+                    else nouvelleQuantite = 0;
+                    // Écrire l'aliment mis à jour avec la nouvelle quantité dans le fichier
+                    writer.write(existingAliment.getNom() + "," + nouvelleQuantite);
+                    writer.newLine();
+                } else {
+                    // Réécrire les autres aliments tels quels dans le fichier
+                    writer.write(existingAliment.getNom() + "," + existingAliment.getQuantite());
+                    writer.newLine();
+                }
+            }
+    
+            // Si l'aliment à ajouter n'était pas présent dans la liste existante, l'ajouter à la fin du fichier
+            if (!listeAliments.stream().anyMatch(a -> a.getNom().equals(aliment.getNom()))) {
+                writer.write(aliment.getNom() + "," + 0);
+                writer.newLine();
             }
         }
     }
 
-    public static void main(String[] args) {
+    
+    
+    
+    
+    
+    
+
+
+    /*public static void main(String[] args) {
         // Exemple d'utilisation
         try {
-            List<Aliment> aliments = lireFichier("votre_fichier.txt");
-            for (Aliment aliment : aliments) {
+            aliment tomate = new aliment("tomate", 4);
+            ajouterAliment("src\\main\\data\\stock.txt", tomate);
+            aliment salade = new aliment("salade", 1);
+            retirerAliment("src\\main\\data\\stock.txt", salade);
+
+            List<aliment> aliments = lireFichier("src\\main\\data\\stock.txt");
+            for (aliment aliment : aliments) {
                 System.out.println(aliment.getNom() + " - " + aliment.getQuantite());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
