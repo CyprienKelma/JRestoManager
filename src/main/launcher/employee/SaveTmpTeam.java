@@ -18,7 +18,7 @@ import java.util.*;
 import main.staff.*;
 import main.launcher.employee.*;
 
-public class SaveTmpTeam {
+public class SaveTmpTeam  {
     // src\\main\\data\\temporaryTeam.txt
 
     // Sauvegarde les variables temporaires dans un fichier

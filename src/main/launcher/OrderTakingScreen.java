@@ -83,25 +83,79 @@ public class OrderTakingScreen {
         // [Numéro de la table] : [Etat de la transaction]
         for (int i = 0; i < Restaurant.getTransactionsListSize(); i++) {
             print((i + 1) + " - " + Restaurant.getTransactionsList().get(i).getTable().getNuméro() + " : "
-                    + Restaurant.getTransactionsList().get(i).getState().getDescription().toLowerCase());
+                    + Restaurant.getTransactionsList().get(i).getState().getDescription());
         }
 
         print("\n\n");
         String choixEcran = menuScanner.next();
+        int choixEcranInt = Integer.parseInt(choixEcran);
+
+        // Désigne la transaction d'indice i (avec i = choixEcran - 1) :
+        Transaction selectedTransaction = Restaurant.getTransactionsList().get(Integer.parseInt(choixEcran) - 1);
+
+
+        if (choixEcran.equals("0")){
+            // On ajoute une nouvelle transaction
+            addNewTransactionScreen(menuScanner, whichWaiter);
+        } else if (choixEcranInt >= 1 && choixEcranInt <= Restaurant.getTransactionsListSize()){
+            // Pour les transactions existantes, on redirige vers la fonction appropriée
+            redirectToApropriateAction(menuScanner, selectedTransaction.getState(), whichWaiter, selectedTransaction);
+        } else {
+            // Si le choix n'est pas valide, on réaffiche l'écran de sélection des transactions
+            showOrderSelectionScreen(menuScanner, whichWaiter);
+        }
+    }
+
+    public static void redirectToApropriateAction(Scanner menuScanner, TransactionState actualTableState, Serveur whichWaiter, Transaction selectedTransaction){
+        switch (actualTableState) {
+            case NOT_STARTED:
+                // Redirige vers fonction de prise de commande
+
+                // A récupérer :
+                // takeCommand(menuScanner, whichWaiter, selectedTransaction);
+                break;
+            case PREPARING:
+                // Redirige vers fonction de l'envoie en cuisine
+
+                break;
+            case READY:
+                // Redirige vers fonction de servir la commande
+                break;
+            case CASHED:
+                // Redirige vers fonction d'encaissement
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void sendPreparingCommand(Scanner menuScanner, Serveur whichWaiter, Transaction selectedTransaction) {
+
+        clearConsole();
+        print("==========================================================================");
+        print("ENVOYER LA COMMANDE EN CUISINE :");
+        print("--------------------------------------------------------------------------");
+        print("Table n°" + selectedTransaction.getTable().getNuméro() + " : "
+                + selectedTransaction.getState().getDescription());
+        print("--------------------------------------------------------------------------\n");
+
+        print("0 - Retour à la sélection des transactions");
+
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
             case "0":
-                // Appelle la fonction de l'écran de prise de commande
-                addNewTransactionScreen(menuScanner, whichWaiter);
-                break;
-            default:
-                // Appelle la fonction de l'écran de prise de commande
+                // Retour à la sélection des transactions
                 showOrderSelectionScreen(menuScanner, whichWaiter);
                 break;
+            case "1":
+                // Envoie la commande en cuisine
+                selectedTransaction.setState(TransactionState.PREPARING);
+                break;
+            default:
+                sendPreparingCommand(menuScanner, whichWaiter, selectedTransaction);
+                break;
         }
-
-        // TODO : Ajouter fonction de traitement des transaction existantes
-
     }
 
     public static void addNewTransactionScreen(Scanner menuScanner, Serveur whichWaiter) {
@@ -200,11 +254,9 @@ public class OrderTakingScreen {
             }
         }
 
-        // * TODO : Faire en sorte que l'on choisisse le numéro de table et pas le numéro dans la liste
-
         print("--------------------------------------------------------------------------");
         print("Quelle table les clients ont choisis ?");
-        print("Entrez le numéro de la liste (ex : 1 pour la première table affiché) :");
+        print("Entrez le numéro de la table :\n");
 
         String choixEcran = menuScanner.next();
         int indexTable = Integer.parseInt(choixEcran) - 1;
