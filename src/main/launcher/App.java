@@ -3,8 +3,7 @@ package main.launcher;
 import java.io.IOException;
 import java.util.*;
 
-import main.launcher.employee.EmployeeScreen;
-import main.launcher.employee.SaveEmployee;
+import main.launcher.employee.*;
 //import main.launcher.employee.SaveTmpTeam;
 import main.place.*;
 
@@ -23,7 +22,7 @@ public class App {
 
     public static void loadAllFile() throws Exception {
         SaveEmployee.loadEmployeeListFromTheFile();
-        //SaveTmpTeam.loadTemporaryVariablesFromFile();
+        SaveTmpTeam.loadTemporaryVariablesFromFile();
     }
 
     public static void showMainMenu() {
