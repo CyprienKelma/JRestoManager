@@ -1,4 +1,4 @@
-package main.launcher.employee;
+// package main.launcher.employee;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -22,8 +22,8 @@ import main.staff.*;
 import main.carte.carte;
 import main.launcher.employee.*;
 
-public class SaveTmpTeam {
-    // src\\main\\data\\temporaryTeam.txt
+// public class SaveTmpTeam  {
+//     // src\\main\\data\\temporaryTeam.txt
 
     // Sauvegarde les variables temporaires dans un fichier
     public static void saveTemporaryVariablesToFile() {
@@ -45,10 +45,10 @@ public class SaveTmpTeam {
                 objectOutputStream.writeObject(e);
             }
 
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la sauvegarde des variables temporaires : " + e.getMessage());
-        }
-    }
+//         } catch (IOException e) {
+//             System.err.println("Erreur lors de la sauvegarde des variables temporaires : " + e.getMessage());
+//         }
+//     }
 
     // Charge les variables temporaires depuis un fichier
     public static void loadTemporaryVariablesFromFile() throws IOException, ClassNotFoundException {

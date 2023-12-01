@@ -3,11 +3,22 @@ package main.place;
 import java.util.List;
 import main.staff.*;
 
+// Classe qui donne l'ensemble des informations de chaque transaction
+// C'est à dire de chaque commande : 1 unique transaction <=> 1 unique table
 public class Transaction {
 
+    // Le nombre de client pour cette transaction
     private int nbrClients;
+    
+    // Le serveur qui s'occupe de cette table
     private Serveur serveurAssociate;
+
+    // L'état de la transaction (voir l'enum TransactionState)
+    // Le but est de définir quand faire ou envoyer la commande entre les différent écrans
+    // (OrderTakingScreen, KitchenScreen, BarScreen)
     private TransactionState state;
+
+    // La table utilisée pour cette transaction
     private Table table;
 
     // TODO : les ajouter quand les stocks fonctionneront
@@ -18,6 +29,9 @@ public class Transaction {
         this.nbrClients = nbrClients;
         this.serveurAssociate = serveurAssociate;
         this.table = table;
+
+        // Pas besoin de préciser l'état de la transaction, elle est toujours initialisée à NOT_STARTED
+        // au moment ou la transaction est créée (voir enum TransactionState)
         this.state = TransactionState.NOT_STARTED;
     }
 

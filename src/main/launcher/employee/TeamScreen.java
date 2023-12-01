@@ -346,7 +346,7 @@ public class TeamScreen {
         // On ouvre le restaurant :
         Restaurant.setIsOpen(true);
 
-        SaveTmpTeam.saveTemporaryVariablesToFile();
+        //SaveTmpTeam.saveTemporaryVariablesToFile();
 
         // On affiche un message de confirmation
         clearConsole();
