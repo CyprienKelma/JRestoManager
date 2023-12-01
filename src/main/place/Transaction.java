@@ -14,7 +14,8 @@ public class Transaction {
     private Serveur serveurAssociate;
 
     // L'état de la transaction (voir l'enum TransactionState)
-    // Le but est de définir quand faire ou envoyer la commande entre les différent écrans 
+    // Le but est de définir quand faire ou envoyer la commande entre les différent écrans
+    // (OrderTakingScreen, KitchenScreen, BarScreen)
     private TransactionState state;
 
     // La table utilisée pour cette transaction
@@ -28,6 +29,9 @@ public class Transaction {
         this.nbrClients = nbrClients;
         this.serveurAssociate = serveurAssociate;
         this.table = table;
+
+        // Pas besoin de préciser l'état de la transaction, elle est toujours initialisée à NOT_STARTED
+        // au moment ou la transaction est créée (voir enum TransactionState)
         this.state = TransactionState.NOT_STARTED;
     }
 

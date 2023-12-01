@@ -36,6 +36,8 @@ public class OrderTakingScreen {
                 tryShowingOrderTakingScreen(menuScanner);
             }
         } else {
+            // On accède à l'écran de sélection du serveur dans le cas ou le restaurant
+            // est ouvert et et que l'équiope est formée
             showOrderTakingScreen(menuScanner);
         }
     }
