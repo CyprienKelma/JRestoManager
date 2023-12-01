@@ -1,17 +1,20 @@
 package main.staff;
 
-public class Serveur extends Employé {
+import java.io.Serializable;
+
+public class Serveur extends Employé implements Serializable {
 
     // Sert à équilibrer le nombre de table entre les serveurs :
-    private int nombreDeTables;
+    protected int nombreDeTables;
 
     // Sert à mesurer le nombre total de table que le serveur a servi sur la journée
-    private int nombreDeTablesServies;
+    protected int nombreDeTablesServies;
 
     public Serveur(String nom, String prenom, double salaire) {
         super(nom, prenom, salaire);
         this.nombreDeTables = 0;
         this.nombreDeTablesServies = 0;
+
     }
 
     public void effectuerTache() {
@@ -24,12 +27,15 @@ public class Serveur extends Employé {
     public void servirTable() {
         System.out.println("Le serveur associé à cette table apporte les boissons et plats des clients");
     }
-
-    @Override
-    public String toString() {
-        return "Serveur{nom='" + getNom() + "', prenom='" + getPrenom() + "', salaire=" + getSalaire() +
-                ", nombreDeTables=" + nombreDeTables + ", nombreDeTablesServies=" + nombreDeTablesServies + '}';
-    }
+    /*
+     * @Override
+     * public String toString() {
+     * return "Serveur{nom='" + getNom() + "', prenom='" + getPrenom() +
+     * "', salaire=" + getSalaire() +
+     * ", nombreDeTables=" + nombreDeTables + ", nombreDeTablesServies=" +
+     * nombreDeTablesServies + '}';
+     * }
+     */
 
     /**
      * @return int return the nombreDeTables

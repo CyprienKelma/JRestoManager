@@ -37,11 +37,11 @@ public class Restaurant {
     // TEMPORAIRE : 5 tables de 2 et 4 personnes
     // C'est pour créer le système de commande sans créer de table
     static {
-        tablesList.add(new Table(1, 2, true));
-        tablesList.add(new Table(2, 2, true));
+        tablesList.add(new Table(78, 2, true));
         tablesList.add(new Table(3, 2, true));
-        tablesList.add(new Table(4, 4, true));
-        tablesList.add(new Table(5, 4, true));
+        tablesList.add(new Table(31, 2, true));
+        tablesList.add(new Table(42, 4, true));
+        tablesList.add(new Table(18, 4, true));
     }
 
     // Carte indiquant en tant réel les plats disponibles ou non (en fonction du
@@ -92,7 +92,7 @@ public class Restaurant {
     }
 
     public static int getTransactionsListSize() {
-        if(transactionsList == null){
+        if (transactionsList == null) {
             return 0;
         } else {
             return transactionsList.size();

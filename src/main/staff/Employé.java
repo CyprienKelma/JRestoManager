@@ -1,10 +1,12 @@
 package main.staff;
 
-public abstract class Employé {
+import java.io.Serializable;
 
-    private String nom;
-    private String prenom;
-    private double salaire;
+public abstract class Employé implements Serializable {
+
+    protected String nom;
+    protected String prenom;
+    protected double salaire;
 
     Employé(String nom, String prenom, double salaire) {
         this.nom = nom;

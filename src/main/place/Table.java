@@ -1,5 +1,7 @@
 package main.place;
 
+import java.util.List;
+
 public class Table {
 
     private int numéro;
@@ -46,6 +48,16 @@ public class Table {
 
     public void setNbrCouvert(int nbrCouvert) {
         this.nbrCouvert = nbrCouvert;
+    }
+
+    public static int numeroToIndex(List<Table> list, int numero) {
+        int ret = -1;
+        for (Table table : list) {
+            if (table.getNuméro() == numero) {
+                ret = list.indexOf(table);
+            }
+        }
+        return ret;
     }
 
 }

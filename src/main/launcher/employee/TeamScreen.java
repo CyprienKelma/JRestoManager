@@ -105,20 +105,22 @@ public class TeamScreen {
 
         // En fonction du nombre d'employé de ce type qu'il faut
         // Ex : 4 cuisiniers, 1 barman, etc...
+
         for (int i = 1; i <= numberOfEmployees; i++) {
             print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
         }
 
         // Pour changer le A SELECTIONNER en NOM PRENOM SALAIRE
         // for (int i = 1; i <= numberOfEmployees; i++) {
-        //     if ((i == 1) && serveur1Tmp != null) {
-        //         print(i + " - " + type.getSimpleName() + " " + i + " : " + serveur1Tmp.getPrenom() + " "
-        //                 + serveur1Tmp.getNom());
-        //         continue;
-        //     } else {
-        //         print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
-        //     }
-        //     // A faire pour chaque employé temporaire
+        // if ((i == 1) && serveur1Tmp != null) {
+        // print(i + " - " + type.getSimpleName() + " " + i + " : " +
+        // serveur1Tmp.getPrenom() + " "
+        // + serveur1Tmp.getNom());
+        // continue;
+        // } else {
+        // print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
+        // }
+        // // A faire pour chaque employé temporaire
         // }
 
         print("\n" + (numberOfEmployees + 1) + " - Page précédente");
@@ -169,10 +171,9 @@ public class TeamScreen {
 
             // On affiche que les employés du type qui nous concerne (i.e. du paramètre
             // 'type')
-            if ( employé.getClass().equals(type) &&
-              !(serveur1Tmp == employé || 
-               serveur2Tmp == employé)
-               ) {
+            if (employé.getClass().equals(type) &&
+                    !(serveur1Tmp == employé ||
+                            serveur2Tmp == employé)) {
 
                 // Vérifier que l'employé n'est pas déja dans l'équipe :
                 print((j + 1) + ") " + type.getSimpleName() + " : " + employé.getNom() + ", " + employé.getPrenom()

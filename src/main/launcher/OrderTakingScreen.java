@@ -161,10 +161,10 @@ public class OrderTakingScreen {
             if (Restaurant.getTablesList().get(i).isDisponible()) {
 
                 // ... et aussi s'il y a assez de couverts ou non :
-                if (Restaurant.getTablesList().get(i).getNbrCouvert() >= Integer.parseInt(nbrClientsStr)){
-                    print((i+1) + ") Table n°" + Restaurant.getTablesList().get(i).getNuméro() + " :"
+                if (Restaurant.getTablesList().get(i).getNbrCouvert() >= Integer.parseInt(nbrClientsStr)) {
+                    print((i + 1) + ") Table n°" + Restaurant.getTablesList().get(i).getNuméro() + " :"
                             + Restaurant.getTablesList().get(i).getNbrCouvert() + " couverts");
-                    
+
                     // Si oui, on l'ajoute à la liste temporaire des tables disponibles :
                     availableTablesTmp.add(Restaurant.getTablesList().get(i));
                 }
@@ -200,7 +200,8 @@ public class OrderTakingScreen {
             }
         }
 
-        // * TODO : Faire en sorte que l'on choisisse le numéro de table et pas le numéro dans la liste
+        // * TODO : Faire en sorte que l'on choisisse le numéro de table et pas le
+        // numéro dans la liste
 
         print("--------------------------------------------------------------------------");
         print("Quelle table les clients ont choisis ?");
@@ -213,17 +214,10 @@ public class OrderTakingScreen {
 
         // SelectedOne désigne la table d'indice choixEcran - 1
         // (puisque les indices des listes commencent à 0)
-        // int nbrTableTmp = availableTablesTmp.get(Integer.parseInt(choixEcran) - 1).getNbrCouvert();
+        // int nbrTableTmp = availableTablesTmp.get(Integer.parseInt(choixEcran) -
+        // 1).getNbrCouvert();
 
-        
-
-
-        int newIndexTable=0;
-        for(Table table : availableTablesTmp){
-            if(table.getNuméro() == indexTable){
-                newIndexTable = availableTablesTmp.indexOf(table);
-            }
-        }
+        int newIndexTable = Table.numeroToIndex(availableTablesTmp, indexTable);
         Table selectedOne = availableTablesTmp.get(newIndexTable);
 
         // Redirige vers confirmation de table :
