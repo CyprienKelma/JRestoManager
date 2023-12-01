@@ -9,3 +9,4 @@ Cuisinier, Durieux, Lea, 9.8
 Barman, Marceau, Stephane, 10.3
 Manager, Kondo, Yang, 16.3
 Serveur, Doma, Molchat, 12.2
+Cuisinier, Almeida, Julien, 12.3
