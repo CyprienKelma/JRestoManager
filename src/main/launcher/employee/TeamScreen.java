@@ -168,19 +168,6 @@ public class TeamScreen {
             throw new IllegalStateException("Erreur : type d'employé inconnu dans TeamScreen.java");
         }
 
-
-        // Pour changer le A SELECTIONNER en NOM PRENOM SALAIRE
-        // for (int i = 1; i <= numberOfEmployees; i++) {
-        // if ((i == 1) && serveur1Tmp != null) {
-        // print(i + " - " + type.getSimpleName() + " " + i + " : " +
-        // serveur1Tmp.getPrenom() + " "
-        // + serveur1Tmp.getNom());
-        // continue;
-        // } else {
-        // print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
-        // }
-        // // A faire pour chaque employé temporaire
-        // }
         print("\n--------------------------------------------------------------------------");
         print("\n" + (numberOfEmployees + 1) + " - Page précédente");
         print((numberOfEmployees + 2) + " - Retour au menu principal\n");
