@@ -89,6 +89,7 @@ public class TeamScreen {
     }
 
     // Ecran pour choisir les employés pour former l'équipe parmis ceux requis
+    // On utilise un type générique pour pouvoir utiliser cette fonction pour tous les types d'employés
     public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees) {
         clearConsole();
         print("==========================================================================\n");
@@ -103,12 +104,70 @@ public class TeamScreen {
 
         }
 
-        // En fonction du nombre d'employé de ce type qu'il faut
-        // Ex : 4 cuisiniers, 1 barman, etc...
+        /*
+         * Selon le type d'employé (i.e. le paramètre 'type'), on va indiquer ceux manquant et ceux déjà sélectionnés
+         * - A SELECTIONNER : Lorsque l'employé n'est pas encore sélectionné
+         * - NOM PRENOM SALAIRE : Lorsque l'employé est déjà sélectionné
+         * Cliquer sur un employé déjà sélectionné permet de modifier son choix
+         */
 
-        for (int i = 1; i <= numberOfEmployees; i++) {
-            print(i + " - " + type.getSimpleName() + " " + i + " : A SELECTIONNER");
+        if(Serveur.class.equals(type)) {
+            if (serveur1Tmp != null) {
+                print("1 - " + type.getSimpleName() + " 1 : " + serveur1Tmp.getPrenom() + " "
+                        + serveur1Tmp.getNom());
+            } else {
+                print("1 - " + type.getSimpleName() + " 1 : A SELECTIONNER");
+            }
+            if (serveur2Tmp != null) {
+                print("2 - " + type.getSimpleName() + " 2 : " + serveur2Tmp.getPrenom() + " "
+                        + serveur2Tmp.getNom());
+            } else {
+                print("2 - " + type.getSimpleName() + " 2 : A SELECTIONNER");
+            }
+        } else if(Cuisinier.class.equals(type)) {
+            if (cuisinier1Tmp != null) {
+                print("1 - " + type.getSimpleName() + " 1 : " + cuisinier1Tmp.getPrenom() + " "
+                        + cuisinier1Tmp.getNom());
+            } else {
+                print("1 - " + type.getSimpleName() + " 1 : A SELECTIONNER");
+            }
+            if (cuisinier2Tmp != null) {
+                print("2 - " + type.getSimpleName() + " 2 : " + cuisinier2Tmp.getPrenom() + " "
+                        + cuisinier2Tmp.getNom());
+            } else {
+                print("2 - " + type.getSimpleName() + " 2 : A SELECTIONNER");
+            }
+            if (cuisinier3Tmp != null) {
+                print("3 - " + type.getSimpleName() + " 3 : " + cuisinier3Tmp.getPrenom() + " "
+                        + cuisinier3Tmp.getNom());
+            } else {
+                print("3 - " + type.getSimpleName() + " 3 : A SELECTIONNER");
+            }
+            if (cuisinier4Tmp != null) {
+                print("4 - " + type.getSimpleName() + " 4 : " + cuisinier4Tmp.getPrenom() + " "
+                        + cuisinier4Tmp.getNom());
+            } else {
+                print("4 - " + type.getSimpleName() + " 4 : A SELECTIONNER");
+            }
+        } else if(Barman.class.equals(type)) {
+            if (barmanTmp != null) {
+                print("1 - " + type.getSimpleName() + " : " + barmanTmp.getPrenom() + " "
+                        + barmanTmp.getNom());
+            } else {
+                print("1 - " + type.getSimpleName() + " : A SELECTIONNER");
+            }
+        } else if(Manager.class.equals(type)) {
+            if (managerTmp != null) {
+                print("1 - " + type.getSimpleName() + " : " + managerTmp.getPrenom() + " "
+                        + managerTmp.getNom());
+            } else {
+                print("1 - " + type.getSimpleName() + " : A SELECTIONNER");
+            }
+        } else {
+            // Renvoie une erreur :
+            throw new IllegalStateException("Erreur : type d'employé inconnu dans TeamScreen.java");
         }
+
 
         // Pour changer le A SELECTIONNER en NOM PRENOM SALAIRE
         // for (int i = 1; i <= numberOfEmployees; i++) {
@@ -122,7 +181,7 @@ public class TeamScreen {
         // }
         // // A faire pour chaque employé temporaire
         // }
-
+        print("\n--------------------------------------------------------------------------");
         print("\n" + (numberOfEmployees + 1) + " - Page précédente");
         print((numberOfEmployees + 2) + " - Retour au menu principal\n");
 
@@ -274,13 +333,13 @@ public class TeamScreen {
 
         // On vérifie si l'quipe est incomplète
 
-        if (serveur1Tmp == null || serveur2Tmp == null) {
+        if (serveur1Tmp.getSalaire() == 0 || serveur2Tmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Serveur");
-        } else if (cuisinier1Tmp == null || cuisinier2Tmp == null || cuisinier3Tmp == null || cuisinier4Tmp == null) {
+        } else if (cuisinier1Tmp.getSalaire() == 0 || cuisinier2Tmp.getSalaire() == 0 || cuisinier3Tmp.getSalaire() == 0 || cuisinier4Tmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Cuisinier");
-        } else if (barmanTmp == null) {
+        } else if (barmanTmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Barman");
-        } else if (managerTmp == null) {
+        } else if (managerTmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Manager");
         }
 
