@@ -14,6 +14,7 @@ public abstract class Employé implements Serializable {
         this.salaire = salaire;
     }
 
+
     /**
      * @return String return the nom
      */
