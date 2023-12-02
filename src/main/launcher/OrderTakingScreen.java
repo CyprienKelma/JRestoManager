@@ -100,8 +100,10 @@ public class OrderTakingScreen {
         // Affiche la liste des transactions en cours sous le format :
         // [Numéro de la table] : [Etat de la transaction]
         for (int i = 0; i < Restaurant.getTransactionsListSize(); i++) {
-            print((i + 1) + ") Table N°" + Restaurant.getTransactionsList().get(i).getTable().getNuméro() + " : "
-                    + Restaurant.getTransactionsList().get(i).getState().getDescription());
+            if(Restaurant.getTransactionsList().get(i).getServeurAssociate().equals(whichWaiter)) {
+                print((i + 1) + " - Table n°" + Restaurant.getTransactionsList().get(i).getTable().getNuméro() + " : "
+                + Restaurant.getTransactionsList().get(i).getState().getDescription());
+            }
         }
 
         print("\n\n");
@@ -178,11 +180,11 @@ public class OrderTakingScreen {
         print("PRISE DE COMMANDE :\n");
         print("--------------------------------------------------------------------------");
         print("Table n°" + selectedTransaction.getTable().getNuméro() + " : "
-                + selectedTransaction.getState().getDescription().toLowerCase());
+                + selectedTransaction.getState().getDescription());
         print("--------------------------------------------------------------------------\n");
 
-        print("1 - Ajouter un plat");
-        print("2 - Ajouter une boisson\n");
+        print("1 - Ajouter les plats");
+        print("2 - Ajouter les boissons\n");
         print("3 - Confirmer la commande et l'envoyer en cuisine\n");
         print("4 - Retour à la sélection des transactions\n\n\n");
 
@@ -191,9 +193,7 @@ public class OrderTakingScreen {
         switch (choixEcran) {
             case "1":
                 // Ajouter un plat
-                
-                // ! TODO : URGENT - Passer les fonctions du package carte en static
-                // Carte.passerCommandePlats(menuScanner, selectedTransaction);
+                Carte.passerCommandePlats(menuScanner, selectedTransaction);
                 break;
             case "2":
                 // Ajouter une boisson

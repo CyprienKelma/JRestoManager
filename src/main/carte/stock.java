@@ -9,14 +9,15 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class stock {
 
-    public static List<aliment> lireFichier(String nomFichier) throws IOException {
+    public static List<Aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
         Charset charset = Charset.forName("windows-1252");
-        List<aliment> listeAliments = new ArrayList<>();
+        List<Aliment> listeAliments = new ArrayList<>();
 
         if (Files.exists(fichier)) {
             boolean estAccessible = Files.isRegularFile(fichier)
@@ -31,7 +32,7 @@ public class stock {
                         if (elements.length == 2) {
                             String nom = elements[0].trim();
                             int quantite = Integer.parseInt(elements[1].trim());
-                            aliment aliment = new aliment(nom, quantite);
+                            Aliment aliment = new Aliment(nom, quantite);
                             listeAliments.add(aliment);
                         }
                     }
@@ -42,11 +43,11 @@ public class stock {
         return listeAliments;
     }
 
-    public static void ajouterAliment(String nomFichier, aliment aliment) throws IOException {
-        List<aliment> listeAliments = lireFichier(nomFichier);
+    public static void ajouterAliment(String nomFichier, Aliment aliment) throws IOException {
+        List<Aliment> listeAliments = lireFichier(nomFichier);
     
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
-            for (aliment existingAliment : listeAliments) {
+            for (Aliment existingAliment : listeAliments) {
                 if (existingAliment.getNom().equals(aliment.getNom())) {
                     // Additionner la quantité existante avec la quantité de l'aliment à ajouter
                     int nouvelleQuantite = existingAliment.getQuantite() + aliment.getQuantite();
@@ -71,10 +72,10 @@ public class stock {
     
 
     public static void retirerAliment(String nomFichier, Map<String, Integer> ingredients) throws IOException {
-        List<aliment> listeAliments = lireFichier(nomFichier);
+        List<Aliment> listeAliments = lireFichier(nomFichier);
     
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
-            for (aliment existingAliment : listeAliments) {
+            for (Aliment existingAliment : listeAliments) {
                 // Vérifier si l'aliment actuel est dans la liste d'ingrédients spécifiée
                 if (ingredients.containsKey(existingAliment.getNom())) {
                     int quantiteARetirer = ingredients.get(existingAliment.getNom());
@@ -93,6 +94,42 @@ public class stock {
             }
         }
     }
+
+
+    public static void retournerAliments(String nomFichier, Map<String, Integer> quantitesRetirees) throws IOException {
+        // Lire le stock actuel
+        List<Aliment> stockActuel = lireFichier(nomFichier);
+    
+        // Créer une nouvelle liste pour stocker les aliments mis à jour
+        List<Aliment> stockMisAJour = new ArrayList<>();
+    
+        // Restaurer les quantités retirées
+        for (Aliment aliment : stockActuel) {
+            String nomAliment = aliment.getNom();
+            int quantiteRetiree = quantitesRetirees.getOrDefault(nomAliment, 0);
+    
+            // Créer une nouvelle instance d'aliment avec la quantité mise à jour
+            int nouvelleQuantite = aliment.getQuantite() + quantiteRetiree;
+            Aliment alimentMisAJour = new Aliment(nomAliment, nouvelleQuantite);
+    
+            // Ajouter l'aliment mis à jour à la nouvelle liste
+            stockMisAJour.add(alimentMisAJour);
+        }
+    
+        // Écrire le stock mis à jour dans le fichier
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), Charset.forName("windows-1252"))) {
+            for (Aliment aliment : stockMisAJour) {
+                // Écrire dans le fichier chaque aliment avec sa quantité
+                writer.write(aliment.getNom() + "," + aliment.getQuantite());
+                writer.newLine();
+            }
+        }
+    }
+    
+    
+
+    
+}
     
     
     
@@ -121,5 +158,5 @@ public class stock {
             e.printStackTrace();
         }
     }*/
-}
+
 

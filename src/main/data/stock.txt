@@ -1,9 +1,9 @@
-Tomate,9
+Tomate,8
 Champignon,6
-Salade,9
-Oignon,3
-Pain,7
-Viande,7
+Salade,8
+Oignon,0
+Pain,6
+Viande,6
 Fromage,19
 Pate,19
 Chorizo,20

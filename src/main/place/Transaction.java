@@ -2,6 +2,7 @@ package main.place;
 
 import java.util.List;
 import main.staff.*;
+import main.carte.*;
 
 // Classe qui donne l'ensemble des informations de chaque transaction
 // C'est à dire de chaque commande : 1 unique transaction <=> 1 unique table
@@ -21,9 +22,15 @@ public class Transaction {
     // La table utilisée pour cette transaction
     private Table table;
 
-    // TODO : les ajouter quand les stocks fonctionneront
-    // private List<Plat> platList;
-    // private List<Boisson> boissonList;
+    // La commande (Plat + Boisson) demandée par le client lors de la prise de commande
+    Commande commandeDemandé = new Commande();
+
+    // La commande reçu par les clients de la transaction une fois que les cuisiniers
+    // et barman ont finis de préparer les plats et boissons
+    Commande commandeReçu = new Commande();
+
+
+    
 
     public Transaction(Serveur serveurAssociate, int nbrClients, Table table) {
         this.nbrClients = nbrClients;
@@ -88,4 +95,32 @@ public class Transaction {
         this.table = table;
     }
 
+    /**
+     * @return Commande return the commandeDemandé
+     */
+    public Commande getCommandeDemandé() {
+        return commandeDemandé;
+    }
+
+    /**
+     * @param commandeDemandé the commandeDemandé to set
+     */
+    public void setCommandeDemandé(Commande commandeDemandé) {
+        this.commandeDemandé = commandeDemandé;
+    }
+
+    /**
+     * @return Commande return the commandeReçu
+     */
+    public Commande getCommandeReçu() {
+        return commandeReçu;
+    }
+
+    /**
+     * @param commandeReçu the commandeReçu to set
+     */
+    public void setCommandeReçu(Commande commandeReçu) {
+        this.commandeReçu = commandeReçu;
+    }
+    
 }

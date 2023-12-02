@@ -9,13 +9,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
 import main.staff.*;
 
- public class SaveTmpTeam  {
+ public class SaveTmpTeam implements Serializable {
      // src\\main\\data\\temporaryTeam.txt
 
     // Sauvegarde les variables temporaires dans un fichier

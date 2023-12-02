@@ -1,10 +1,10 @@
 package main.carte;
 
-public class aliment {
+public class Aliment {
     private String nom;
     private int quantite;
 
-    public aliment(String nom, int quantite) {
+    public Aliment(String nom, int quantite) {
         this.nom = nom;
         this.quantite = quantite;
     }
@@ -15,5 +15,9 @@ public class aliment {
 
     public int getQuantite() {
         return quantite;
+    }
+
+    public int setQuantite(int quantite) {
+        return this.quantite = quantite;
     }
 }
