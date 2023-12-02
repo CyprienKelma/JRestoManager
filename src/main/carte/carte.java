@@ -120,6 +120,12 @@ public class carte {
         this.scanner = new Scanner(System.in);  // Initialize the Scanner
     }
 
+    // TODO : Rendre la fonction compatible avec le package launcher afin
+    // de pouvoir utiliser passerCommandePlats() dans ce package (carte)
+    // Autrement dit, il faut relier tout le projet ensemble. Pour ça :
+    // 1) passer les fonctions en static si possible
+    // 2) Prendre en paramètre le Scanner du menu et la trasaction concernée
+    // (pour pouvoir utiliser le scanner et la transaction dans la fonction)
     public void passerCommande() {
         int choix;
     

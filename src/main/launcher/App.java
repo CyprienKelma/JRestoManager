@@ -48,32 +48,32 @@ public class App {
         print("6 - Ecran gestion de la réserve d'aliments\n\n\n");
 
         Scanner menuScanner = new Scanner(System.in);
-        int choixEcran = menuScanner.nextInt();
+        String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case 1:
+            case "1":
                 // Appelle la fonction de l'écran de prise de commande
                 OrderTakingScreen.tryShowingOrderTakingScreen(menuScanner);
                 break;
-            case 2:
+            case "2":
                 // Appelle la fonction de l'écran de cuisine
                 KitchenScreen.tryShowingOrderTakingScreen(menuScanner);
                 break;
-            case 3:
+            case "3":
                 // Appelle la fonction de l'écran de bar
                 BarScreen.tryShowingScreen(menuScanner);
                 break;
-            case 4:
+            case "4":
                 // Appelle la fonction de l'écran de monitoring
                 // => Suivi des performances du restaurant
                 // => Impression de la liste de course
                 MonitoringScreen.showMonitoringScreen(menuScanner);
                 break;
-            case 5:
+            case "5":
                 // Appelle la fonction de l'écran de gestion des employés
                 EmployeeScreen.showTeamScreen(menuScanner);
                 break;
-            case 6:
+            case "6":
                 // Appelle la fonction de l'écran de gestion de la réserve d'aliments
                 break;
             default:

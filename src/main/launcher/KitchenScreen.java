@@ -3,6 +3,7 @@ package main.launcher;
 import java.util.Scanner;
 
 import main.place.Restaurant;
+import main.staff.Cuisinier;
 
 // Classe qui gère l'écran des cuisiniers (2)
 public class KitchenScreen {
@@ -83,7 +84,23 @@ public class KitchenScreen {
         }
     }
 
+    public static void showCookToDo(Scanner menuScanner, Cuisinier whichCuisinier){
+
+        clearConsole();
+        print("==========================================================================\n");
+        print("Repas à préparer :\n");
+
+        print("Selectionner votre prochaine préparation parmis les repas en attente suivant :");
+        print("--------------------------------------------------------------------------\n");
+
+    }
+
     public static void print(String text) {
         System.out.println(text);
+    }
+
+    public static void clearConsole() {
+        for (int i = 0; i < 50; ++i)
+            System.out.println();
     }
 }

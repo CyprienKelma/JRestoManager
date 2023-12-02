@@ -50,14 +50,17 @@ public class Table {
         this.nbrCouvert = nbrCouvert;
     }
 
+    // Méthode qui permet de trouver l'index d'une table dans une liste de table
     public static int numeroToIndex(List<Table> list, int numero) {
-        int ret = -1;
         for (Table table : list) {
             if (table.getNuméro() == numero) {
-                ret = list.indexOf(table);
+                return list.indexOf(table);
             }
         }
-        return ret;
+
+        // Dans le cas ou le numéro de table n'est pas trouvé dans la liste
+        
+        throw new IllegalArgumentException("Numéro de table non trouvé : " + numero);
     }
 
 }

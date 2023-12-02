@@ -14,7 +14,6 @@ public class Serveur extends Employé implements Serializable {
         super(nom, prenom, salaire);
         this.nombreDeTables = 0;
         this.nombreDeTablesServies = 0;
-
     }
 
     public void effectuerTache() {
@@ -27,15 +26,6 @@ public class Serveur extends Employé implements Serializable {
     public void servirTable() {
         System.out.println("Le serveur associé à cette table apporte les boissons et plats des clients");
     }
-    /*
-     * @Override
-     * public String toString() {
-     * return "Serveur{nom='" + getNom() + "', prenom='" + getPrenom() +
-     * "', salaire=" + getSalaire() +
-     * ", nombreDeTables=" + nombreDeTables + ", nombreDeTablesServies=" +
-     * nombreDeTablesServies + '}';
-     * }
-     */
 
     /**
      * @return int return the nombreDeTables
