@@ -17,14 +17,14 @@ public class Table {
     /**
      * @return int return the numéro
      */
-    public int getNuméro() {
+    public int getNumero() {
         return numéro;
     }
 
     /**
      * @param numéro the numéro to set
      */
-    public void setNuméro(int numéro) {
+    public void setNumero(int numéro) {
         this.numéro = numéro;
     }
 
@@ -53,7 +53,7 @@ public class Table {
     // Méthode qui permet de trouver l'index d'une table dans une liste de table
     public static int numeroToIndex(List<Table> list, int numero) {
         for (Table table : list) {
-            if (table.getNuméro() == numero) {
+            if (table.getNumero() == numero) {
                 return list.indexOf(table);
             }
         }
