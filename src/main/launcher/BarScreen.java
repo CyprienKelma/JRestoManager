@@ -2,6 +2,8 @@ package main.launcher;
 
 import java.util.Scanner;
 
+import main.place.Restaurant;
+
 public class BarScreen {
 
     private BarScreen() {
@@ -11,12 +13,27 @@ public class BarScreen {
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 
-    // Vérifie si les conditions sont réunies pour afficher l'écran des cuinisiers
-    // (ex : avoir une équipe formé de 4 cuisiniers comme demandé dans le sujet)
-    public static void tryShowingScreen(Scanner menuScanner) {
-        // TODO: Implémenter cette fonction dès que la classe "Equipe" sera implémentée
 
-        // Pour l'instant rediriger vers l'écran de bar
+    // Fonction qui tente d'afficher l'écran du barman
+    // - Si l'équipe n'est pas encore créée, indique qu'il faut d'abord en créer une
+    // - Si l'équipe est créée, affiche l'écran de selection du cuisinier
+    // (showBarScreen)
+    public static void tryShowingOrderTakingScreen(Scanner menuScanner) {
+        if (!Restaurant.isOpen()) {
+            App.clearConsole();
+            print("==========================================================================\n");
+            print("Accés refusé : Le restaurant n'est pas encore ouvert !\n");
+            print("Pour préparer des boissons, votre manager doit d'abord créer une équipe, puis ouvrir le restaurant.\n");
+            print("1 - Retour au menu principal\n");
+
+            String choixEcran = menuScanner.next();
+
+            if (choixEcran.equals("1")) {
+                App.showMainMenu();
+            } else {
+                tryShowingOrderTakingScreen(menuScanner);
+            }
+        }
         showBarScreen(menuScanner);
     }
 

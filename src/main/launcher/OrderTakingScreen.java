@@ -197,9 +197,7 @@ public class OrderTakingScreen {
                 break;
             case "2":
                 // Ajouter une boisson
-
-                // ! TODO : URGENT - Passer les fonctions du package carte en static
-                // Carte.passerCommandeBoissons(menuScanner, selectedTransaction);
+                Carte.passerCommandeBoissons(menuScanner, selectedTransaction);
                 break;
             case "3":
                 // Confirmer la commande et l'envoyer en cuisine
@@ -228,7 +226,7 @@ public class OrderTakingScreen {
                 + selectedTransaction.getState().getDescription());
         print("--------------------------------------------------------------------------\n");
 
-        print(("La commande a bien été envoyée en cuisine !\n"));
+        print(("La commande a bien été envoyée en cuisine et au barman !\n"));
         print("Lorsque les plats et les boissons seront prêts, vous pourrez les apporter aux clients.\n");
         print("\n1 - Retour à la sélection des transactions\n\n");
 
@@ -236,8 +234,15 @@ public class OrderTakingScreen {
 
         if(choixEcran.equals("1")) {
             // Retour à la sélection des transactions
-                showOrderSelectionScreen(menuScanner, whichWaiter);
                 selectedTransaction.setState(TransactionState.PREPARING);
+                
+                // TODO : Envoyer la commande en cuisine
+                // => Envoyer les plats aux cuisiniers
+                // => Envoyer les boissons au barman
+
+
+                showOrderSelectionScreen(menuScanner, whichWaiter);
+
         } else {
             sendCommandToPrepare(menuScanner, whichWaiter, selectedTransaction);
         }
