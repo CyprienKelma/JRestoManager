@@ -1,7 +1,5 @@
 package main.staff;
 
-import java.util.*;
-
 public class Equipe {
 
     /*

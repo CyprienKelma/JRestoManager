@@ -3,7 +3,6 @@ package main.place;
 import java.util.*;
 import main.staff.*;
 import main.stock.*;
-import main.carte.*;
 
 /*
  * Classe pricipale qui représente le coeur du restaurant
@@ -34,7 +33,7 @@ public class Restaurant {
     // Le nombre de tables est fixe et défini par le manager (voir écran monitoring)
     private static List<Table> tablesList = new ArrayList<>();
 
-    // TODO : Ajouter gestion des tables dans l'écran monitoring
+    // Ajouter gestion des tables dans l'écran monitoring
     // TEMPORAIRE : 5 tables de 2 et 4 personnes
     // C'est pour créer le système de commande sans créer de table
     static {

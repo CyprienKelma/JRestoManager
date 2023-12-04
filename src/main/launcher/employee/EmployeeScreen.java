@@ -276,7 +276,7 @@ public class EmployeeScreen {
             Employé employé = employésList.get(i);
 
             // Le type d'employé (Manager, Serveur, ect...)
-            String type = employé.getClass().getSimpleName();
+            //String type = employé.getClass().getSimpleName();
 
             // On affiche chaque employé d'indice i
             print((i + 1) + ") " + employé.getNom() + ", " + employé.getPrenom() + ", "

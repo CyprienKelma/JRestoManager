@@ -1,6 +1,4 @@
 package main.place;
-
-import java.util.List;
 import main.staff.*;
 import main.carte.*;
 
@@ -10,7 +8,7 @@ public class Transaction {
 
 
     // Identifiant unique pour retrouver la transaction dans la liste des transactions
-    private int transactionId;
+    //private int transactionId;
 
     // Le nombre de client pour cette transaction
     private int nbrClients;

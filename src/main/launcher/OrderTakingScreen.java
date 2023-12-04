@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.*;
 
 import main.place.*;
-import main.staff.Employé;
 import main.staff.Serveur;
 import main.carte.*;
 
@@ -299,7 +298,7 @@ public class OrderTakingScreen {
         print("Rappel : Pensez à ne pas proposer une table de 10 pour 3 clients !");
         print("--------------------------------------------------------------------------\n");
 
-        // ! TODO : Il faudra changer la liste des tables disponibles en fonction du
+        // ! Il faudra changer la liste des tables disponibles en fonction du
         // ! choix du manager
 
         // On répertorie les tables disponibles :

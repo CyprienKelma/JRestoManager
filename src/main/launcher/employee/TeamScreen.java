@@ -385,24 +385,24 @@ public class TeamScreen {
         Equipe newTeam = new Equipe(serveur1Tmp, serveur2Tmp, cuisinier1Tmp, cuisinier2Tmp, cuisinier3Tmp,
                 cuisinier4Tmp,
                 barmanTmp, managerTmp);
-
+    
         // On définit alors l'équipe actuelle du restaurant
         Restaurant.setEquipeActuelle(newTeam);
-
+    
         // On ouvre le restaurant :
         Restaurant.setIsOpen(true);
-
+    
         //SaveTmpTeam.saveTemporaryVariablesToFile();
-
+    
         // On affiche un message de confirmation
         clearConsole();
         print("==========================================================================\n");
         print("L'équipe a été créée avec succès !");
         print("Vous pouvez maintenant ouvrir le restaurant.");
         print("Pour cela, rendez-vous dans l'écran Monitoring du manager.\n\n");
-
+    
         // TEST - Pas présent au rendu final :
-
+    
         print("Les membres de l'équipe sont :");
         print("--------------------------------------------------------------------------");
         print("Serveur 1 : " + Restaurant.getEquipeActuelle().getServeur1().getPrenom() + " "
@@ -422,12 +422,20 @@ public class TeamScreen {
         print("\nManager : " + Restaurant.getEquipeActuelle().getManager().getPrenom() + " "
                 + Restaurant.getEquipeActuelle().getManager().getNom());
         print("--------------------------------------------------------------------------\n");
-
+    
         print("Appuyez sur Entrée pour revenir au menu principal...");
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        
+        try {
+            scanner.nextLine();
+        } finally {
+            // Close the Scanner in a finally block to ensure it gets closed even if an exception occurs
+            scanner.close();
+        }
+    
         App.showMainMenu();
     }
+    
 
     // utiliser pour afficher un texte plus rapidement
     public static void print(String text) {

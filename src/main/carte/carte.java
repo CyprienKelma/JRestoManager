@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import main.place.Transaction;
-import main.carte.stock;
 import main.launcher.OrderTakingScreen;
-import main.staff.Serveur;
-import main.carte.*;
 
 public class Carte {
 
@@ -123,9 +120,6 @@ public class Carte {
         return ingredients;
     }
 
-    private Scanner scanner;
-
-
     public static void passerCommandePlats(Scanner menuScanner, Transaction transaction) throws IOException {
     
         int choix;
@@ -158,7 +152,7 @@ public class Carte {
                         break;
                     case "2":
 
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
+                        // La fonction de réinitialisation de la selection des plats
                         // actuellement le stock n'est pas remis à jour
 
                         for (Map.Entry<String, Integer> entry : transaction.getCommandeDemandé().getPlats().entrySet()) {
@@ -181,7 +175,7 @@ public class Carte {
 
                         // Vide la liste temporaires des quantités retirées
                         
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
+                        // La fonction de réinitialisation de la selection des plats
                         //quantitesRetirées.clear();
 
                         passerCommandePlats(menuScanner, transaction);
@@ -277,28 +271,35 @@ public class Carte {
     private static void commanderPlat(List<String> platsDisponibles, Transaction selectedTransaction) {
         System.out.println("\nVeuillez entrer le numéro du plat à ajouter : \n\n");
         Scanner scanner = new Scanner(System.in);
-        int numeroPlat = scanner.nextInt(); // Utilisez le Scanner de la classe
+        
+        try {
+            int numeroPlat = scanner.nextInt(); // Utilisez le Scanner de la classe
     
-        if (numeroPlat >= 1 && numeroPlat <= platsDisponibles.size()) {
-            String platChoisi = platsDisponibles.get(numeroPlat - 1);
+            if (numeroPlat >= 1 && numeroPlat <= platsDisponibles.size()) {
+                String platChoisi = platsDisponibles.get(numeroPlat - 1);
     
-            Map<String, Integer> ingredients = getIngredients(platChoisi);
+                Map<String, Integer> ingredients = getIngredients(platChoisi);
     
-            try {
-                // Retirer les ingrédients du plat choisi du stock
-                stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
+                try {
+                    // Retirer les ingrédients du plat choisi du stock
+                    stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
     
-                // Ajouter le plat à la commande avec une quantité de 1 par défaut
-                selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);
+                    // Ajouter le plat à la commande avec une quantité de 1 par défaut
+                    selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);
     
-                System.out.println("Le plat à été ajouté à la commande.");
-            } catch (IOException e) {
-                System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                    System.out.println("Le plat a été ajouté à la commande.");
+                } catch (IOException e) {
+                    System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                }
+            } else {
+                System.out.println("Numéro de plat invalide.");
             }
-        } else { 
-            System.out.println("Numéro de plat invalide.");
+        } finally {
+            // Close the Scanner in a finally block to ensure it gets closed even if an exception occurs
+            scanner.close();
         }
     }
+    
     
 
     // Fonction qui permet de selectionner les boissons
@@ -335,7 +336,7 @@ public class Carte {
                         break;
                     case "2":
 
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
+                        // La fonction de réinitialisation de la selection des plats
                         // actuellement le stock n'est pas remis à jour comme voulu
 
                         for (Map.Entry<String, Integer> entry : transaction.getCommandeDemandé().getBoissons().entrySet()) {
@@ -358,7 +359,7 @@ public class Carte {
 
                         // Vide la liste temporaires des quantités retirées
                         
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
+                        // La fonction de réinitialisation de la selection des plats
                         //quantitesRetirées.clear();
 
                         passerCommandeBoissons(menuScanner, transaction);
@@ -419,26 +420,33 @@ public class Carte {
     public static void commanderBoisson(List<String> boissonsDisponibles, Transaction selectedTransaction) {
         System.out.println("\nVeuillez entrer le numéro de la boisson à ajouter : ");
         Scanner scanner = new Scanner(System.in);
-        int numeroBoisson = scanner.nextInt();
     
-        if (numeroBoisson >= 1 && numeroBoisson <= boissonsDisponibles.size()) {
-            String boissonChoisie = boissonsDisponibles.get(numeroBoisson - 1);
+        try {
+            int numeroBoisson = scanner.nextInt();
     
-            try {
-                // On appelle la fonction qui permet de retirer les boissons du stock
-                StockDrink.retirerBoisson("src\\main\\data\\stockDrink.txt", Collections.singletonMap(boissonChoisie, 1));
+            if (numeroBoisson >= 1 && numeroBoisson <= boissonsDisponibles.size()) {
+                String boissonChoisie = boissonsDisponibles.get(numeroBoisson - 1);
     
-                // Ajoute la boisson à la commande avec une quantité de 1 par défaut
-                selectedTransaction.getCommandeDemandé().addBoissons(boissonChoisie, 1);
+                try {
+                    // On appelle la fonction qui permet de retirer les boissons du stock
+                    StockDrink.retirerBoisson("src\\main\\data\\stockDrink.txt", Collections.singletonMap(boissonChoisie, 1));
     
-                System.out.println("La boisson a été ajoutée à la commande.");
-            } catch (IOException e) {
-                System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                    // Ajoute la boisson à la commande avec une quantité de 1 par défaut
+                    selectedTransaction.getCommandeDemandé().addBoissons(boissonChoisie, 1);
+    
+                    System.out.println("La boisson a été ajoutée à la commande.");
+                } catch (IOException e) {
+                    System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                }
+            } else {
+                System.out.println("Numéro de boisson invalide.");
             }
-        } else {
-            System.out.println("Numéro de boisson invalide.");
+        } finally {
+            // Close the Scanner in a finally block to ensure it gets closed even if an exception occurs
+            scanner.close();
         }
     }
+    
 
     public static void afficherCommande(Transaction selectedTransaction) {
         Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getPlats();
@@ -533,11 +541,11 @@ public class Carte {
         }
     }*/
 
-    // public static void main(String[] args) {
-    //     Carte carteInstance = new Carte();
-    //     carteInstance.initialiserPlat();
-    //     carteInstance.initialiserBoisson();
+    /*public static void main(String[] args) {
+         Carte carteInstance = new Carte();
+         carteInstance.initialiserPlat();
+         carteInstance.initialiserBoisson();
 
-    //     carteInstance.passerCommande();
-    // }
+         carteInstance.PasserCommande();
+    }*/
 }

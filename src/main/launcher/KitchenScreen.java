@@ -1,11 +1,8 @@
 package main.launcher;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
-import main.carte.Commande;
 import main.place.Restaurant;
 import main.place.Transaction;
 import main.place.TransactionState;
