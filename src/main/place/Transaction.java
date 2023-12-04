@@ -33,9 +33,6 @@ public class Transaction {
     // et barman ont finis de préparer les plats et boissons
     Commande commandeReçu = new Commande();
 
-
-    
-
     public Transaction(Serveur serveurAssociate, int nbrClients, Table table) {
         this.nbrClients = nbrClients;
         this.serveurAssociate = serveurAssociate;

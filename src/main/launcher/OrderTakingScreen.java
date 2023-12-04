@@ -300,7 +300,7 @@ public class OrderTakingScreen {
         print("--------------------------------------------------------------------------\n");
 
         // ! TODO : Il faudra changer la liste des tables disponibles en fonction du
-        // ! choix du manager
+        // ! choix du manager (voir écran monitoring)
 
         // On répertorie les tables disponibles :
         List<Table> availableTablesTmp = new ArrayList<>();

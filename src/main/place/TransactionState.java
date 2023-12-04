@@ -25,4 +25,20 @@ public enum TransactionState {
     public String getDescription() {
         return description;
     }
+
+    public static void checkIfCommandReady(Transaction transaction){
+        // Si la commande est vide, on la passe à l'état "READY"
+        // => La commande ne contient plus de plats ET plus de boissons
+        // => Comme ça toute la commande est servie en même temps
+        // (comme demandé dans le sujet)
+        if((transaction.getCommandeDemandé().getBoissons().size() == 0) && (transaction.getCommandeDemandé().getPlats().size() == 0)){
+            transaction.setState(TransactionState.READY);
+            // TODO : check debug transactionState
+            print("debug : la transaction " + transaction + " est bien passée à l'état " + TransactionState.READY);
+        }
+    }
+
+    public static void print(String string) {
+        System.out.println(string);
+    }
 }

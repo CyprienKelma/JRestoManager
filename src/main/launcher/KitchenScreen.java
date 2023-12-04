@@ -69,7 +69,7 @@ public class KitchenScreen {
         switch (choixEcran) {
             case "1":
                 // Appelle la fonction de l'écran de prise de commande
-                showCookToDo(menuScanner, Restaurant.getEquipeActuelle().getCuisinier1()); 
+                showCookToDo(menuScanner, Restaurant.getEquipeActuelle().getCuisinier1());
                 break;
             case "2":
                 // Appelle la fonction de l'écran de prise de commande
@@ -92,7 +92,7 @@ public class KitchenScreen {
         }
     }
 
-    public static void showCookToDo(Scanner menuScanner, Cuisinier whichCuisinier){
+    public static void showCookToDo(Scanner menuScanner, Cuisinier whichCuisinier) {
 
         clearConsole();
         print("==========================================================================\n");
@@ -102,43 +102,54 @@ public class KitchenScreen {
         print("--------------------------------------------------------------------------");
 
         int indexCommand = 1;
+        int indexPlat = 0;
+
+        List<Transaction> transactionsList = Restaurant.getTransactionsList();
 
         // Pour chacune des transactions en cours ...
-        for(Transaction transaction : Restaurant.getTransactionsList()) {
+        for (Transaction transaction : transactionsList) {
 
             // Si la commande est défini comme étant en cours de préparation
-            if(transaction != null && transaction.getState() == TransactionState.PREPARING){
+            if (transaction != null && transaction.getState() == TransactionState.PREPARING) {
 
                 // On affiche les plats qu'il faut préparer
-                for(Map.Entry<String, Integer> plat : transaction.getCommandeDemandé().getPlats().entrySet()) {
-                    print("- Commande " + indexCommand + " : " + plat.getKey() + " pour la table N°" + transaction.getTable().getNumero());
+                for (Map.Entry<String, Integer> plat : transaction.getCommandeDemandé().getPlats().entrySet()) {
+                    if (plat.getValue() > 0) {
+                        indexPlat++;
+                        print(indexPlat + ") Commande " + indexCommand + " : " + plat.getKey() + " pour la table N°"
+                                + transaction.getTable().getNumero());
+                    }
                 }
                 indexCommand++;
             }
         }
-        
+
         print("--------------------------------------------------------------------------\n");
+        print((indexPlat + 1) + " - Page précédente");
         print("0 - Retour au menu principal\n");
-        print("Entrez le numéro de la commande que vous souhaitez préparer :\n\n");
+        print("Entrez le numéro du plat que vous souhaitez préparer :\n\n");
 
         String choixEcran = menuScanner.next();
         int choixEcranInt = Integer.parseInt(choixEcran);
 
-        if(choixEcranInt == 0){
+        if (choixEcranInt == 0) {
             App.showMainMenu();
-        }
-        else if(choixEcranInt > 0 && choixEcranInt < indexCommand){
-            // Si l'on récupère bien un plat à préparer (au lieu de revenir au menu principal) :
+        } else if (choixEcranInt > 0 && choixEcranInt <= indexPlat) {
+            // Si l'on récupère bien un plat à préparer (au lieu de revenir au menu
+            // principal) :
 
-            // Alors on récupère la transaction correspondante (grâce à la fonction getSelectedTransaction)
+            // Alors on récupère la transaction correspondante (grâce à la fonction
+            // getSelectedTransaction)
             Transaction selectedTransaction = getSelectedTransaction(choixEcranInt);
 
-            // Et on récupère le premier plat de la commande (vous pouvez ajuster cela selon vos besoins)
-            String firstPlat = selectedTransaction.getCommandeDemandé().getPlats().keySet().iterator().next();
+            // On récupère le plat choisi par l'utilisateur
+            String selectedPlat = getSelectedPlat(selectedTransaction, choixEcranInt);
 
             // On appele la fonction cookingProcessScreen
-            cookingProcessScreen(menuScanner, whichCuisinier, selectedTransaction, firstPlat);
-        } else{
+            cookingProcessScreen(menuScanner, whichCuisinier, selectedTransaction, selectedPlat);
+        } else if (choixEcranInt == indexPlat+1) {
+            showKitchenScreen(menuScanner);
+        } else {
             showCookToDo(menuScanner, whichCuisinier);
         }
     }
@@ -146,18 +157,46 @@ public class KitchenScreen {
     // Fonction qui renvoie simplement la transaction correspondant à l'index
     private static Transaction getSelectedTransaction(int index) {
         int currentIndex = 1;
+        // Pour chacune des transactions en cours ...
         for (Transaction transaction : Restaurant.getTransactionsList()) {
-            if (transaction.getState() == TransactionState.PREPARING) {
+
+            // TODO : check debug kitchenScreen.getSelectedTransaction
+            print("Transaction state: " + transaction.getState());
+
+            // Si la commande est défini comme étant en cours de préparation
+            if (transaction != null && transaction.getState() == TransactionState.PREPARING) {
+
+                // TODO : check debug kitchenScreen.getSelectedTransaction
+                System.out.println("Current Index: " + currentIndex);
+
+                // Si l'index correspond à l'index de la transaction
                 if (currentIndex == index) {
+                    // Alors on renvoie la transaction
                     return transaction;
                 }
                 currentIndex++;
             }
         }
-        return null; // Dans le cas (d'erreur) ou aucune transaction n'est trouvée
+        throw new IllegalStateException("Erreur dans KitchenScreen.getSelectedTransaction()");
     }
 
-    public static void cookingProcessScreen(Scanner menuScanner, Cuisinier whichCuisinier, Transaction whichTransaction, String whichPlat) {
+    // Fonction qui renvoie le plat correspondant à l'index
+    private static String getSelectedPlat(Transaction transaction, int index) {
+        int currentIndex = 1;
+        // Pour chacun des plats de la commande demandé ...
+        for (Map.Entry<String, Integer> plat : transaction.getCommandeDemandé().getPlats().entrySet()) {
+            // Si l'index correspond à l'index du plat
+            if (currentIndex == index) {
+                // Alors on renvoie le plat
+                return plat.getKey();
+            }
+            currentIndex++;
+        }
+        return "Erreur dans KitchenScreen.getSelectedPlat()";
+    }
+
+    public static void cookingProcessScreen(Scanner menuScanner, Cuisinier whichCuisinier, Transaction whichTransaction,
+            String whichPlat) {
         clearConsole();
         print("==========================================================================\n");
         print("Repas actuel à préparer :\n");
@@ -171,22 +210,48 @@ public class KitchenScreen {
 
         String choixEcran = menuScanner.next();
 
-        if(choixEcran.equals("1")){
+        if (choixEcran.equals("1")) {
 
-            // Ajoute le plat fini dans la commande reçu
-            whichTransaction.getCommandeReçu().addPlats(whichPlat, 1);
             // Retire le plat fini de la commande demandé
+            // Et ajoute le plat fini dans la commande reçu
             // Ainsi lorsque la commande demandé sera vide (plats ET boissons)
             // alors cela signifiera que la commande est fini
-            whichTransaction.getCommandeDemandé().removePlats(whichPlat, 1);
+            removePlatFromTransactionsList(whichTransaction, whichPlat);
 
             // On revient dans la liste des plats à préparer pour continuer de travailler
             showCookToDo(menuScanner, whichCuisinier);
-        }
-        else{
+        } else {
             cookingProcessScreen(menuScanner, whichCuisinier, whichTransaction, whichPlat);
         }
 
+    }
+
+    // Fonction pour retirer le plat préparé de la liste des plats à préparer dans
+    // la liste générale des transactions
+    private static void removePlatFromTransactionsList(Transaction transaction, String plat) {
+
+        // Ajoute le plat fini dans la commande reçu
+        transaction.getCommandeReçu().addPlats(plat, 1);
+
+        // Test : System.out.println("Plats à préparer avant retrait : " +
+        // transaction.getCommandeDemandé().getPlats());
+
+        // Retire le plat de la commande demandée de la transaction actuelle
+        transaction.getCommandeDemandé().supprimerPlat(plat);
+
+        // TODO : check debug kitchenScreen.removePlatFromTransactionsList
+        print("debug : le plat " + plat + " a bien été retiré de la commande demandée de la transaction "
+                + transaction);
+        print("\ndebug : la commande demandée de la transaction " + transaction + " est maintenant : "
+                + transaction.getCommandeDemandé().getPlats());
+
+        print("debug : le plat " + plat + " a bien été ajouté à la commande reçue de la transaction " + transaction);
+        print("\ndebug : la commande reçue de la transaction " + transaction + " est maintenant : "
+                + transaction.getCommandeReçu().getPlats() + "\n");
+
+        // On vérifie si la commande est vide
+        TransactionState.checkIfCommandReady(transaction);
+        print("debug : la transaction " + transaction + " est maintenant à l'état " + transaction.getState() + "\n");
     }
 
     public static void print(String text) {
