@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class stock {
+public class Stock {
 
     public static List<Aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);

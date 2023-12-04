@@ -1,6 +1,8 @@
 package main.place;
 
 import java.util.*;
+
+import main.carte.Stock;
 import main.staff.*;
 import main.stock.*;
 
