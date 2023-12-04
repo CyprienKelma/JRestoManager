@@ -58,11 +58,11 @@ public class App {
                 break;
             case "2":
                 // Appelle la fonction de l'écran de cuisine
-                KitchenScreen.tryShowingOrderTakingScreen(menuScanner);
+                KitchenScreen.tryShowingKitchenScreen(menuScanner);
                 break;
             case "3":
                 // Appelle la fonction de l'écran de bar
-                BarScreen.tryShowingScreen(menuScanner);
+                BarScreen.tryShowingBarScreen(menuScanner);
                 break;
             case "4":
                 // Appelle la fonction de l'écran de monitoring

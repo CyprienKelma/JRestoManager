@@ -125,7 +125,8 @@ public class Carte {
 
     private Scanner scanner;
 
-    public static void passerCommandePlats(Scanner menuScanner, Transaction transaction) {
+
+    public static void passerCommandePlats(Scanner menuScanner, Transaction transaction) throws IOException {
     
         int choix;
         do {
@@ -133,7 +134,7 @@ public class Carte {
             print("==========================================================================");
             print("PRISE DE COMMANDE :\n");
             print("--------------------------------------------------------------------------");
-            print("Table n°" + transaction.getTable().getNuméro() + " : "
+            print("Table n°" + transaction.getTable().getNumero() + " : "
                     + transaction.getState().getDescription());
             print("--------------------------------------------------------------------------\n");
 
@@ -186,6 +187,10 @@ public class Carte {
                         passerCommandePlats(menuScanner, transaction);
                         break;
                     case "3":
+                        // Sauvegarde les plats de la commande dans la transaction dès qu'on reveint
+                        // sur l'écran de commande générale (OrderTakingScreen.takeCommand)
+                        transaction.getCommandeDemandé().setPlatsSelectionnes(new HashMap<>(transaction.getCommandeDemandé().getPlats()));
+
                         OrderTakingScreen.takeCommand(menuScanner, transaction.getServeurAssociate(), transaction);
                         break;
                     default:
@@ -193,25 +198,30 @@ public class Carte {
                         break;
                 }
             } catch (IOException e) {
-                e.printStackTrace(); // Gérer l'exception de manière appropriée en fonction de vos besoins
+                e.printStackTrace();
             }
         } while (choix != 2);
     }
 
     public static void afficherPlatsNonDisponibles(List<String> plats, List<Aliment> stock) {
-        System.out.println("--------------------------------------------------------------------------");
-        System.out.println("\nPlats non disponibles :");
-        System.out.println("--------------------------------------------------------------------------");
+            clearConsole();
+            print("==========================================================================");
+            print("PRISE DE COMMANDE :\n");
+            print("--------------------------------------------------------------------------");
+            print("Plats non disponibles :");
+            print("--------------------------------------------------------------------------");
         
         for (String plat : plats) {
+            // On récupère les ingrédients du plat
             Map<String, Integer> ingredients = getIngredients(plat);
             boolean platDisponible = true;
 
+            // On vérifie pour chaque ingrédients s'ils sont présents dans le stock
             for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
                 String ingredientNom = entry.getKey();
                 int quantiteRequise = entry.getValue();
 
-                // Vérifier si l'ingrédient est présent dans le stock
+                // On vérifie si l'ingrédient est présent dans le stock
                 boolean ingredientPresent = stock.stream()
                         .anyMatch(a -> a.getNom().equals(ingredientNom) && a.getQuantite() >= quantiteRequise);
 
@@ -229,7 +239,9 @@ public class Carte {
 
     public static List<String> afficherPlatsDisponibles(List<String> plats, List<Aliment> stock) {
         List<String> platsDisponibles = new ArrayList<>();
-        System.out.println("\n\tPlats disponibles :");
+        print("--------------------------------------------------------------------------");
+        print("Plats disponibles :");
+        print("--------------------------------------------------------------------------");
     
         int numeroPlatDisponible = 1;
     
@@ -263,7 +275,7 @@ public class Carte {
 
 
     private static void commanderPlat(List<String> platsDisponibles, Transaction selectedTransaction) {
-        System.out.println("\nVeuillez entrer le numéro du plat à ajouter : ");
+        System.out.println("\nVeuillez entrer le numéro du plat à ajouter : \n\n");
         Scanner scanner = new Scanner(System.in);
         int numeroPlat = scanner.nextInt(); // Utilisez le Scanner de la classe
     
@@ -277,7 +289,7 @@ public class Carte {
                 stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
     
                 // Ajouter le plat à la commande avec une quantité de 1 par défaut
-                selectedTransaction.getCommandeDemandé().ajouterPlat(platChoisi, 1);
+                selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);
     
                 System.out.println("Le plat à été ajouté à la commande.");
             } catch (IOException e) {
@@ -299,7 +311,7 @@ public class Carte {
             print("==========================================================================");
             print("PRISE DE COMMANDE :\n");
             print("--------------------------------------------------------------------------");
-            print("Table n°" + transaction.getTable().getNuméro() + " : "
+            print("Table n°" + transaction.getTable().getNumero() + " : "
                     + transaction.getState().getDescription());
             print("--------------------------------------------------------------------------\n");
 
@@ -352,6 +364,10 @@ public class Carte {
                         passerCommandeBoissons(menuScanner, transaction);
                         break;
                     case "3":
+                        // Sauvegarde les boissons de la commande dans la transaction dès qu'on reveint
+                        // sur l'écran de commande générale (OrderTakingScreen.takeCommand)
+                        transaction.getCommandeDemandé().setBoissonsSelectionnes(new HashMap<>(transaction.getCommandeDemandé().getBoissons()));
+                        
                         OrderTakingScreen.takeCommand(menuScanner, transaction.getServeurAssociate(), transaction);
                         break;
                     default:
@@ -413,7 +429,7 @@ public class Carte {
                 StockDrink.retirerBoisson("src\\main\\data\\stockDrink.txt", Collections.singletonMap(boissonChoisie, 1));
     
                 // Ajoute la boisson à la commande avec une quantité de 1 par défaut
-                selectedTransaction.getCommandeDemandé().ajouterBoisson(boissonChoisie, 1);
+                selectedTransaction.getCommandeDemandé().addBoissons(boissonChoisie, 1);
     
                 System.out.println("La boisson a été ajoutée à la commande.");
             } catch (IOException e) {

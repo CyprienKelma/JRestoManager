@@ -1,5 +1,6 @@
 package main.launcher;
 
+import java.io.IOException;
 import java.util.*;
 
 import main.place.*;
@@ -101,7 +102,7 @@ public class OrderTakingScreen {
         // [Numéro de la table] : [Etat de la transaction]
         for (int i = 0; i < Restaurant.getTransactionsListSize(); i++) {
             if(Restaurant.getTransactionsList().get(i).getServeurAssociate().equals(whichWaiter)) {
-                print((i + 1) + " - Table n°" + Restaurant.getTransactionsList().get(i).getTable().getNuméro() + " : "
+                print((i + 1) + " - Table n°" + Restaurant.getTransactionsList().get(i).getTable().getNumero() + " : "
                 + Restaurant.getTransactionsList().get(i).getState().getDescription());
             }
         }
@@ -136,8 +137,9 @@ public class OrderTakingScreen {
     }
 
 
-    // Fonction de "transfert" d'une transaction (passé en paramètre) vers la fonction appropriée.
+    // Fonction de "transfert" d'une transaction (passé en paramètre) vers la bonne fonction.
     // Et ceux selon son état (voir TransactionState.java pour plus d'infos sur les états)
+    // Joue un rôle essentielle puisque c'est elle qui permet de rediriger vers la fonction appropriée
     public static void redirectToAppropriateAction(Scanner menuScanner, Serveur whichWaiter, Transaction selectedTransaction) {
 
         // On récupère l'état de la transaction :
@@ -146,13 +148,15 @@ public class OrderTakingScreen {
         switch (actualTableState) {
             case NOT_STARTED:
                 // Redirige de l'état de transaction créé vers la fonction de prise de commande :
-                takeCommand(menuScanner, whichWaiter, selectedTransaction);
-                // A récupérer auprès de Rémi :
-                // fonction takeCommand(menuScanner, whichWaiter, selectedTransaction);
+                try {
+                    takeCommand(menuScanner, whichWaiter, selectedTransaction);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
-            case PREPARING:
-                // Une fois la commande prise, redirige vers la fonction d'envoie en cuisine
-                sendCommandToPrepare(menuScanner, whichWaiter, selectedTransaction);
+                case PREPARING:
+                    // Une fois la commande prise, redirige vers la fonction d'envoie en cuisine
+                    sendCommandToPrepare(menuScanner, whichWaiter, selectedTransaction);
                 break;
             case READY:
                 // Quand les plats et les boissons sont prêts, redirige vers la fonction
@@ -173,13 +177,13 @@ public class OrderTakingScreen {
 
     // Fonction qui permet de prendre la commande des clients
     // Celle-ci est appelée quand l'état de la transaction est "NOT_STARTED"
-    public static void takeCommand(Scanner menuScanner, Serveur whichWaiter, Transaction selectedTransaction) {
+    public static void takeCommand(Scanner menuScanner, Serveur whichWaiter, Transaction selectedTransaction) throws IOException {
 
         clearConsole();
         print("==========================================================================");
         print("PRISE DE COMMANDE :\n");
         print("--------------------------------------------------------------------------");
-        print("Table n°" + selectedTransaction.getTable().getNuméro() + " : "
+        print("Table n°" + selectedTransaction.getTable().getNumero() + " : "
                 + selectedTransaction.getState().getDescription());
         print("--------------------------------------------------------------------------\n");
 
@@ -208,7 +212,7 @@ public class OrderTakingScreen {
                 showOrderSelectionScreen(menuScanner, whichWaiter);
                 break;
             default:
-                sendCommandToPrepare(menuScanner, whichWaiter, selectedTransaction);
+                takeCommand(menuScanner, whichWaiter, selectedTransaction);
                 break;
         }
     }
@@ -218,31 +222,33 @@ public class OrderTakingScreen {
     // Celle-ci est appelée quand l'état de la transaction est "PREPARING"
     public static void sendCommandToPrepare(Scanner menuScanner, Serveur whichWaiter, Transaction selectedTransaction) {
 
+        // On change l'état de la transaction sur PREPARING :
+        // Ce qui veut dire que les plats qui la composent seront traités par les cuisiniers
+        // Pareil pour le barman avec les boissons
+        selectedTransaction.setState(TransactionState.PREPARING);
+        
         clearConsole();
         print("==========================================================================");
         print("ENVOYER LA COMMANDE EN CUISINE :");
         print("--------------------------------------------------------------------------");
-        print("Table n°" + selectedTransaction.getTable().getNuméro() + " : "
+        print("Table n°" + selectedTransaction.getTable().getNumero() + " : "
                 + selectedTransaction.getState().getDescription());
         print("--------------------------------------------------------------------------\n");
 
         print(("La commande a bien été envoyée en cuisine et au barman !\n"));
         print("Lorsque les plats et les boissons seront prêts, vous pourrez les apporter aux clients.\n");
         print("\n1 - Retour à la sélection des transactions\n\n");
+        print("2 - Retour au menu principal\n\n");
 
         String choixEcran = menuScanner.next();
 
         if(choixEcran.equals("1")) {
+            
             // Retour à la sélection des transactions
-                selectedTransaction.setState(TransactionState.PREPARING);
-                
-                // TODO : Envoyer la commande en cuisine
-                // => Envoyer les plats aux cuisiniers
-                // => Envoyer les boissons au barman
+            showOrderSelectionScreen(menuScanner, whichWaiter);
 
-
-                showOrderSelectionScreen(menuScanner, whichWaiter);
-
+        } else if(choixEcran.equals("2")) {
+            App.showMainMenu();
         } else {
             sendCommandToPrepare(menuScanner, whichWaiter, selectedTransaction);
         }
@@ -309,7 +315,7 @@ public class OrderTakingScreen {
                 if (Restaurant.getTablesList().get(i).getNbrCouvert() >= Integer.parseInt(nbrClientsStr)) {
 
                     // Si oui, on l'affiche :
-                    print((i + 1) + ") Table n°" + Restaurant.getTablesList().get(i).getNuméro() + " :"
+                    print((i + 1) + ") Table n°" + Restaurant.getTablesList().get(i).getNumero() + " :"
                             + Restaurant.getTablesList().get(i).getNbrCouvert() + " couverts");
 
                     // Et (si oui) on l'ajoute à la liste temporaire des tables disponibles :
@@ -377,7 +383,7 @@ public class OrderTakingScreen {
         print("==========================================================================");
         print("CONFIRMATION DE LA TRANSACTION :");
 
-        print("La table " + selectedOne.getNuméro() + " est maintenant occupée par "
+        print("La table " + selectedOne.getNumero() + " est maintenant occupée par "
                 + nbrClients + " client(s).");
 
         print("--------------------------------------------------------------------------");

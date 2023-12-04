@@ -3,6 +3,7 @@ package main.place;
 import java.util.*;
 import main.staff.*;
 import main.stock.*;
+import main.carte.*;
 
 /*
  * Classe pricipale qui représente le coeur du restaurant
@@ -43,11 +44,6 @@ public class Restaurant {
         tablesList.add(new Table(42, 4, true));
         tablesList.add(new Table(18, 4, true));
     }
-
-    // Carte indiquant en tant réel les plats disponibles ou non (en fonction du
-    // stock)
-    // private static Carte carte;
-    // TODO : Netoyer le package stock avant d'importer la classe Carte
 
     Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"

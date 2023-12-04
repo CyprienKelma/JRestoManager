@@ -18,7 +18,7 @@ public class BarScreen {
     // - Si l'équipe n'est pas encore créée, indique qu'il faut d'abord en créer une
     // - Si l'équipe est créée, affiche l'écran de selection du cuisinier
     // (showBarScreen)
-    public static void tryShowingOrderTakingScreen(Scanner menuScanner) {
+    public static void tryShowingBarScreen(Scanner menuScanner) {
         if (!Restaurant.isOpen()) {
             App.clearConsole();
             print("==========================================================================\n");
@@ -31,7 +31,7 @@ public class BarScreen {
             if (choixEcran.equals("1")) {
                 App.showMainMenu();
             } else {
-                tryShowingOrderTakingScreen(menuScanner);
+                tryShowingBarScreen(menuScanner);
             }
         }
         showBarScreen(menuScanner);
