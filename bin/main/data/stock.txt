@@ -1,5 +1,5 @@
 Champignon,81
-Salade,18
+Salade,17
 Oignon,25
 Pain,119
 Viande,119

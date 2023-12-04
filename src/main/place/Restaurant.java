@@ -2,8 +2,8 @@ package main.place;
 
 import java.util.*;
 import main.staff.*;
-import main.stock.*;
 import main.carte.*;
+import main.carte.Stock;
 
 /*
  * Classe pricipale qui représente le coeur du restaurant

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import main.place.Transaction;
-import main.carte.stock;
+import main.carte.Stock;
 import main.launcher.OrderTakingScreen;
 import main.staff.Serveur;
 import main.carte.*;
@@ -150,7 +150,7 @@ public class Carte {
                 switch (strChoice) {
                     case "1":
                         // Vérifie en temps réel si les plats sont disponibles
-                        List<Aliment> stock1 = stock.lireFichier("src\\main\\data\\stock.txt");
+                        List<Aliment> stock1 = Stock.lireFichier("src\\main\\data\\stock.txt");
                         afficherPlatsNonDisponibles(liste1, stock1);
                         // Affiche ceux qui le sont et ceux qui ne le sont pas
                         List<String> platsDisponibles = afficherPlatsDisponibles(liste1, stock1);
@@ -170,7 +170,7 @@ public class Carte {
                         
                         try {
                             // Réinitialiser le stock
-                            stock.retournerAliments("src\\main\\data\\stock.txt", quantitesRetirées);
+                            Stock.retournerAliments("src\\main\\data\\stock.txt", quantitesRetirées);
                         } catch (IOException e) {
                             System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
                         }
@@ -286,7 +286,7 @@ public class Carte {
     
             try {
                 // Retirer les ingrédients du plat choisi du stock
-                stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
+                Stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
     
                 // Ajouter le plat à la commande avec une quantité de 1 par défaut
                 selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);

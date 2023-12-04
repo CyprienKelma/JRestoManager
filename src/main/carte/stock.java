@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 
-public class stock {
+public class Stock {
 
     public static List<Aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
