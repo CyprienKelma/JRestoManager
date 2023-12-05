@@ -77,6 +77,7 @@ public class App {
                 EmployeeScreen.showTeamScreen(menuScanner);
                 break;
             case "6":
+                GestionStockScreen.tryShowingGestionScreen(menuScanner);
                 // Appelle la fonction de l'écran de gestion de la réserve d'aliments
                 break;
             default:

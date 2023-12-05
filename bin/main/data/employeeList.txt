@@ -10,3 +10,4 @@ Barman, Marceau, Stephane, 10.3
 Manager, Kondo, Yang, 16.3
 Serveur, Doma, Molchat, 12.2
 Cuisinier, Almeida, Julien, 12.3
+Serveur, 1, 2, 3.0
