@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import main.place.Transaction;
-import main.carte.Stock;
-import main.launcher.OrderTakingScreen;
-import main.staff.Serveur;
-import main.carte.*;
+import main.launcher.order.OrderTakingScreen;
 
 public class Carte {
 

@@ -1,6 +1,19 @@
 package main.place;
 
+
+/*
+ * Enum qui définit les différents états d'une transaction
+ * Elle est très importante car elle permet de savoir comment gérer les commandes
+ * entre les différents écrans (OrderTakingScreen, KitchenScreen, BarScreen) en fonction
+ * de leurs avancements. Cela permet au serveur d'être disponible sur des commande d'état
+ * différente. Par exemple, encaisser une commande puis acceuillir de nouveaux clients, etc...
+ */
 public enum TransactionState {
+    // Toute les commandes commence à l'état "NOT_STARTED"
+    // une fois qu'on intervient sur elle, on la passe à l'état suivant
+    // (voir les fonctions de changement d'état plus bas)
+
+
     // Quand les clients n'ont pas encore commandés
     NOT_STARTED("Commande à prendre"),
 

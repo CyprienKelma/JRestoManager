@@ -8,7 +8,6 @@ import main.carte.*;
 // C'est à dire de chaque commande : 1 unique transaction <=> 1 unique table
 public class Transaction {
 
-
     // Identifiant unique pour retrouver la transaction dans la liste des transactions
     private int transactionId;
 
@@ -41,6 +40,12 @@ public class Transaction {
         // Pas besoin de préciser l'état de la transaction, elle est toujours initialisée à NOT_STARTED
         // au moment ou la transaction est créée (voir enum TransactionState)
         this.state = TransactionState.NOT_STARTED;
+
+        // On récupère l'identifiant de la transaction
+        this.transactionId  = Restaurant.getTransactionId();
+        // On incrémente l'identifiant de la transaction pour la prochaine fois
+        // (voir la variable static transactionId dans la classe Restaurant)
+        Restaurant.setTransactionId(Restaurant.getTransactionId() + 1);
     }
 
     public void setState(TransactionState newState) {
@@ -123,5 +128,11 @@ public class Transaction {
     public void setCommandeReçu(Commande commandeReçu) {
         this.commandeReçu = commandeReçu;
     }
-    
+
+    /**
+     * @return int return the transactionId
+     */
+    public int getTransactionId() {
+        return transactionId;
+    }
 }

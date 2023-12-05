@@ -1,5 +1,6 @@
 package main.launcher;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ import main.place.Restaurant;
 import main.place.Transaction;
 import main.place.TransactionState;
 
+//Classe qui gère l'écran d
 public class BarScreen {
 
     private BarScreen() {
@@ -22,7 +24,7 @@ public class BarScreen {
     // - Si l'équipe n'est pas encore créée, indique qu'il faut d'abord en créer une
     // - Si l'équipe est créée, affiche l'écran de selection du cuisinier
     // (showBarScreen)
-    public static void tryShowingBarScreen(Scanner menuScanner) {
+    public static void tryShowingBarScreen(Scanner menuScanner) throws IOException {
         if (!Restaurant.isOpen()) {
             App.clearConsole();
             print("==========================================================================\n");
@@ -41,7 +43,7 @@ public class BarScreen {
         showBarScreen(menuScanner);
     }
 
-    public static void showBarScreen(Scanner menuScanner) {
+    public static void showBarScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("Boissons à préparer :\n");
@@ -110,14 +112,16 @@ public class BarScreen {
     }
 
     // Fonction qui change la quantité de la boisson sélectionnée dans la commande sélectionnée et celle reçue
-    public static void changeCommandeQuantity(Scanner menuScanner, Transaction transaction, Map.Entry<String, Integer> boissonActuel){
+    public static void changeCommandeQuantity(Scanner menuScanner, Transaction transaction, Map.Entry<String, Integer> boissonActuel) throws IOException{
 
         // On enlève la boisson de la commande demandée et on l'ajoute à la commande reçue
         transaction.getCommandeDemandé().removeBoissons(boissonActuel.getKey(), 1);
-        if(transaction.getCommandeDemandé().getBoissons().get(boissonActuel.getKey()) == 0){
+        if(transaction.getCommandeDemandé().getBoissons().get(boissonActuel.getKey()) <= 0){
+            // Si la quantité de la boisson est à 0 (ou moins...), on la supprime de la commande
+            // Comma ça on passe de {boisson, 0} à {} et la, la commande est vraiment vide
             transaction.getCommandeDemandé().supprimerBoisson(boissonActuel.getKey());
         }
-        
+
         transaction.getCommandeReçu().addBoissons(boissonActuel.getKey(), 1);
 
         // TODO : check debug transactionState

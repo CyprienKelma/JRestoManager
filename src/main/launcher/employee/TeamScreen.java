@@ -1,5 +1,6 @@
 package main.launcher.employee;
 
+import java.io.IOException;
 import java.util.*;
 
 import main.launcher.App;
@@ -42,7 +43,7 @@ public class TeamScreen {
     }
 
     // Ecran : Programmer les employés pour la soirée (i.e. former l'équipe)
-    public static void showTeamFormationScreen(Scanner menuScanner) {
+    public static void showTeamFormationScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("FORMER L'EQUIPE DE CE SOIR :\n");
@@ -90,7 +91,7 @@ public class TeamScreen {
 
     // Ecran pour choisir les employés pour former l'équipe parmis ceux requis
     // On utilise un type générique pour pouvoir utiliser cette fonction pour tous les types d'employés
-    public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees) {
+    public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         if (numberOfEmployees == 1) { // Pour le barman et manager
@@ -192,7 +193,7 @@ public class TeamScreen {
 
     // Cette fonction affiche la liste des employés du type voulu. Comme ça,
     // on peut choisir lequel on ajoute parmis ceux du bon type
-    public static <T> void showEmployeeListByType(Scanner menuScanner, Class<T> type, int whichOne) {
+    public static <T> void showEmployeeListByType(Scanner menuScanner, Class<T> type, int whichOne) throws IOException {
 
         // On va créer une liste temporaire pour stocker les employés du type voulu
         List<Employé> tmpList = new ArrayList<>();
@@ -278,7 +279,7 @@ public class TeamScreen {
     }
 
     public static <T extends Employé> void notifyAddTeam(Scanner menuScanner, Employé selectedOne, int whichOne,
-            Class<T> type) {
+            Class<T> type) throws IOException {
 
         clearConsole();
         print("==========================================================================\n");
@@ -316,7 +317,7 @@ public class TeamScreen {
 
     }
 
-    public static void confirmFinalNewTeam(Scanner menuScanner) {
+    public static void confirmFinalNewTeam(Scanner menuScanner) throws IOException {
 
         // On vérifie si l'quipe est incomplète
 
@@ -358,7 +359,7 @@ public class TeamScreen {
         }
     }
 
-    public static void missingTeamMembers(Scanner menuScanner, String missingMember) {
+    public static void missingTeamMembers(Scanner menuScanner, String missingMember) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("ERREUR : L'équipe n'est pas complète !");
@@ -380,7 +381,7 @@ public class TeamScreen {
         }
     }
 
-    public static void instanciateTeam() {
+    public static void instanciateTeam() throws IOException {
         // On instancie l'équipe avec les employés temporaires
         Equipe newTeam = new Equipe(serveur1Tmp, serveur2Tmp, cuisinier1Tmp, cuisinier2Tmp, cuisinier3Tmp,
                 cuisinier4Tmp,

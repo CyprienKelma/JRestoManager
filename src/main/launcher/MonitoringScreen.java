@@ -2,6 +2,7 @@ package main.launcher;
 
 import java.util.Scanner;
 
+//Classe qui gère l'écran de prise de commande du restaurant (4)
 public class MonitoringScreen {
 
     private MonitoringScreen() {

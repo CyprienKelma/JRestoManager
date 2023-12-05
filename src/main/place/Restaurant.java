@@ -16,6 +16,9 @@ public class Restaurant {
     // équipe valide (=> bon nombre d'employé de chaque type)
     private static boolean isOpen;
 
+    // Identifiant unique pour chaque transaction
+    private static int transactionId = 1;
+
     // La liste de tous les employés du restaurant et
     // de tout type (Manager, Serveur, Barman, Cuisinier)
     private static List<Employé> employésList = new ArrayList<>();
@@ -93,6 +96,15 @@ public class Restaurant {
             return transactionsList.size();
         }
     }
+
+    public static int getTransactionId() {
+        return transactionId;
+    }
+
+    public static void setTransactionId(int transactionId) {
+        Restaurant.transactionId = transactionId;
+    }
+
 
     public static void setTransactionsList(List<Transaction> transactionsList) {
         Restaurant.transactionsList = transactionsList;

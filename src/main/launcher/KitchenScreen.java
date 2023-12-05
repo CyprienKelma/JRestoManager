@@ -1,5 +1,6 @@
 package main.launcher;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class KitchenScreen {
     // - Si l'équipe n'est pas encore créée, indique qu'il faut d'abord en créer une
     // - Si l'équipe est créée, affiche l'écran de selection du cuisinier
     // (showKitchenScreen)
-    public static void tryShowingKitchenScreen(Scanner menuScanner) {
+    public static void tryShowingKitchenScreen(Scanner menuScanner) throws IOException {
         if (!Restaurant.isOpen()) {
             App.clearConsole();
             print("==========================================================================\n");
@@ -45,7 +46,7 @@ public class KitchenScreen {
         showKitchenScreen(menuScanner);
     }
 
-    public static void showKitchenScreen(Scanner menuScanner) {
+    public static void showKitchenScreen(Scanner menuScanner) throws IOException {
         App.clearConsole(); // Pour simuler un écran
         print("==========================================================================\n");
         print("Quel cuisinier êtes-vous ?\n");
@@ -92,7 +93,7 @@ public class KitchenScreen {
         }
     }
 
-    public static void showCookToDo(Scanner menuScanner, Cuisinier whichCuisinier) {
+    public static void showCookToDo(Scanner menuScanner, Cuisinier whichCuisinier) throws IOException {
 
         clearConsole();
         print("==========================================================================\n");
@@ -177,7 +178,7 @@ public class KitchenScreen {
                 currentIndex++;
             }
         }
-        throw new IllegalStateException("Erreur dans KitchenScreen.getSelectedTransaction()");
+        return null;
     }
 
     // Fonction qui renvoie le plat correspondant à l'index
@@ -196,7 +197,7 @@ public class KitchenScreen {
     }
 
     public static void cookingProcessScreen(Scanner menuScanner, Cuisinier whichCuisinier, Transaction whichTransaction,
-            String whichPlat) {
+            String whichPlat) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("Repas actuel à préparer :\n");
@@ -204,7 +205,7 @@ public class KitchenScreen {
         print("A vous de jouez ! Lorsque vous aurez fini votre préparation, vous pourrez");
         print("indiquer que le plat est prêt en appuyant sur 1.\n");
         print("--------------------------------------------------------------------------\n");
-        print("Plat à préparer : " + whichPlat + "pour la table N°" + whichTransaction.getTable().getNumero() + "\n");
+        print("Plat à préparer : " + whichPlat + " pour la table N°" + whichTransaction.getTable().getNumero() + "\n");
         print("--------------------------------------------------------------------------\n");
         print("1 - Indiquer que le plat est préparé\n\n");
 

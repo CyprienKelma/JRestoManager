@@ -1,5 +1,6 @@
 package main.launcher.employee;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class EmployeeScreen {
     }
 
     // Ecran principal de gestion des employés (5)
-    public static void showTeamScreen(Scanner menuScanner) {
+    public static void showTeamScreen(Scanner menuScanner) throws IOException {
         clearConsole(); // Nettoie la console pour une meilleure lisibilité
         print("==========================================================================\n");
         print("GESTION DES EMPLOYÉS\n");
@@ -50,7 +51,7 @@ public class EmployeeScreen {
     }
 
     // Sous-écran A : Ajouter/Supprimer un employé
-    public static void showAddRemoveEmployeeScreen(Scanner menuScanner) {
+    public static void showAddRemoveEmployeeScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("AJOUTER/SUPPRIMER UN EMPLOYÉ :\n");
@@ -81,7 +82,7 @@ public class EmployeeScreen {
     }
 
     // Sous-écran A1 : Ajouter un employé
-    private static void showAddEmployee(Scanner menuScanner) {
+    private static void showAddEmployee(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("AJOUTER UN EMPLOYÉ :\n");
@@ -120,7 +121,7 @@ public class EmployeeScreen {
 
     }
 
-    public static void showEmployeeList(Scanner menuScanner) {
+    public static void showEmployeeList(Scanner menuScanner) throws IOException {
 
         if (Restaurant.getEmployésList().isEmpty()) {
             clearConsole();
@@ -172,10 +173,11 @@ public class EmployeeScreen {
      * @param menuScanner Le scanner pour naviguer dans le menu
      * @param typeEmployé Le type d'employé à ajouter (Serveur, Cuisinier, Barman,
      *                    Manager)
+     * @throws IOException
      * @throws IllegalArgumentException Dans le cas ou le type d'employé est
      *                                  inatendu
      */
-    private static void addNewEmployee(Scanner menuScanner, String typeEmployé) {
+    private static void addNewEmployee(Scanner menuScanner, String typeEmployé) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         print("AJOUTER UN EMPLOYÉ :\n");
@@ -246,7 +248,7 @@ public class EmployeeScreen {
     }
 
     // Sous-écran A2 : Supprimer un employé
-    private static void showRemoveEmployee(Scanner menuScanner) {
+    private static void showRemoveEmployee(Scanner menuScanner) throws IOException {
 
         List<Employé> employésList = Restaurant.getEmployésList();
 
@@ -305,7 +307,7 @@ public class EmployeeScreen {
     // Affiche un message de confirmation, suivit d'un menu pour choisir la suite
     // Précise en paramètre si l'on ajoute un employé (isAdd = true) ou le supprime
     // (isAdd = false). En fonction des cas les menus seront différents
-    public static void showConfirmationEmployeeChange(Scanner menuScanner, String typeEmployé, boolean isAdd) {
+    public static void showConfirmationEmployeeChange(Scanner menuScanner, String typeEmployé, boolean isAdd) throws IOException {
         clearConsole();
         print("==========================================================================\n");
         if (isAdd) {
