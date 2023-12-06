@@ -489,9 +489,9 @@ public class Carte {
     }
     
 
-    public static double afficherCommandeBoisson(Transaction selectedTransaction){
+    public static void afficherCommandeBoisson(Transaction selectedTransaction){
 
-        Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getPlats();
+        Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getBoissons();
 
         double total = 0;
         System.out.println("\n");
@@ -515,7 +515,6 @@ public class Carte {
         }
     
         System.out.println("\nCoût total des boisssons : " + total + " euros");
-        return total;
     }
 
     public static double affichertotalBoissonCommande(Transaction selectedTransaction) {

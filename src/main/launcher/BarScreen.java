@@ -83,7 +83,6 @@ public class BarScreen {
         if(choixEcranInt == 0){
             App.showMainMenu();
         } else {
-            int indexCommand2 = 1;
             int indexBoisson2 = 1;
 
             // Pour chacune des transactions en cours ...
@@ -105,7 +104,6 @@ public class BarScreen {
                             indexBoisson2++;
                         }
                     }
-                    indexCommand2++;
                 }
             }
         }

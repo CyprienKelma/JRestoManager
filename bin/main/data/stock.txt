@@ -1,6 +1,6 @@
-Champignon,54
-Salade,53
-Oignon,91
+Champignon,21
+Salade,18
+Oignon,13
 Pain,116
 Viande,116
 Fromage,192
