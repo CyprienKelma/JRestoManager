@@ -11,7 +11,6 @@ import main.place.Table;
 import main.place.Transaction;
 import main.place.TransactionState;
 import main.staff.Serveur;
-import main.launcher.order.OrderTakingScreen;
 
 // Classe qui gère tout l'écran de création d'une nouvelle transaction
 public class OrderCreationScreen {
