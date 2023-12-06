@@ -124,7 +124,7 @@ public class KitchenScreen {
         }
     
         print("--------------------------------------------------------------------------\n");
-        print((indexPlat) + " - Page précédente");
+        print(indexPlat + " - Page précédente");
         print("0 - Retour au menu principal\n");
         print("Quand vous aurez fini de préparer un plat, entrez son numéro pour le supprimer de la liste.\n\n");
 
@@ -135,7 +135,7 @@ public class KitchenScreen {
             App.showMainMenu();
         } else if (choixEcranInt == indexPlat) {
             // Return to the previous page
-            showCookToDo(menuScanner, whichCuisinier);
+            showKitchenScreen(menuScanner);
         } else {
             int indexPlat2 = 1;
 

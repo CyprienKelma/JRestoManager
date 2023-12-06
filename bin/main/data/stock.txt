@@ -1,8 +1,8 @@
-Champignon,18
-Salade,13
-Oignon,4
-Pain,116
-Viande,116
+Champignon,0
+Salade,0
+Oignon,1
+Pain,115
+Viande,115
 Fromage,192
 Pate,189
 Chorizo,203

@@ -205,7 +205,7 @@ public class OrderTakingScreen {
         print("1 - Ajouter les plats");
         print("2 - Ajouter les boissons\n");
         print("3 - Confirmer la commande et l'envoyer en cuisine\n");
-        print("4 - Retour à la sélection des transactions\n\n\n");
+        print("4 - Retour à la sélection des transactions\n");
 
         String choixEcran = menuScanner.next();
 
@@ -252,8 +252,8 @@ public class OrderTakingScreen {
 
         print(("La commande a bien été envoyée en cuisine et au barman !\n"));
         print("Lorsque les plats et les boissons seront prêts, vous pourrez les apporter aux clients.\n");
-        print("\n1 - Retour à la sélection des transactions\n\n");
-        print("2 - Retour au menu principal\n\n");
+        print("1 - Retour à la sélection des transactions\n");
+        print("2 - Retour au menu principal\n");
 
         String choixEcran = menuScanner.next();
 
@@ -285,7 +285,7 @@ public class OrderTakingScreen {
         print(" - Aller les chercher au bar et en cuisine.");
         print(" - Vous pouvez ensuite les apporter aux clients.\n");
         print("--------------------------------------------------------------------------\n");
-        print("\n1 - Retour à la selection des transactions\n\n");
+        print("1 - Retour à la selection des transactions\n");
         print("2 - Retour au menu principal\n\n");
 
         // A ce stade on considère que les clients ont reçu leur commande
@@ -319,11 +319,12 @@ public class OrderTakingScreen {
         print("----------------------------------------------------------------------------\n\n");
 
         print("Selectionner l'action à effectuer :\n");
-        print("1 - Procéder à l'addition (les clients ont fini de manger et souhaitent payer) ");
+        print("1 - Procéder à l'addition (les clients ont fini de manger et souhaitent payer)\n ");
         print("2 - Attendre encore (retour à la sélection des transactions)");
         print("----------------------------------------------------------------------------\n\n");
         
         String choixEcran = menuScanner.next();
+        
 
         if(choixEcran.equals("1")){
             // On change l'état de la transaction sur CASHED :
@@ -331,7 +332,8 @@ public class OrderTakingScreen {
             transaction.setState(TransactionState.CASHED);
             // On libère la table :
             transaction.getTable().setDisponible(true);
-            confirmTheBill(menuScanner,transaction);
+            
+            payment(menuScanner, transaction);
             // TODO : imprimer le ticket de caisse
             // Voir fontion de monitoring
 
@@ -345,7 +347,7 @@ public class OrderTakingScreen {
         }
     }
 
-    public static void confirmTheBill(Scanner menuScanner, Transaction transaction) throws IOException{
+    public static void confirmTheBill(Scanner menuScanner, Transaction transaction, int nbrfacture) throws IOException{
         
         clearConsole();
         print("============================================================================");
@@ -353,30 +355,39 @@ public class OrderTakingScreen {
         print("----------------------------------------------------------------------------");
         print("Table n°" + transaction.getTable().getNumero() + " : "
                 + transaction.getState().getDescription());
-        print("----------------------------------------------------------------------------\n\n");
+        print("----------------------------------------------------------------------------\n");
 
         print("La transaction " + transaction.getTransactionId() + " est bien confirmée.");
-        print("les clients ont payés et la table " + transaction.getTable().getNumero() + " est libérée.\n\n");
+        print("les clients ont payés en " + nbrfacture + " fois et la table " + transaction.getTable().getNumero() + " est libérée.\n\n");
 
         print("Ticket de caisse :");
         print("----------------------------------------------------------------------------");
-        print("Commande N°" + transaction.getTransactionId() + " - Table n°" + transaction.getTable().getNumero() + "\n");
-        print("Serveur : " + transaction.getServeurAssociate().getNom() + " " + transaction.getServeurAssociate().getPrenom() + "\n");
+        print("\t\t\tCommande N°" + transaction.getTransactionId() + " - Table n°" + transaction.getTable().getNumero());
+        print("\t\t\tServeur : " + transaction.getServeurAssociate().getNom() + " " + transaction.getServeurAssociate().getPrenom() + "\n");
         
-        for(int i = 0; i < transaction.getCommandeReçu().getPlats().size(); i++){
-            print(i + ")" + transaction.getCommandeReçu().getPlats().get(i).toString(i) + " - " + transaction.getCommandeReçu().getPlats().get(i).toString(i) + "euros");
+        print("----------------------------------------------------------------------------");
+        print("\t\t\tArticles : \n");
+
+        // Afficher la liste des plats avec quantité et prix
+        for(Map.Entry<String, Integer> platEntry : transaction.getCommandeReçu().getPlats().entrySet()) {
+            print(platEntry.getValue() + "x " + platEntry.getKey() + " - " + Carte.getPrixPlat(platEntry.getKey()) * platEntry.getValue() + " euros");
         }
+
         print("\n");
-        for(int i = 0; i < transaction.getCommandeReçu().getBoissons().size(); i++){
-            print(i + ")" + transaction.getCommandeReçu().getBoissons().get(i).toString(i) + " - " + transaction.getCommandeReçu().getBoissons().get(i).toString(i) + "euros");
+        
+        // Afficher la liste des boissons avec quantité et prix
+        for(Map.Entry<String, Integer> boissonEntry : transaction.getCommandeReçu().getBoissons().entrySet()) {
+            print(boissonEntry.getValue() + "x " + boissonEntry.getKey() + " - " + Carte.getPrixBoisson(boissonEntry.getKey()) * boissonEntry.getValue() + " euros");
         }
-        print("----------------------------------------------------------------------------\n");
+
+        print("\n----------------------------------------------------------------------------\n");
         double total = Carte.affichertotalPlatCommande(transaction);
         total = total + Carte.affichertotalBoissonCommande(transaction);
-        print("TOTAL7 : " + total + " euros\n");
-
-
-
+        print("TOTAL : " + total + " euros");
+        print("Par CB : " + total + " euros\n");
+        print("\t\t Nous vous remercions de votre visite");
+        print("\t\t\t A Bientôt\n");
+        
         String choixEcran = menuScanner.next();
 
         if(choixEcran.equals("1")){
@@ -396,7 +407,65 @@ public class OrderTakingScreen {
             // On retourne à la sélection des transactions :
             showOrderSelectionScreen(menuScanner, transaction.getServeurAssociate());
         } else {
-            confirmTheBill(menuScanner, transaction);
+            confirmTheBill(menuScanner, transaction, nbrfacture);
+        }
+    }
+
+    public static void payment(Scanner menuScanner, Transaction transaction) throws IOException{
+        
+        clearConsole();
+        print("============================================================================");
+        print("CONFIRMATION D'ADDITION :");
+        print("----------------------------------------------------------------------------");
+        print("Table n°" + transaction.getTable().getNumero() + " : "
+                + transaction.getState().getDescription());
+        print("----------------------------------------------------------------------------\n\n");
+        print("0 - Retour confirmation d'addition\n");
+        print("1 - Paiement en 1 fois\n");
+        print("2 - Paiement en plusieurs fois\n");    
+
+        String choixEcran = menuScanner.next();
+
+        if(choixEcran.equals("0")){
+            // Retour confirmation facture :
+            askForTheBill(menuScanner, transaction);
+        } else if(choixEcran.equals("1")){
+            // On retourne à la sélection des transactions :
+            confirmTheBill(menuScanner, transaction,1);
+        } else if(choixEcran.equals("2")){
+
+            double total = Carte.affichertotalPlatCommande(transaction);
+            total += Carte.affichertotalBoissonCommande(transaction);
+            int nbrmax = (int) total % 20;
+            int nombre = 0;
+            boolean isValidInput = false;
+
+            print("----------------------------------------------------------------------------\n");
+            print("Paiement en plusieurs fois, jusqu'à un maximum de " + nbrmax + " factures\n");
+
+            while (!isValidInput) {
+                print("Donnez le nombre de factures souhaitées (inférieur ou égale à " + nbrmax + ") : ");
+                String choixEcran1 = menuScanner.next();
+
+                try {
+                    nombre = Integer.parseInt(choixEcran1);
+
+                    if (nombre <= nbrmax) {
+                        isValidInput = true;
+                    } else {
+                        print("Le nombre doit être inférieur ou égale à " + nbrmax + ". Veuillez réessayer.\n");
+                    }
+                
+
+                } catch (NumberFormatException e) {
+                    print("Erreur de saisie. Veuillez entrer un nombre valide.\n");
+                }
+            }
+            String choixEcran2 = menuScanner.next();
+            int nbr = Integer.parseInt(choixEcran2);
+            confirmTheBill(menuScanner, transaction,nbr);
+        }else {
+            payment(menuScanner, transaction);
         }
     }
     

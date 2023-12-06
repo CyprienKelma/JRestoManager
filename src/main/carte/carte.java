@@ -120,6 +120,22 @@ public class Carte {
         return ingredients;
     }
 
+    public static double getPrixPlat(String plat) {
+        int indexPlat = liste1.indexOf(plat);
+        if (indexPlat != -1 && indexPlat < liste2.size()) {
+            return Double.parseDouble(liste2.get(indexPlat).replaceAll("[^\\d.]", ""));
+        }
+        return 0; // or throw an exception indicating that the price is not found
+    }
+
+    public static double getPrixBoisson(String boisson) {
+        int indexBoisson = liste4.indexOf(boisson);
+        if (indexBoisson != -1 && indexBoisson < liste5.size()) {
+            return Double.parseDouble(liste5.get(indexBoisson).replaceAll("[^\\d.]", ""));
+        }
+        return 0; // or throw an exception indicating that the price is not found
+    }
+
     private Scanner scanner;
 
 
@@ -139,7 +155,7 @@ public class Carte {
             afficherCommande(transaction);
             System.out.println("\n1 - Ajouter un plat à la commande");
             System.out.println("2 - Réinitialiser la selection des plats");
-            System.out.println("\n3 - Fin d'ajout des plats\n\n");
+            System.out.println("3 - Fin d'ajout des plats\n");
             choix = menuScanner.nextInt();
             String strChoice = Integer.toString(choix);
     

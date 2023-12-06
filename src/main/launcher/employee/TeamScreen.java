@@ -340,7 +340,7 @@ public class TeamScreen {
 
         print("1 - Confirmer la selection et finaliser l'équipe\n");
         print("2 - Page précédente");
-        print("3 - Retour au menu principal");
+        print("3 - Retour au menu principal\n");
 
         String choixEcran = menuScanner.next();
 
