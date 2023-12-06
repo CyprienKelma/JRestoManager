@@ -190,8 +190,6 @@ public class KitchenScreen {
         // On vérifie si la commande est vide
         TransactionState.checkIfCommandReady(transaction);
 
-        // Puis à rappelle la fonction d'écran du barman pour continuer de préparer les autres boissons
-        showKitchenScreen(menuScanner);
     }
 
     public static void cookingProcessScreen(Scanner menuScanner, Cuisinier whichCuisinier, Transaction whichTransaction,
