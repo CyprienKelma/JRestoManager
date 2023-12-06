@@ -13,7 +13,7 @@ import main.carte.Stock;
 import main.carte.StockDrink;
 import main.place.Restaurant;
 
-//Classe qui gère l'écran d
+//Classe qui gère l'écran de gestion de stock
 public class GestionStockScreen {
 
     private GestionStockScreen() {

@@ -464,9 +464,34 @@ public class Carte {
         System.out.println("\nCoût total de la commande : " + total + " euros");
     }
 
-    public static void afficherCommandeBoisson(Transaction selectedTransaction){
+    public static double affichertotalPlatCommande(Transaction selectedTransaction) {
+        Map<String, Integer> items = selectedTransaction.getCommandeReçu().getPlats();
+    
+        double total = 0;
+       
+        for (Map.Entry<String, Integer> entry : items.entrySet()) {
+            String plat = entry.getKey();
+            int quantite = entry.getValue();
+    
+            // Trouver l'index du plat dans la liste1 pour obtenir le prix correspondant dans la liste2
+            int indexPlat = liste1.indexOf(plat);
+            if (indexPlat != -1 && indexPlat < liste2.size()) {
+                double prixUnitaire = Double.parseDouble(liste2.get(indexPlat).replaceAll("[^\\d.]", ""));
+                double prixTotal = prixUnitaire * quantite;  
+                // Ajouter le coût total du plat à la somme totale
+                total += prixTotal;
+            } else {
+                System.out.println("\nErreur : Prix non trouvé pour le plat suivant : " + plat);
+            }
+        }
+    
+        return total;
+    }
+    
 
-        Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getBoissons();
+    public static double afficherCommandeBoisson(Transaction selectedTransaction){
+
+        Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getPlats();
 
         double total = 0;
         System.out.println("\n");
@@ -490,7 +515,34 @@ public class Carte {
         }
     
         System.out.println("\nCoût total des boisssons : " + total + " euros");
+        return total;
     }
+
+    public static double affichertotalBoissonCommande(Transaction selectedTransaction) {
+        Map<String, Integer> items = selectedTransaction.getCommandeReçu().getBoissons();
+    
+        double total = 0;
+        for (Map.Entry<String, Integer> entry : items.entrySet()) {
+            String boisson = entry.getKey();
+            int quantite = entry.getValue();
+    
+            // Trouver l'index de la boisson dans la liste4 pour obtenir le prix correspondant dans la liste5
+            int indexBoisson = liste4.indexOf(boisson);
+            if (indexBoisson != -1 && indexBoisson < liste5.size()) {
+                double prixUnitaire = Double.parseDouble(liste5.get(indexBoisson).replaceAll("[^\\d.]", ""));
+                double prixTotal = prixUnitaire * quantite;
+    
+    
+                // Ajouter le coût total de la boisson à la somme totale
+                total += prixTotal;
+            } else {
+                System.out.println("\nErreur : Prix non trouvé pour la boisson suivante : " + boisson);
+            }
+        }
+    
+        return total;
+    }
+    
 
     public static void print(String text) {
         System.out.println(text);

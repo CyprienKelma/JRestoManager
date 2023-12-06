@@ -330,10 +330,9 @@ public class OrderTakingScreen {
             // On change l'état de la transaction sur CASHED :
             // Ce qui veut dire que les clients ont payés et que la table est libérée
             transaction.setState(TransactionState.CASHED);
-
             // On libère la table :
             transaction.getTable().setDisponible(true);
-
+            confirmTheBill(menuScanner,transaction);
             // TODO : imprimer le ticket de caisse
             // Voir fontion de monitoring
 
@@ -373,7 +372,12 @@ public class OrderTakingScreen {
             print(i + ")" + transaction.getCommandeReçu().getBoissons().get(i).toString(i) + " - " + transaction.getCommandeReçu().getBoissons().get(i).toString(i) + "euros");
         }
         print("----------------------------------------------------------------------------\n");
-        print("TOTAL : " + "A FAIRE" + "euros\n");
+        double total = Carte.affichertotalPlatCommande(transaction);
+        total = total + Carte.affichertotalBoissonCommande(transaction);
+        print("TOTAL7 : " + total + " euros\n");
+
+
+
         String choixEcran = menuScanner.next();
 
         if(choixEcran.equals("1")){
@@ -396,6 +400,7 @@ public class OrderTakingScreen {
             confirmTheBill(menuScanner, transaction);
         }
     }
+    
 
     public static void print(String text) {
         System.out.println(text);
