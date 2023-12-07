@@ -30,7 +30,7 @@ public class OrderCreationScreen {
         print("==========================================================================");
         print("AJOUTER UNE NOUVELLE TRANSACTION :");
 
-        print("Combien de clients sont présents à la table (entre 1 et 8) ?");
+        print("Combien de clients sont présents à la table (entre 1 et 8) ?\n");
         String nbrClientsStr = menuScanner.next();
 
         // La valeur convertie en int ci-dessous est utilisée pour l'affichage de la
@@ -44,7 +44,7 @@ public class OrderCreationScreen {
             print("==========================================================================");
             print("ERREUR : Le nombre de clients doit être compris entre 1 et 15 !\n");
             print("1 - Réessayer");
-            print("2 - Retour au menu principal");
+            print("2 - Retour au menu principal\n");
 
             String choixEcran = menuScanner.next();
 
@@ -104,7 +104,7 @@ public class OrderCreationScreen {
             print("     b) De proposer qu'ils mangent sur des tables séparés ...\n\n");
 
             print("1 - Réessayer");
-            print("2 - Retour au menu principal");
+            print("2 - Retour au menu principal\n");
 
             String choixEcran = menuScanner.next();
 
@@ -165,7 +165,7 @@ public class OrderCreationScreen {
         print("--------------------------------------------------------------------------");
 
         print("1 - Retour à la selection des transactions");
-        print("2 - Retour au menu principal");
+        print("2 - Retour au menu principal\n");
 
         String choixEcran = menuScanner.next();
 

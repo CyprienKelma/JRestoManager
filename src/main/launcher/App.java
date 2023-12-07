@@ -48,7 +48,7 @@ public class App {
         print("3 - Ecran bar\n");
         print("4 - Ecran Monitoring\n");
         print("5 - Ecran gestion des employés\n");
-        print("6 - Ecran gestion de la réserve d'aliments\n\n\n");
+        print("6 - Ecran gestion de la réserve d'aliments\n\n");
 
         Scanner menuScanner = new Scanner(System.in);
         String choixEcran = menuScanner.next();
