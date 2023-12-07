@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import main.launcher.App;
 import main.place.Restaurant;
+import main.place.StatistiqueService;
 import main.place.Table;
 import main.place.Transaction;
 import main.place.TransactionState;
@@ -151,6 +152,8 @@ public class OrderCreationScreen {
 
         // On instancie alors la nouvelle transaction :
         instanciateTransaction(menuScanner, whichWaiter, selectedOne, nbrClients);
+        StatistiqueService.addTransactionStat();
+        StatistiqueService.addClientStat(nbrClients);
 
         clearConsole();
         print("==========================================================================");

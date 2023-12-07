@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import main.launcher.employee.*;
+import main.launcher.monitoring.MonitoringScreen;
 import main.launcher.order.OrderTakingScreen;
 
 //import main.launcher.employee.SaveTmpTeam;
@@ -69,7 +70,7 @@ public class App {
                 // Appelle la fonction de l'écran de monitoring
                 // => Suivi des performances du restaurant
                 // => Impression de la liste de course
-                MonitoringScreen.showMonitoringScreen(menuScanner);
+                MonitoringScreen.tryshowingMonitoringScreen(menuScanner);
                 break;
             case "5":
                 // Appelle la fonction de l'écran de gestion des employés

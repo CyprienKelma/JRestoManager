@@ -17,7 +17,7 @@ public class Aliment {
         return quantite;
     }
 
-    public int setQuantite(int quantite) {
-        return this.quantite = quantite;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 }

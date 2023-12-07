@@ -3,6 +3,7 @@ package main.carte;
 import java.io.IOException;
 import java.util.*;
 
+import main.place.StatistiqueService;
 import main.place.Transaction;
 import main.launcher.order.OrderTakingScreen;
 

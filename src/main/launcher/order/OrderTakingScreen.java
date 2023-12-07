@@ -242,6 +242,10 @@ public class OrderTakingScreen {
         // Pareil pour le barman avec les boissons
         selectedTransaction.setState(TransactionState.PREPARING);
 
+        // On ajoute la transaction aux statistiques
+        StatistiqueService.addPlatVenduStat(selectedTransaction.getCommandeDemandé().getPlats());
+        StatistiqueService.addBoissonVendueStat(selectedTransaction.getCommandeDemandé().getBoissons());
+
         clearConsole();
         print("==========================================================================");
         print("ENVOYER LA COMMANDE EN CUISINE :");
