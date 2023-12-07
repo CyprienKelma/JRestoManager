@@ -1,5 +1,5 @@
-Limonade,26
-Cidre doux,17
-Biere sans alcool,198
+Limonade,23
+Cidre doux,15
+Biere sans alcool,197
 Jus de Fruits,40
 Verre d'eau,900

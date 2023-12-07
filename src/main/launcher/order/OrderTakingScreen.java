@@ -440,16 +440,17 @@ public class OrderTakingScreen {
 
             double total = Carte.affichertotalPlatCommande(transaction);
             total += Carte.affichertotalBoissonCommande(transaction);
-            int nbrmax = (int) total % 20;
+            int nbrmax = (int) total/9;
             int nombre = 0;
             boolean isValidInput = false;
+            String choixEcran1;
 
             print("----------------------------------------------------------------------------\n");
             print("Paiement en plusieurs fois, jusqu'à un maximum de " + nbrmax + " factures\n");
 
             while (!isValidInput) {
                 print("Donnez le nombre de factures souhaitées (inférieur ou égale à " + nbrmax + ") : ");
-                String choixEcran1 = menuScanner.next();
+                choixEcran1 = menuScanner.next();
 
                 try {
                     nombre = Integer.parseInt(choixEcran1);
@@ -465,8 +466,7 @@ public class OrderTakingScreen {
                     print("Erreur de saisie. Veuillez entrer un nombre valide.\n");
                 }
             }
-            String choixEcran2 = menuScanner.next();
-            int nbr = Integer.parseInt(choixEcran2);
+            int nbr = nombre;
             confirmTheBill(menuScanner, transaction,nbr);
         }else {
             payment(menuScanner, transaction);
