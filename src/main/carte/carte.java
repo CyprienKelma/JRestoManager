@@ -288,30 +288,42 @@ public class Carte {
 
 
     private static void commanderPlat(List<String> platsDisponibles, Transaction selectedTransaction) {
-        System.out.println("\nVeuillez entrer le numéro du plat à ajouter : \n\n");
         Scanner scanner = new Scanner(System.in);
-        int numeroPlat = scanner.nextInt(); // Utilisez le Scanner de la classe
     
-        if (numeroPlat >= 1 && numeroPlat <= platsDisponibles.size()) {
-            String platChoisi = platsDisponibles.get(numeroPlat - 1);
+        while (true) {
+            System.out.println("\nVeuillez entrer le numéro du plat à ajouter : \n\n");
     
-            Map<String, Integer> ingredients = getIngredients(platChoisi);
+            // Vérifier si l'entrée est un entier
+            if (scanner.hasNextInt()) {
+                int numeroPlat = scanner.nextInt();
     
-            try {
-                // Retirer les ingrédients du plat choisi du stock
-                Stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
+                if (numeroPlat >= 1 && numeroPlat <= platsDisponibles.size()) {
+                    String platChoisi = platsDisponibles.get(numeroPlat - 1);
     
-                // Ajouter le plat à la commande avec une quantité de 1 par défaut
-                selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);
+                    Map<String, Integer> ingredients = getIngredients(platChoisi);
     
-                System.out.println("Le plat à été ajouté à la commande.");
-            } catch (IOException e) {
-                System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                    try {
+                        // Retirer les ingrédients du plat choisi du stock
+                        Stock.retirerAliment("src\\main\\data\\stock.txt", ingredients);
+    
+                        // Ajouter le plat à la commande avec une quantité de 1 par défaut
+                        selectedTransaction.getCommandeDemandé().addPlats(platChoisi, 1);
+    
+                        System.out.println("Le plat a été ajouté à la commande.");
+                        break; // Sortir de la boucle une fois que le plat a été ajouté avec succès
+                    } catch (IOException e) {
+                        System.out.println("Erreur lors de la mise à jour du stock : " + e.getMessage());
+                    }
+                } else {
+                    System.out.println("Numéro de plat invalide. Veuillez réessayer.");
+                }
+            } else {
+                System.out.println("Veuillez entrer un numéro de plat valide. Veuillez réessayer.");
+                scanner.next(); // Effacer l'entrée incorrecte du scanner
             }
-        } else { 
-            System.out.println("Numéro de plat invalide.");
         }
     }
+    
     
 
     // Fonction qui permet de selectionner les boissons

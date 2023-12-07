@@ -91,10 +91,12 @@ public class OrderTakingScreen {
     public static void showOrderSelectionScreen(Scanner menuScanner, Serveur whichWaiter) throws IOException {
 
         clearConsole();
+        int idtable = Restaurant.getTransactionsListSize() +1;
         print("==========================================================================");
         print("SELECTIONNER LA TRANSACTION :");
         print("--------------------------------------------------------------------------");
         print("0 - Ajouter une nouvelle transaction");
+        print(idtable+" - Retour au choix des serveurs");
         print("--------------------------------------------------------------------------\n");
 
         // Affiche la liste des transactions en cours sous le format :
@@ -125,13 +127,15 @@ public class OrderTakingScreen {
             OrderCreationScreen.addNewTransactionScreen(menuScanner, whichWaiter);
 
             /*
-             * Si par contre i >= 1, alors c'est que l'on souhaite sélectionner une des
+             * Si par contre i > 1, alors c'est que l'on souhaite sélectionner une des
              * transactions déjà existante pour intéragir avec elle.
              * On redirige donc vers la fonction "redirectToAppropriateAction" qui permet,
              * selon l'état de la transaction, de rediriger vers la fonction appropriée
              * (ex : Si dans la transaction les clients n'ont pas commandé, on redirige vers
              * la fonction de prise de commande)
              */
+        }else if (choixEcranInt == idtable){showOrderTakingScreen(menuScanner);
+
         } else if (choixEcranInt >= 1 && choixEcranInt <= Restaurant.getTransactionsListSize()) {
 
             // Désigne la transaction d'indice i (avec i = choixEcran - 1) :
