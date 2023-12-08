@@ -33,7 +33,7 @@ public class MonitoringScreen {
         print("Entrez votre mot de passe :\n");
         String password = menuScanner.next();
 
-        if (userName.equals("admin") && password.equals("1234")) {
+        if (userName.equals("ADMIN") && password.equals("1234")) {
             showMonitoringScreen(menuScanner);
         } else {
             print("Identifiants incorrects, veuillez réessayer\n");
@@ -52,7 +52,7 @@ public class MonitoringScreen {
 
         print("                        Authentification réussie !");
         print("--------------------------------------------------------------------------");
-        print("                   Quel écran souhaitez-vous afficher ?");
+        print("                  Quel écran souhaitez-vous afficher ?\n");
         
         if(Restaurant.isOpen()){
             OpenedRestaurantMonitoring.showOpenedRestaurantMonitoringScreen(menuScanner);
