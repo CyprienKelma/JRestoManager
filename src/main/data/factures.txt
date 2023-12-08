@@ -1,70 +1,80 @@
-1,Vitse,42,1
-2x Salade simple - 18.0
-4x Limonade - 16.0
-34.0
+ID: 1
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°1 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 1 est bien confirmée.
+Les clients ont payé en 1 fois et la table 1 est libérée.
 
 
-2,Vitse,42,1
-1x Potage oignon - 8.0
-2x Salade simple - 18.0
-2x Limonade - 8.0
-1x Cidre doux - 5.0
-39.0
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°1 - Table n°1
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Potage oignon - 8.0 euros
+2x Potage tomate - 16.0 euros
+3x Potage champignon - 24.0 euros
 
 
-3,Vitse,3,1
-1x Salade simple - 9.0
-1x Burger sans TS - 15.0
-1x Jus de Fruits - 1.0
-1x Biere sans alcool - 5.0
-30.0
+3x Limonade - 12.0 euros
+1x Biere sans alcool - 5.0 euros
+2x Cidre doux - 10.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 75.0 euros
+Par CB : 75.0 euros
 
 
-4,Vitse,3,1
-4x Salade simple - 36.0
-1x Biere sans alcool - 5.0
-41.0
+La transaction 2 est bien confirmée.
+Les clients ont payé en 1 fois et la table 9 est libérée.
 
 
-5,Kelma,42,1
-1x Burger sans T - 15.0
-2x Salade simple - 18.0
-1x Burger sans TS - 15.0
-1x Jus de Fruits - 1.0
-2x Limonade - 8.0
-1x Biere sans alcool - 5.0
-1x Cidre doux - 5.0
-67.0
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°2 - Table n°9
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Potage tomate - 8.0 euros
 
 
-6,VitseHugo,42,1
-1x Pizza Chorizo - 12.0
-2x Salade tomate - 18.0
-2x Limonade - 8.0
-38.0
+1x Limonade - 4.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 12.0 euros
+Par CB : 12.0 euros
 
 
-7,VitseHugo,18,1
-2x Salade tomate - 18.0
-18.0
+ID: 2
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°10 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 3 est bien confirmée.
+Les clients ont payé en 1 fois et la table 10 est libérée.
 
 
-8,Vitse Hugo,31,1
-1x Potage oignon - 8.0
-2x Potage tomate - 16.0
-1x Salade simple - 9.0
-2x Salade tomate - 18.0
-2x Jus de Fruits - 2.0
-2x Limonade - 8.0
-1x Verre d'eau - 0.0
-61.0
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°3 - Table n°10
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+3x Potage tomate - 24.0 euros
 
 
-9,Vitse Hugo,1,1
-1x Salade simple - 9.0
-2x Salade tomate - 18.0
-2x Limonade - 8.0
-1x Cidre doux - 5.0
-40.0
+
+----------------------------------------------------------------------------
+TOTAL : 24.0 euros
+Par CB : 24.0 euros
 
 

@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import main.place.Restaurant;
 import main.launcher.App;
-import main.place.*;
 
 //Classe qui gère l'écran de prise de commande du restaurant (4)
 public class MonitoringScreen {

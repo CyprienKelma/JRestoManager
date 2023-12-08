@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import main.launcher.App;
+import main.launcher.order.BillsManagement;
 import main.place.Restaurant;
 import main.place.StatistiqueService;
 
@@ -13,9 +14,11 @@ public class OpenedRestaurantMonitoring {
     public static void showOpenedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException{
         print("--------------------------------------------------------------------------");
         print("1 - Mettre fin au service et fermer le restaurant");
-        print("2 - Voir les performances actuelles");
+        print("2 - Voir les performances actuelles\n");
+        print("3 - Afficher les tickets de caisses enregistré");
+        print("4 - Retirer un ticket de caisse\n");
 
-        print("3 - Retour au menu principal\n\n");
+        print("5 - Retour au menu principal\n\n");
 
         String choixEcran = menuScanner.next();
 
@@ -29,6 +32,37 @@ public class OpenedRestaurantMonitoring {
                 showActualServicePerformance(menuScanner);
                 break;
             case "3":
+                // Appelle la fonction pour afficher les tickets de caisses
+                // => Suivi des performances du restaurant
+                // => Impression de la liste de course
+                BillsManagement.afficherTousLesTickets(menuScanner);
+                break;
+            case "4":
+                // Appelle la fonction retirerBill en demandant l'id
+                print("\n--------------------------------------------------------------------------");
+                print("Donner l'id de la facture en question pour le retirer");
+                String choixEcran1 = menuScanner.next();
+
+                try {
+                    // Convertir l'entrée utilisateur en un entier (ID)
+                    int idFacture = Integer.parseInt(choixEcran1);
+
+                    // Vérifier si l'ID de la facture existe
+                    if (idFacture > 0 && idFacture <= BillsManagement.getLastBillId()) {
+                        // Appeler la fonction pour retirer la facture
+                        BillsManagement.retirerBill(idFacture,menuScanner);
+                    } else {
+                        // Afficher un message si l'ID de la facture n'est pas valide
+                        print("L'ID de la facture n'existe pas. Veuillez réessayer.");
+                        // Ajouter une logique supplémentaire si nécessaire, comme redemander l'ID.
+                    }
+                } catch (NumberFormatException e) {
+                    // Gérer une exception si l'entrée utilisateur n'est pas un entier
+                    print("Veuillez entrer un ID de facture valide (nombre entier).");
+                }
+
+                break;
+            case "5":
                 // Appelle la fonction de l'écran de monitoring
                 // => Suivi des performances du restaurant
                 // => Impression de la liste de course

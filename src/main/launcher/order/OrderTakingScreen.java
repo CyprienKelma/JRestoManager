@@ -329,11 +329,8 @@ public class OrderTakingScreen {
         print("Selectionner l'action à effectuer :\n");
         print("1 - Procéder à l'addition (les clients ont fini de manger et souhaitent payer)\n ");
         print("2 - Attendre encore (retour à la sélection des transactions)");
-        print("----------------------------------------------------------------------------\n\n");
-        
-        String choixEcran = menuScanner.next();
-        
 
+        String choixEcran = menuScanner.next();
         if(choixEcran.equals("1")){
             // On change l'état de la transaction sur CASHED :
             // Ce qui veut dire que les clients ont payés et que la table est libérée
@@ -357,55 +354,55 @@ public class OrderTakingScreen {
 
     public static void confirmTheBill(Scanner menuScanner, Transaction transaction, int nbrfacture) throws IOException {
         clearConsole();
-        print("============================================================================");
-        print("CONFIRMATION D'ADDITION :");
-        print("----------------------------------------------------------------------------");
-        print("Table n°" + transaction.getTable().getNumero() + " : "
-                + transaction.getState().getDescription());
-        print("----------------------------------------------------------------------------\n");
+        StringBuilder billStringBuilder = new StringBuilder();
+
+        billStringBuilder.append("============================================================================\n");
+        billStringBuilder.append("CONFIRMATION D'ADDITION :\n");
+        billStringBuilder.append("----------------------------------------------------------------------------\n");
+        billStringBuilder.append("Table n°" + transaction.getTable().getNumero() + " : "
+                + transaction.getState().getDescription()+"\n");
+        billStringBuilder.append("----------------------------------------------------------------------------\n\n");
     
-        print("La transaction " + transaction.getTransactionId() + " est bien confirmée.");
-        print("Les clients ont payé en " + nbrfacture + " fois et la table " + transaction.getTable().getNumero() + " est libérée.\n\n");
+        billStringBuilder.append("La transaction " + transaction.getTransactionId() + " est bien confirmée.\n");
+        billStringBuilder.append("Les clients ont payé en " + nbrfacture + " fois et la table " + transaction.getTable().getNumero() + " est libérée.\n\n\n");
     
-        print("Ticket de caisse :");
-        print("----------------------------------------------------------------------------");
-        print("\t\t\tCommande N°" + transaction.getTransactionId() + " - Table n°" + transaction.getTable().getNumero());
-        print("\t\t\tServeur : " + transaction.getServeurAssociate().getNom() + " " + transaction.getServeurAssociate().getPrenom() + "\n");
+        billStringBuilder.append("Ticket de caisse :\n");
+        billStringBuilder.append("----------------------------------------------------------------------------\n");
+        billStringBuilder.append("\t\t\tCommande N°" + transaction.getTransactionId() + " - Table n°" + transaction.getTable().getNumero()+"\n");
+        billStringBuilder.append("\t\t\tServeur : " + transaction.getServeurAssociate().getNom() + " " + transaction.getServeurAssociate().getPrenom() + "\n");
     
-        print("----------------------------------------------------------------------------");
-        print("\t\t\tArticles : \n");
-    
-        // Extraire les entrées de plat et de boisson avant la boucle
-        Map.Entry<String, Integer> platEntry = null;
-        Map.Entry<String, Integer> boissonEntry = null;
+        billStringBuilder.append("----------------------------------------------------------------------------\n");
+        billStringBuilder.append("\t\t\tArticles : \n\n");
     
         // Afficher la liste des plats avec quantité et prix
         for (Map.Entry<String, Integer> entry : transaction.getCommandeReçu().getPlats().entrySet()) {
-            print(entry.getValue() + "x " + entry.getKey() + " - " + Carte.getPrixPlat(entry.getKey()) * entry.getValue() + " euros");
-            platEntry = entry; // Mettre à jour platEntry pour le dernier plat
+            billStringBuilder.append(entry.getValue() + "x " + entry.getKey() + " - " + Carte.getPrixPlat(entry.getKey()) * entry.getValue() + " euros\n");
         }
-    
-        print("\n");
-    
+
+        billStringBuilder.append("\n\n");
+
         // Afficher la liste des boissons avec quantité et prix
         for (Map.Entry<String, Integer> entry : transaction.getCommandeReçu().getBoissons().entrySet()) {
-            print(entry.getValue() + "x " + entry.getKey() + " - " + Carte.getPrixBoisson(entry.getKey()) * entry.getValue() + " euros");
-            boissonEntry = entry; // Mettre à jour boissonEntry pour la dernière boisson
+            billStringBuilder.append(entry.getValue() + "x " + entry.getKey() + " - " + Carte.getPrixBoisson(entry.getKey()) * entry.getValue() + " euros\n");
         }
     
-        print("\n----------------------------------------------------------------------------\n");
+        billStringBuilder.append("\n----------------------------------------------------------------------------\n");
         double total = Carte.affichertotalPlatCommande(transaction);
         total = total + Carte.affichertotalBoissonCommande(transaction);
-        print("TOTAL : " + total + " euros");
-        print("Par CB : " + total + " euros\n");
+        billStringBuilder.append("TOTAL : " + total + " euros\n");
+        billStringBuilder.append("Par CB : " + total + " euros\n\n");
         print("\t\t Nous vous remercions de votre visite");
         print("\t\t\t A Bientôt\n");
+
+        // Print the bill
+        print(billStringBuilder.toString());
+
 
         print("============================================================================");
         print("1 - Continuer et retourner Ecran d'accueil\n");
     
-    
         String choixEcran = menuScanner.next();
+
         if (choixEcran.equals("1")) {
             // On change l'état de la transaction sur CASHED :
             // Ce qui veut dire que les clients ont payé et que la table est libérée
@@ -414,24 +411,8 @@ public class OrderTakingScreen {
             // On libère la table :
             transaction.getTable().setDisponible(true);
     
-            // TODO : imprimer le ticket de caisse
-            // Voir fonction de monitoring
-            String nameserv = transaction.getServeurAssociate().getNom()+" "+transaction.getServeurAssociate().getPrenom();
-    
             // Appel de la fonction pour sauvegarder le ticket de caisse dans le fichier "facture.txt"
-            BillsManagement.sauvegardeFacture(
-                nameserv,
-                transaction.getTable().getNumero(),
-                platEntry,
-                boissonEntry,
-                total,
-                nbrfacture,
-                transaction
-            );
-    
-            // On retourne à la sélection des transactions :
-            showOrderSelectionScreen(menuScanner, transaction.getServeurAssociate());
-        } else if (choixEcran.equals("2")) {
+            BillsManagement.sauvegardeFacture(billStringBuilder.toString());
             // On retourne à la sélection des transactions :
             showOrderSelectionScreen(menuScanner, transaction.getServeurAssociate());
         } else {
