@@ -60,3 +60,11 @@
 61.0
 
 
+9,Vitse Hugo,1,1
+1x Salade simple - 9.0
+2x Salade tomate - 18.0
+2x Limonade - 8.0
+1x Cidre doux - 5.0
+40.0
+
+

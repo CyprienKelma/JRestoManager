@@ -1,7 +1,7 @@
 Champignon,72
-Tomate,281
-Salade,33
-Oignon,42
+Tomate,278
+Salade,29
+Oignon,39
 Pain,101
 Viande,101
 Fromage,190

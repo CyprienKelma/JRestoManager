@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import main.launcher.App;
+import main.launcher.employee.TeamScreen;
 import main.place.Restaurant;
 import main.place.StatistiqueService;
 import main.place.Table;
@@ -12,7 +13,7 @@ public class ClosedRestaurantMonitoring {
     
 
     public static void showClosedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException{
-        print("--------------------------------------------------------------------------\n");
+        print("--------------------------------------------------------------------------");
         print("1 - Voir les performances du dernier service");
         print("2 - Voir la liste de course du dernier service");
         print("3 - Gérer les tables\n");
@@ -38,13 +39,9 @@ public class ClosedRestaurantMonitoring {
                 showTableManagementScreen(menuScanner);
                 break;
             case "4":
-                // On remet les stats à zéro afin de prendre en compte que le nouveau service
-                StatistiqueService.resetAllStatistique();
-
-                // On définie le restaurant comme ouvert
-                Restaurant.setIsOpen(true);
-                // Et on redirige vers l'écran de confirmation d'ouverture du restaurant
-                MonitoringScreen.showMonitoringScreen(menuScanner);
+                // On redirige d'abord vers une fonction qui vérifie si le restaurant peut ouvrir
+                // (Si l'équipe est formée et s'il y a assez de table pour accueillir les clients)
+                tryToOpenRestaurant(menuScanner);
                 break;
             case "5":
                 // Appelle la fonction de l'écran de monitoring
@@ -58,6 +55,7 @@ public class ClosedRestaurantMonitoring {
         }
     }
 
+    // Affiche divers statisques du dernier service effectué
     public static void showLastServicePerformance(Scanner menuScanner) throws IOException{
         clearConsole();
         print("==========================================================================");
@@ -68,11 +66,20 @@ public class ClosedRestaurantMonitoring {
         // On affiche les stats du dernier service
         StatistiqueService.showActualStatistique();
         print("--------------------------------------------------------------------------\n\n");
-        print("Appuyez sur Entrée pour continuer\n");
-        menuScanner.nextLine();
-        showClosedRestaurantMonitoringScreen(menuScanner);
+        print("1 - Page précédente\n");
+        String choixEcran = menuScanner.next();
+
+        if(choixEcran.equals("1")){
+            MonitoringScreen.showMonitoringScreen(menuScanner);
+        } else {
+            MonitoringScreen.showMonitoringScreen(menuScanner);
+        }
     }
 
+    // Affiche la liste de course du dernier service
+    // On part d'une quantité "par défaut" de chaque ingrédient, et en enlève dès que
+    // l'on en utilise un dans une recette. Ainsi, on peut savoir ce qu'il faut commander
+    // à la fin du service pour re-remplir le stock
     public static void showLastServiceShoppingList(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================");
@@ -87,7 +94,7 @@ public class ClosedRestaurantMonitoring {
 
 
         print("--------------------------------------------------------------------------\n");
-        print("1 - Imprimer la liste de course\n");
+        print("1 - Imprimer la liste de course [BROKEN]\n");
         print("2 - Page précédente\n\n");
         String choixEcran = menuScanner.next();
 
@@ -95,22 +102,27 @@ public class ClosedRestaurantMonitoring {
             // TODO : Imprime la liste de course
             
         } else {
-            showLastServiceShoppingList(menuScanner);
+            MonitoringScreen.showMonitoringScreen(menuScanner);
         }
         
     }
 
+    // Permet d'afficher et de gérer les tables du restaurant
     public static void showTableManagementScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================");
         print("                         GESTION DES TABLES\n\n");
 
+        print("Vous pouvez ici ajouter ou supprimer des tables du restaurant");
+        print("Pour un service optimal, il est recommandé d'avoir au moins 6 table.\n");
+        print("Par défaut, le restaurant comporte 10 tables, de 2, 4 et 8 couverts\n");
         print("Composition actuelle des tables du restaurant :");
         print("--------------------------------------------------------------------------");
         Table.showTables(Restaurant.getTablesList());
         print("--------------------------------------------------------------------------\n");
-        print("1 - Définir un nouveau plan de table");
-        print("2 - Page précédente\n\n");
+        print("1 - Ajouter des tables");
+        print("2 - Réinitialiser la selection");
+        print("3 - Page précédente\n\n");
 
 
         String choixEcran = menuScanner.next();
@@ -121,8 +133,14 @@ public class ClosedRestaurantMonitoring {
                 setNewTablePlan(menuScanner);
                 break;
             case "2":
+                // On supprime toutes les tables du restaurant
+                Restaurant.getTablesList().clear();
+                // On redirige vers la page précédente
+                showTableManagementScreen(menuScanner);
+                break;
+            case "3":
                 // Retour au menu précédent
-                showClosedRestaurantMonitoringScreen(menuScanner);
+                MonitoringScreen.showMonitoringScreen(menuScanner);
                 break;
             default:
                 showTableManagementScreen(menuScanner);
@@ -130,6 +148,7 @@ public class ClosedRestaurantMonitoring {
         }
     }
 
+    // Permet de définir un plan de table personnalisé, si l'on veut changer de celui par défaut
     public static void setNewTablePlan(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================");
@@ -164,16 +183,109 @@ public class ClosedRestaurantMonitoring {
         showTableManagementScreen(menuScanner);
     }
 
+    // On vérifie si le restaurant peut ouvrir
+    public static void tryToOpenRestaurant(Scanner menuScanner) throws IOException{
+
+        // Dans le cas où il n'y a pas de table
+        if(Restaurant.getTablesList().isEmpty()){
+            clearConsole();
+            print("==========================================================================");
+            print("                            OUVERTURE DU RESTAURANT\n");
+            print("ERREUR : Vous ne pouvez pas ouvrir le restaurant car il n'y a pas de table.");
+            print("Veuillez en ajouter dans l'écran de gestion des tables de l'écran monitoring.\n\n");
+            print("1 - Accéder à l'écran de gestion des tables");
+            print("2 - Page précédente\n\n");
+
+            String input = menuScanner.next();
+            if (input.equals("1")){
+                // S'il le souhaite, l'utilisateur peut directement se rendre dans l'écran de gestion de table
+                showTableManagementScreen(menuScanner);
+            } else if(input.equals("2")){
+                MonitoringScreen.showMonitoringScreen(menuScanner);
+            } else {
+                tryToOpenRestaurant(menuScanner);
+            }
+        }
+
+        // Dans le cas où il n'y a pas d'équipe formé ET confirmé dans l'écran de gestion des employés
+        if(!Restaurant.isEquipeActuelleCreated()) {
+            clearConsole();
+            print("==========================================================================");
+            print("                            OUVERTURE DU RESTAURANT\n");
+            print("Vous ne pouvez pas ouvrir le restaurant car il n'y a pas d'équipe.");
+            print("Veuillez en former une dans l'écran de gestion des employés.\n\n");
+            print("1 - Accéder à l'écran de formation d'équipe");
+            print("2 - Page précédente\n\n");
+
+            String input = menuScanner.next();
+            if (input.equals("1")){
+                // S'il le souhaite, l'utilisateur peut directement se rendre dans l'écran de gestion de table
+                TeamScreen.showTeamFormationScreen(menuScanner);
+            } else if(input.equals("2")){
+                MonitoringScreen.showMonitoringScreen(menuScanner);
+            } else {
+                tryToOpenRestaurant(menuScanner);
+            }
+        }
+
+        // On remet les stats à zéro afin de prendre en compte que le nouveau service
+        StatistiqueService.resetAllStatistique();
+
+        // On peut ouvrir le restaurant
+        Restaurant.setIsOpen(true);
+
+        // Et on redirige vers l'écran de confirmation d'ouverture du restaurant
+        showOpenConfirmationScreen(menuScanner);
+    }
+
+    // Ecran qui demande une confirmation avant d'ouvrir pour de bon le restaurant
+    public static void showOpenConfirmationScreen(Scanner menuScanner) throws IOException {
+        clearConsole();
+        print("==========================================================================");
+        print("                            OUVERTURE DU RESTAURANT\n");
+
+        print("Cette action va lancer un nouveau service et ouvrir le restaurant.");
+        print("Cela signie que tout les employés vont pouvoir commencer à travailler.\n");
+
+        print("De plus, les statistiques et la liste de course du dernier service seront");
+        print("remplacés par celles de ce nouveau service.\n");
+
+        print("Vérifiez donc que vous avez bien rempli le stock;\n\n");
+
+        print("Etes-vous sûr de vouloir ouvrir le restaurant ?\n");
+
+        print("--------------------------------------------------------------------------");
+        print("1 - Oui, ouvrir le restaurant");
+        print("2 - Non, annuler et retourner au menu de monitoring\n\n");
+
+        String choixEcran = menuScanner.next();
+        if(choixEcran.equals("1")) {
+            // On ouvre le restaurant
+            Restaurant.setIsOpen(true);
+            // On redirige vers l'écran de notification d'ouverture du restaurant
+            showOpenedConfirmationScreen(menuScanner);
+        } else if(choixEcran.equals("2")) {
+            // On redirige vers l'écran de monitoring du restaurant fermé
+            showClosedRestaurantMonitoringScreen(menuScanner);
+        } else {
+            showOpenConfirmationScreen(menuScanner);
+        }
+    }
+
 
     public static void showOpenedConfirmationScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================");
         print("                         RESTAURANT OUVERT\n\n");
-        print("Le restaurant est maintenant ouvert, les employés peuvent commancer à travailler");
+        print("Le restaurant est maintenant ouvert,les employés peuvent commencer à travailler.");
         print("Lorsque vous voudrez mettre fin au service, revenez ici pour fermer le restaurant.\n\n");
-        print("Appuyez sur Entrée pour continuer\n");
-        menuScanner.nextLine();
-        App.showMainMenu();
+        print("1 - Retour au menu principale\n");
+        String choixEcran = menuScanner.next();
+        if(choixEcran.equals("1")){
+            App.showMainMenu();
+        } else {
+            showOpenedConfirmationScreen(menuScanner);
+        }
     }
 
 
@@ -182,6 +294,7 @@ public class ClosedRestaurantMonitoring {
     }
 
     public static void clearConsole() {
-        print("\n");
+        for(int i = 0; i < 50; ++i)
+            System.out.println();
     }
 }

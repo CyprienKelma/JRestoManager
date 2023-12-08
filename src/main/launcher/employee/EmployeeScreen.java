@@ -40,6 +40,9 @@ public class EmployeeScreen {
                 showAddRemoveEmployeeScreen(menuScanner);
                 break;
             case "3":
+                if(Restaurant.isOpen()){
+                    showCannotCreateTeamScreen(menuScanner);
+                }
                 TeamScreen.showTeamFormationScreen(menuScanner);
                 break;
             case "4":
@@ -47,6 +50,27 @@ public class EmployeeScreen {
                 break;
             default:
                 showTeamScreen(menuScanner);
+        }
+    }
+
+    public static void showCannotCreateTeamScreen(Scanner menuScanner) throws IOException{
+        clearConsole();
+        print("==========================================================================\n");
+        print("Désolé, il est impossible de former une équipe :");
+        print("Le restaurant est actuellement ouvert.");
+        print("Veuillez fermer le restaurant pour former l'équipe du service suivant\n");
+
+        print("--------------------------------------------------------------------------");
+        print("1 - Revenir à la page précédente");
+        print("2 - Revenir au menu principale\n\n");
+        String input = menuScanner.next();
+
+        if (input.equals("1")) {
+            showTeamScreen(menuScanner);
+        } else if (input.equals("2")) {
+            App.showMainMenu();
+        } else {
+            showCannotCreateTeamScreen(menuScanner);
         }
     }
 
@@ -167,16 +191,7 @@ public class EmployeeScreen {
         }
     }
 
-    /**
-     * Ajoute un nouvelle employé au restaurant
-     *
-     * @param menuScanner Le scanner pour naviguer dans le menu
-     * @param typeEmployé Le type d'employé à ajouter (Serveur, Cuisinier, Barman,
-     *                    Manager)
-     * @throws IOException
-     * @throws IllegalArgumentException Dans le cas ou le type d'employé est
-     *                                  inatendu
-     */
+    //Ajoute un nouvelle employé au restaurant
     private static void addNewEmployee(Scanner menuScanner, String typeEmployé) throws IOException {
         clearConsole();
         print("==========================================================================\n");

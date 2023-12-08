@@ -22,7 +22,7 @@ public class Table {
         int lastTableIndex = Restaurant.getTablesList().size() - 1;
 
         // Pour récupérer le numéro de la dernière table de la liste
-        int lastTableNumber = Restaurant.getTablesList().get(lastTableIndex).getNumero();
+        int lastTableNumber = (lastTableIndex >= 0) ? Restaurant.getTablesList().get(lastTableIndex).getNumero() : 0;
         for (int i = 0; i < nbrTable; i++) {
             Table table = new Table(lastTableNumber + i + 1, nbrCouvert, true);
             Restaurant.getTablesList().add(table);

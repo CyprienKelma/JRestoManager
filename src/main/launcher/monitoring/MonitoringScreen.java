@@ -36,10 +36,21 @@ public class MonitoringScreen {
         if (userName.equals("ADMIN") && password.equals("1234")) {
             showMonitoringScreen(menuScanner);
         } else {
-            print("Identifiants incorrects, veuillez réessayer\n");
-            print("Appuyez sur Entrée pour continuer\n");
-            menuScanner.nextLine();
-            tryshowingMonitoringScreen(menuScanner);
+            print("\nIdentifiants incorrects, veuillez réessayer\n");
+            print("1 - Réessayer");
+            print("2 - Retour au menu principal\n\n");
+            String choixEcran = menuScanner.next();
+            switch(choixEcran){
+                case "1":
+                    tryshowingMonitoringScreen(menuScanner);
+                    break;
+                case "2":
+                    App.showMainMenu();
+                    break;
+                default:
+                    tryshowingMonitoringScreen(menuScanner);
+                    break;
+            }
         }
     }
 
@@ -52,8 +63,11 @@ public class MonitoringScreen {
 
         print("                        Authentification réussie !");
         print("--------------------------------------------------------------------------");
-        print("                  Quel écran souhaitez-vous afficher ?\n");
+        print("                  Quel écran souhaitez-vous afficher ?");
         
+
+        // Redirige vers le menu adaptée en fonction de si le restaurant est ouvert ou fermé
+        // (divisé en 2 classes différentes pour plus de clarté et d'organisation)
         if(Restaurant.isOpen()){
             OpenedRestaurantMonitoring.showOpenedRestaurantMonitoringScreen(menuScanner);
         } else {

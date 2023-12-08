@@ -36,15 +36,20 @@ public class Restaurant {
     // Le nombre de tables est fixe et défini par le manager (voir écran monitoring)
     private static List<Table> tablesList = new ArrayList<>();
 
-    // TODO : Ajouter gestion des tables dans l'écran monitoring
-    // TEMPORAIRE : 5 tables de 2 et 4 personnes
-    // C'est pour créer le système de commande sans créer de table
+    // Initialisation des tables par défaut du restaurant
+    // Dans l'écran monitoring, le manager peut (s'il le souhaite) créer sa composition
+    // de tables personnalisée, mais par défaut, le restaurant est initialisé avec 10 tables
     static {
-        tablesList.add(new Table(78, 2, true));
+        tablesList.add(new Table(1, 2, true));
+        tablesList.add(new Table(2, 2, true));
         tablesList.add(new Table(3, 2, true));
-        tablesList.add(new Table(31, 2, true));
-        tablesList.add(new Table(42, 4, true));
-        tablesList.add(new Table(18, 4, true));
+        tablesList.add(new Table(4, 2, true));
+        tablesList.add(new Table(5, 4, true));
+        tablesList.add(new Table(6, 4, true));
+        tablesList.add(new Table(7, 4, true));
+        tablesList.add(new Table(8, 4, true));
+        tablesList.add(new Table(9, 8, true));
+        tablesList.add(new Table(10, 8, true));
     }
 
     Restaurant() {
@@ -71,6 +76,10 @@ public class Restaurant {
 
     public static Equipe getEquipeActuelle() {
         return equipeActuelle;
+    }
+
+    public static boolean isEquipeActuelleCreated() {
+        return equipeActuelle != null;
     }
 
     public static void setEquipeActuelle(Equipe equipeActuelle) {
