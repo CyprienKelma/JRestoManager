@@ -1,6 +1,6 @@
 Champignon,60
-Tomate,225
-Salade,92
+Tomate,224
+Salade,91
 Oignon,100
 Pain,101
 Viande,101
