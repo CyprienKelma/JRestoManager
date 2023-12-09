@@ -48,8 +48,7 @@ public class ClosedRestaurantMonitoring {
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "5":
-                // Appelle la fonction choisir et retirer un ticket de caisse
-                BillsManagement.getSelectedBill(menuScanner);
+                OpenedRestaurantMonitoring.getSelectedBill(menuScanner);
                 break;
             case "6":
                 // On redirige d'abord vers une fonction qui vérifie si le restaurant peut ouvrir

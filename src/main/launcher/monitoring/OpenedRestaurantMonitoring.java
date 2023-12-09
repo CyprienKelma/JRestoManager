@@ -38,29 +38,7 @@ public class OpenedRestaurantMonitoring {
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "4":
-                // Appelle la fonction retirerBill en demandant l'id
-                print("\n--------------------------------------------------------------------------");
-                print("Donner l'id de la facture en question pour le retirer");
-                String choixEcran1 = menuScanner.next();
-
-                try {
-                    // Convertir l'entrée utilisateur en un entier (ID)
-                    int idFacture = Integer.parseInt(choixEcran1);
-
-                    // Vérifier si l'ID de la facture existe
-                    if (idFacture > 0 && idFacture <= BillsManagement.getLastBillId()) {
-                        // Appeler la fonction pour retirer la facture
-                        BillsManagement.retirerBill(idFacture,menuScanner);
-                    } else {
-                        // Afficher un message si l'ID de la facture n'est pas valide
-                        print("L'ID de la facture n'existe pas. Veuillez réessayer.");
-                        // Ajouter une logique supplémentaire si nécessaire, comme redemander l'ID.
-                        showOpenedRestaurantMonitoringScreen(menuScanner);
-                    }
-                } catch (NumberFormatException e) {
-                    // Gérer une exception si l'entrée utilisateur n'est pas un entier
-                    print("Veuillez entrer un ID de facture valide (nombre entier).");
-                }
+                getSelectedBill(menuScanner);
 
                 break;
             case "5":
@@ -73,6 +51,32 @@ public class OpenedRestaurantMonitoring {
                 print("Erreur de saisie, veuillez réessayer\n");
                 showOpenedRestaurantMonitoringScreen(menuScanner);
                 break;
+        }
+    }
+
+    // Fonction pour retirer un ticket de caisse
+    public static void getSelectedBill(Scanner menuScanner) throws IOException {
+        print("\n--------------------------------------------------------------------------");
+        print("Donner l'id de la facture en question pour le retirer");
+        String choixEcran1 = menuScanner.next();
+        
+        try {
+            // Convertit la selection en int
+            int idFacture = Integer.parseInt(choixEcran1);
+            
+            // Vérifie si l'ID de la facture existe
+            if (idFacture > 0 && idFacture <= BillsManagement.getLastBillId()) {
+                // Appele la fonction pour retirer la facture
+                BillsManagement.retirerBill(idFacture,menuScanner);
+            } else {
+                // Affiche un message si l'ID de la facture n'est pas valide
+                print("L'ID de la facture n'existe pas. Veuillez réessayer.");
+                getSelectedBill(menuScanner);
+            }
+        } catch (NumberFormatException e) {
+            // Gére une exception si l'entrée utilisateur n'est pas un entier
+            print("L'ID de la facture n'est pas valide. Veuillez réessayer.");
+            getSelectedBill(menuScanner);
         }
     }
 

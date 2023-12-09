@@ -60,20 +60,21 @@ public class StatistiqueService {
         print("Boissons la moins selectionnée : " + getLessSelectedElem(boissonsVendues) + "\n");
 
         print("Statistiques par employés :");
-        print("Nombre de transaction effectué par le serveur N°1 (" + Restaurant.getEquipeActuelle().getServeur1().getPrenom() 
-        + ") : " + Restaurant.getEquipeActuelle().getServeur1().getNbrCommandePrise());
+        // TODO : finir les stats
+        // print("Nombre de transaction effectué par le serveur N°1 (" + Restaurant.getEquipeActuelle().getServeur1().getPrenom() 
+        // + ") : " + Restaurant.getEquipeActuelle().getServeur1().getNbrCommandePrise());
 
-        print("Nombre de transaction effectué par le serveur N°2 (" + Restaurant.getEquipeActuelle().getServeur2().getPrenom()
-        + ") : " + Restaurant.getEquipeActuelle().getServeur2().getNbrCommandePrise() + "\n");
+        // print("Nombre de transaction effectué par le serveur N°2 (" + Restaurant.getEquipeActuelle().getServeur2().getPrenom()
+        // + ") : " + Restaurant.getEquipeActuelle().getServeur2().getNbrCommandePrise() + "\n");
 
-        print("Nombre de plats préparés par le cuisinier N°1 (" + Restaurant.getEquipeActuelle().getCuisinier1().getPrenom()
-        + ") : " + Restaurant.getEquipeActuelle().getCuisinier1().getNbrCommandePrise());
+        // print("Nombre de plats préparés par le cuisinier N°1 (" + Restaurant.getEquipeActuelle().getCuisinier1().getPrenom()
+        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier1().getNbrCommandePrise());
 
-        print("Nombre de plats préparés par le cuisinier N°2 (" + Restaurant.getEquipeActuelle().getCuisinier2().getPrenom()
-        + ") : " + Restaurant.getEquipeActuelle().getCuisinier2().getNbrCommandePrise() + "\n");
+        // print("Nombre de plats préparés par le cuisinier N°2 (" + Restaurant.getEquipeActuelle().getCuisinier2().getPrenom()
+        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier2().getNbrCommandePrise() + "\n");
 
-        print("Nombre de commande prise par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
-        + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrCommandePrise());
+        // print("Nombre de commande prise par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
+        // + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrCommandePrise());
     }
 
     // Fonction qui retourne l'élément le plus vendu (plats ou boissons)
