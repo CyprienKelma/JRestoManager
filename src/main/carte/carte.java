@@ -2,13 +2,12 @@ package main.carte;
 
 import java.io.IOException;
 import java.util.*;
-
-import main.place.StatistiqueService;
 import main.place.Transaction;
 import main.launcher.order.OrderTakingScreen;
 
 public class Carte {
 
+    //Liste des plats
     private static List<String> liste1 = new ArrayList<>() {
         {
             add("Salade tomate");
@@ -25,6 +24,7 @@ public class Carte {
         }
     };
 
+    //Liste des prix de plats
     private static List<String> liste2 = new ArrayList<>() {
         {
             add("9 euros");
@@ -41,6 +41,7 @@ public class Carte {
         }
     };
 
+    //Liste des ingrédents des plats
     private static List<String> liste3 = new ArrayList<>() {
         {
             add("Salade Tomate");
@@ -57,6 +58,7 @@ public class Carte {
         }
     };
 
+    //Liste des boissons
     private static List<String> liste4 = new ArrayList<>() {
         {
             add("Limonade");
@@ -67,6 +69,7 @@ public class Carte {
         }
     };
 
+    //Liste des prix de boissons
     private static List<String> liste5 = new ArrayList<>() {
         {
             add("4 euros");
@@ -97,6 +100,7 @@ public class Carte {
         boisson.addAll(liste5);
     }
 
+    //Obtient les ingrédients des plats avec leur quantité dans une Map
     public static Map<String, Integer> getIngredients(String plat) {
         Map<String, Integer> ingredients = new HashMap<>();
     
@@ -121,14 +125,16 @@ public class Carte {
         return ingredients;
     }
 
+    //Obtient le prix des plats
     public static double getPrixPlat(String plat) {
         int indexPlat = liste1.indexOf(plat);
         if (indexPlat != -1 && indexPlat < liste2.size()) {
             return Double.parseDouble(liste2.get(indexPlat).replaceAll("[^\\d.]", ""));
         }
-        return 0; // or throw an exception indicating that the price is not found
+        return 0; 
     }
 
+    //obtient le prix des boissons
     public static double getPrixBoisson(String boisson) {
         int indexBoisson = liste4.indexOf(boisson);
         if (indexBoisson != -1 && indexBoisson < liste5.size()) {
@@ -137,11 +143,7 @@ public class Carte {
         return 0; // or throw an exception indicating that the price is not found
     }
 
-    private Scanner scanner;
-
-
     public static void passerCommandePlats(Scanner menuScanner, Transaction transaction) throws IOException {
-    
         int choix;
         do {
             clearConsole();
@@ -172,9 +174,7 @@ public class Carte {
                         break;
                     case "2":
 
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
-                        // actuellement le stock n'est pas remis à jour
-
+                        //Réinitialiser la commande des plats
                         for (Map.Entry<String, Integer> entry : transaction.getCommandeDemandé().getPlats().entrySet()) {
                             String plat = entry.getKey();
                             int quantite = entry.getValue();
@@ -192,12 +192,6 @@ public class Carte {
                         // Comma ça, en cas de faute de frappe, on peux réinitialiser la selection
                         // sans casser la transaction
                         transaction.getCommandeDemandé().clearPlats();
-
-                        // Vide la liste temporaires des quantités retirées
-                        
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
-                        //quantitesRetirées.clear();
-
                         passerCommandePlats(menuScanner, transaction);
                         break;
                     case "3":
@@ -217,6 +211,8 @@ public class Carte {
         } while (choix != 2);
     }
 
+    // Affiche les plats non disponibles, 
+    //compare les ingrédients nécessaires avec les ingrédients disponibles dans le stock
     public static void afficherPlatsNonDisponibles(List<String> plats, List<Aliment> stock) {
             clearConsole();
             print("==========================================================================");
@@ -251,6 +247,8 @@ public class Carte {
         }
     }
 
+    // Affiche les plats disponibles, 
+    //compare les ingrédients nécessaires avec les ingrédients disponibles dans le stock
     public static List<String> afficherPlatsDisponibles(List<String> plats, List<Aliment> stock) {
         List<String> platsDisponibles = new ArrayList<>();
         print("--------------------------------------------------------------------------");
@@ -287,7 +285,7 @@ public class Carte {
         return platsDisponibles;
     }
 
-
+    // Commander les plats et vérifie si possible
     private static void commanderPlat(List<String> platsDisponibles, Transaction selectedTransaction) {
         Scanner scanner = new Scanner(System.in);
     
@@ -323,10 +321,10 @@ public class Carte {
                 scanner.next(); // Effacer l'entrée incorrecte du scanner
             }
         }
+        scanner.close();
     }
     
     
-
     // Fonction qui permet de selectionner les boissons
     public static void passerCommandeBoissons(Scanner menuScanner, Transaction transaction){
 
@@ -361,15 +359,12 @@ public class Carte {
                         break;
                     case "2":
 
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
-                        // actuellement le stock n'est pas remis à jour comme voulu
-
+                        //réinitialisation de la selection des plats
                         for (Map.Entry<String, Integer> entry : transaction.getCommandeDemandé().getBoissons().entrySet()) {
                             String boissons = entry.getKey();
                             int quantite = entry.getValue();
                             quantitesRetirées.put(boissons, quantite);
-                        }
-                        
+                        }                        
                         
                         try {
                             // Pour réinitialiser le stock
@@ -381,11 +376,6 @@ public class Carte {
                         // Comma ça, en cas de faute de frappe, on peux réinitialiser la selection
                         // sans casser la transaction
                         transaction.getCommandeDemandé().clearBoissons();
-
-                        // Vide la liste temporaires des quantités retirées
-                        
-                        // TODO : Fix la fonction de réinitialisation de la selection des plats
-                        //quantitesRetirées.clear();
 
                         passerCommandeBoissons(menuScanner, transaction);
                         break;
@@ -406,6 +396,8 @@ public class Carte {
         } while (choix != 2);
     }
 
+    // Affiche les boisons non disponibles, 
+    //compare les ingrédients nécessaires avec les ingrédients disponibles dans le stock
     public static void afficherBoissonsNonDisponibles(List<String> boissons, List<Boisson> stock) {
         System.out.println("--------------------------------------------------------------------------");
         System.out.println("\nBoissons non disponibles :");
@@ -422,6 +414,8 @@ public class Carte {
         }
     }
 
+    // Affiche les boissons disponibles, 
+    //compare les ingrédients nécessaires avec les ingrédients disponibles dans le stock
     public static List<String> afficherBoissonsDisponibles(List<String> boissons, List<Boisson> stock) {
         List<String> boissonsDisponibles = new ArrayList<>();
         System.out.println("\nBoissons disponibles : ");
@@ -442,6 +436,7 @@ public class Carte {
         return boissonsDisponibles;
     }
 
+    // Commander les boissons et vérifie si possible
     public static void commanderBoisson(List<String> boissonsDisponibles, Transaction selectedTransaction) {
         System.out.println("\nVeuillez entrer le numéro de la boisson à ajouter : ");
         Scanner scanner = new Scanner(System.in);
@@ -464,8 +459,10 @@ public class Carte {
         } else {
             System.out.println("Numéro de boisson invalide.");
         }
+        scanner.close();
     }
 
+    //affiche les commandes des plats
     public static void afficherCommande(Transaction selectedTransaction) {
         Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getPlats();
 
@@ -493,6 +490,7 @@ public class Carte {
         System.out.println("\nCoût total de la commande : " + total + " euros");
     }
 
+    // Retourne le prix total des plats commandés
     public static double affichertotalPlatCommande(Transaction selectedTransaction) {
         Map<String, Integer> items = selectedTransaction.getCommandeReçu().getPlats();
     
@@ -517,7 +515,7 @@ public class Carte {
         return total;
     }
     
-
+    // Affiche la commande des boissons commandés
     public static void afficherCommandeBoisson(Transaction selectedTransaction){
 
         Map<String, Integer> items = selectedTransaction.getCommandeDemandé().getBoissons();
@@ -546,6 +544,7 @@ public class Carte {
         System.out.println("\nCoût total des boisssons : " + total + " euros");
     }
 
+    // Retourne le prix total des plats commandés
     public static double affichertotalBoissonCommande(Transaction selectedTransaction) {
         Map<String, Integer> items = selectedTransaction.getCommandeReçu().getBoissons();
     
@@ -581,40 +580,4 @@ public class Carte {
             System.out.println();
     }
     
-
-   /*public static void afficherMenu(List<String> plats, List<String> prixPlats, List<String> descriptionsPlats, List<String> boissons, List<String> prixBoissons) {
-        System.out.println("\t\t\t Menu du Restaurant \n");
-
-        // Afficher la liste des plats
-        System.out.println("\t Plats : \n");
-        for (int i = 0; i < plats.size(); i++) {
-            String plat = plats.get(i);
-            System.out.println("\t\t " + plat);
-
-            // Afficher le prix et la description associés
-            if (i < prixPlats.size()) {
-                System.out.println("\t\t Prix : " + prixPlats.get(i) + " | Description : " + descriptionsPlats.get(i) + "\n");
-            }
-        }
-
-        // Afficher la liste des boissons
-        System.out.println("\t Boissons : \n");
-        for (int i = 0; i < boissons.size(); i++) {
-            String boisson = boissons.get(i);
-            System.out.println("\t\t " + boisson);
-
-            // Afficher le prix associé
-            if (i < prixBoissons.size()) {
-                System.out.println("\t\t Prix : " + prixBoissons.get(i) + "\n");
-            }
-        }
-    }*/
-
-    // public static void main(String[] args) {
-    //     Carte carteInstance = new Carte();
-    //     carteInstance.initialiserPlat();
-    //     carteInstance.initialiserBoisson();
-
-    //     carteInstance.passerCommande();
-    // }
 }

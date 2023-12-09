@@ -8,7 +8,8 @@ import java.util.*;
 
 public class StockDrink {
 
-
+    //Lecture du fichier texte stok.txt et 
+    //retourne une liste avec nom et quantité des ingrédients des boissons
     public static List<Boisson> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
         Charset charset = Charset.forName("windows-1252");
@@ -38,6 +39,7 @@ public class StockDrink {
         return listeBoissons;
     }
 
+    // Ajoute d'un ingrédient avec sa quantité
     public static void ajouterBoisson(String nomFichier, Boisson boisson) throws IOException {
         List<Boisson> listeBoissons = lireFichier(nomFichier);
     
@@ -69,6 +71,7 @@ public class StockDrink {
         }
     }
 
+    // Retire l'ingrédient avec nom et quantité (dans Map)
     public static void retirerBoisson(String nomFichier, Map<String, Integer> boissonsQuantites) throws IOException {
         List<Boisson> listeBoissons = lireFichier(nomFichier);
     

@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 public class Stock {
 
+    //Lecture du fichier texte stok.txt et 
+    //retourne une liste avec nom et quantité des ingrédients des plats
     public static List<Aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
         Charset charset = Charset.forName("windows-1252");
@@ -42,6 +42,7 @@ public class Stock {
         return listeAliments;
     }
 
+    // Ajoute d'un ingrédient avec sa quantité
     public static void ajouterAliment(String nomFichier, Aliment aliment) throws IOException {
         List<Aliment> listeAliments = lireFichier(nomFichier);
 
@@ -70,6 +71,7 @@ public class Stock {
         }
     }
 
+    // Retire les ingrédients avec nom et quantité (dans Map)
     public static void retirerAliment(String nomFichier, Map<String, Integer> ingredients) throws IOException {
         List<Aliment> listeAliments = lireFichier(nomFichier);
 
@@ -125,30 +127,3 @@ public class Stock {
     }
 
 }
-
-/*
- * public static void main(String[] args) {
- * // Exemple d'utilisation
- * carte carteInstance = new carte();
- * 
- * // Initialisation des plats et boissons
- * carteInstance.initialiserPlat();
- * carteInstance.initialiserBoisson();
- * 
- * // Exemple de plat à retirer
- * String platARetirer = "Potage tomate";
- * 
- * // Récupération des ingrédients du plat à retirer
- * Map<String, Integer> ingredientsAretirer =
- * carteInstance.getIngredients(platARetirer);
- * 
- * System.out.println(ingredientsAretirer);
- * try {
- * // Appel de la fonction pour retirer l'aliment du stock
- * stock.retirerAliment("src\\main\\data\\stock.txt", ingredientsAretirer);
- * 
- * } catch (IOException e) {
- * e.printStackTrace();
- * }
- * }
- */

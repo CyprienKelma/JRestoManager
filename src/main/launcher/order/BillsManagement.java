@@ -10,12 +10,13 @@ public class BillsManagement {
 
     private static final String FILE_PATH = "src\\main\\data\\factures.txt";
     
+    // Sauvegarde le String contenant le ticket de caisse en ajoutant un ID+1 du dernier ID
     public static void sauvegardeFacture(String billDetails) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             int billId = getNextBillId();
             String formattedBillDetails = String.format("ID: %d\n%s", billId, billDetails);
 
-            // Append the formatted bill details to the file
+
             writer.write(formattedBillDetails);
             writer.newLine();
         } catch (IOException e) {
@@ -38,6 +39,8 @@ public class BillsManagement {
         e.printStackTrace();
     }
 
+
+    //Affiches Tous les tickets de caisse
     public static void afficherTousLesTickets(Scanner menuScanner) {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -61,6 +64,7 @@ public class BillsManagement {
         }
     }
 
+    // Retire le ticket de caisse de l'id en question
     public static void retirerBill(int billIdToRemove, Scanner menuScanner) {
         try {
             // Utiliser la fonction countLinesBetweenIDs pour déterminer le nombre de lignes à retirer

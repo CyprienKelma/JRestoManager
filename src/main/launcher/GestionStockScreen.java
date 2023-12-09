@@ -11,7 +11,6 @@ import main.carte.Aliment;
 import main.carte.Boisson;
 import main.carte.Stock;
 import main.carte.StockDrink;
-import main.place.Restaurant;
 
 // Classe qui gère l'écran de gestion de stock
 public class GestionStockScreen {
@@ -70,7 +69,7 @@ public class GestionStockScreen {
 
         switch (choixEcran) {
             case "0":
-                // Retour du screen
+                // Retour au menu gestion de stock
                 showGestionScreen(menuScanner);
                 break;
             case "1":

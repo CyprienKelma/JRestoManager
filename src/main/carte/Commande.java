@@ -6,11 +6,12 @@ public class Commande {
     private Map<String, Integer> plats;
     private Map<String, Integer> boissons;
 
+    //Getters et Setter
+
     public Commande() {
         this.plats = new HashMap<>();
         this.boissons = new HashMap<>();
     }
-
 
     public Map<String, Integer> getPlats() {
         return plats;

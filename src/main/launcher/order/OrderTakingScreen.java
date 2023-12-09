@@ -80,13 +80,13 @@ public class OrderTakingScreen {
     }
 
     /*
-     * Fonction qui affiche l'écran de sélection des transactions
-     * Une fois que l'on a choisi le serveur, on affiche la liste de SES transactions
-     * Si l'on appuis sur 0, on créer une nouvelle transaction
-     * Si l'on appuis sur une transaction existante, on redirige vers la fonction
-     * "redirectToAppropriateAction" qui permet, selon l'état de la transaction,
-     * de rediriger vers la fonction appropriée. EX : Si dans la transaction les
-     * clients n'ont pas commandé, on redirige vers la fonction de prise de commande
+    Fonction qui affiche l'écran de sélection des transactions
+    Une fois que l'on a choisi le serveur, on affiche la liste de SES transactions
+    Si l'on appuis sur 0, on créer une nouvelle transaction
+    Si l'on appuis sur une transaction existante, on redirige vers la fonction
+    "redirectToAppropriateAction" qui permet, selon l'état de la transaction,
+    de rediriger vers la fonction appropriée. EX : Si dans la transaction les
+    clients n'ont pas commandé, on redirige vers la fonction de prise de commande
      */
     public static void showOrderSelectionScreen(Scanner menuScanner, Serveur whichWaiter) throws IOException {
 
@@ -121,18 +121,18 @@ public class OrderTakingScreen {
 
             
             /*
-             * On ajoute une nouvelle transaction. Le processus étant assez long, 
-             * il se déroule au sein de la classe OrderCreationScreen
+            On ajoute une nouvelle transaction. Le processus étant assez long, 
+            il se déroule au sein de la classe OrderCreationScreen
              */
             OrderCreationScreen.addNewTransactionScreen(menuScanner, whichWaiter);
 
             /*
-             * Si par contre i > 1, alors c'est que l'on souhaite sélectionner une des
-             * transactions déjà existante pour intéragir avec elle.
-             * On redirige donc vers la fonction "redirectToAppropriateAction" qui permet,
-             * selon l'état de la transaction, de rediriger vers la fonction appropriée
-             * (ex : Si dans la transaction les clients n'ont pas commandé, on redirige vers
-             * la fonction de prise de commande)
+            Si par contre i > 1, alors c'est que l'on souhaite sélectionner une des
+            transactions déjà existante pour intéragir avec elle.
+            On redirige donc vers la fonction "redirectToAppropriateAction" qui permet,
+            selon l'état de la transaction, de rediriger vers la fonction appropriée
+            (ex : Si dans la transaction les clients n'ont pas commandé, on redirige vers
+            la fonction de prise de commande)
              */
         }else if (choixEcranInt == idtable){showOrderTakingScreen(menuScanner);
 
@@ -309,7 +309,7 @@ public class OrderTakingScreen {
             bringPreparedCommand(menuScanner, transaction);
         }
     }
-
+    // Demande la facture 
     public static void askForTheBill(Scanner menuScanner, Transaction transaction) throws IOException{
         
         clearConsole();
@@ -346,6 +346,7 @@ public class OrderTakingScreen {
         }
     }
 
+    // Confirmation de la facture en ajoutant tout dans billStringBuilder puis l'affiche
     public static void confirmTheBill(Scanner menuScanner, Transaction transaction, int nbrfacture) throws IOException {
         clearConsole();
         StringBuilder billStringBuilder = new StringBuilder();
@@ -388,7 +389,7 @@ public class OrderTakingScreen {
         print("\t\t Nous vous remercions de votre visite");
         print("\t\t\t A Bientôt\n");
 
-        // Print the bill
+        // Affiche la Facture
         print(billStringBuilder.toString());
 
 
@@ -415,6 +416,7 @@ public class OrderTakingScreen {
     }
     
 
+    // Demande le paiement non ou plusieurs et combien
     public static void payment(Scanner menuScanner, Transaction transaction) throws IOException{
         
         clearConsole();
@@ -438,6 +440,9 @@ public class OrderTakingScreen {
             confirmTheBill(menuScanner, transaction,1);
         } else if(choixEcran.equals("2")){
 
+
+            // On a choisi de faire un nombre de infinie juste en le divisant par 9
+            // Le client choisit en combien de fois il paie en respéctant la division par 9
             double total = Carte.affichertotalPlatCommande(transaction);
             total += Carte.affichertotalBoissonCommande(transaction);
             int nbrmax = (int) total/9;
