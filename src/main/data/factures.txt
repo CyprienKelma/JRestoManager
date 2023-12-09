@@ -2,16 +2,16 @@ ID: 1
 ============================================================================
 CONFIRMATION D'ADDITION :
 ----------------------------------------------------------------------------
-Table n°1 : Commande encaissée et table libérée
+Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
 ----------------------------------------------------------------------------
 
-La transaction 1 est bien confirmée.
-Les clients ont payé en 1 fois et la table 1 est libérée.
+La transaction 1 est bien confirmï¿½e.
+Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
 
 
 Ticket de caisse :
 ----------------------------------------------------------------------------
-			Commande N°1 - Table n°1
+			Commande Nï¿½1 - Table nï¿½1
 			Serveur : Vitse Hugo
 ----------------------------------------------------------------------------
 			Articles : 
@@ -30,52 +30,67 @@ TOTAL : 75.0 euros
 Par CB : 75.0 euros
 
 
-La transaction 2 est bien confirmée.
-Les clients ont payé en 1 fois et la table 9 est libérée.
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
+----------------------------------------------------------------------------
+
+La transaction 6 est bien confirmï¿½e.
+Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
 
 
 Ticket de caisse :
 ----------------------------------------------------------------------------
-			Commande N°2 - Table n°9
+			Commande Nï¿½6 - Table nï¿½1
 			Serveur : Vitse Hugo
 ----------------------------------------------------------------------------
 			Articles : 
 
-1x Potage tomate - 8.0 euros
+1x Potage oignon - 8.0 euros
+2x Potage tomate - 16.0 euros
+3x Potage champignon - 24.0 euros
 
 
-1x Limonade - 4.0 euros
+3x Limonade - 12.0 euros
+1x Biere sans alcool - 5.0 euros
+2x Cidre doux - 10.0 euros
 
 ----------------------------------------------------------------------------
-TOTAL : 12.0 euros
-Par CB : 12.0 euros
+TOTAL : 75.0 euros
+Par CB : 75.0 euros
 
 
 ID: 2
 ============================================================================
 CONFIRMATION D'ADDITION :
 ----------------------------------------------------------------------------
-Table n°10 : Commande encaissée et table libérée
+Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
 ----------------------------------------------------------------------------
 
-La transaction 3 est bien confirmée.
-Les clients ont payé en 1 fois et la table 10 est libérée.
+La transaction 6 est bien confirmï¿½e.
+Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
 
 
 Ticket de caisse :
 ----------------------------------------------------------------------------
-			Commande N°3 - Table n°10
+			Commande Nï¿½6 - Table nï¿½1
 			Serveur : Vitse Hugo
 ----------------------------------------------------------------------------
 			Articles : 
 
-3x Potage tomate - 24.0 euros
+1x Potage oignon - 8.0 euros
+2x Potage tomate - 16.0 euros
+3x Potage champignon - 24.0 euros
 
 
+3x Limonade - 12.0 euros
+1x Biere sans alcool - 5.0 euros
+2x Cidre doux - 10.0 euros
 
 ----------------------------------------------------------------------------
-TOTAL : 24.0 euros
-Par CB : 24.0 euros
+TOTAL : 75.0 euros
+Par CB : 75.0 euros
 
 
 ID: 1
