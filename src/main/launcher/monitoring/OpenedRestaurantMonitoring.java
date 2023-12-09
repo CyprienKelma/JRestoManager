@@ -38,29 +38,8 @@ public class OpenedRestaurantMonitoring {
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "4":
-                // Appelle la fonction retirerBill en demandant l'id
-                print("\n--------------------------------------------------------------------------");
-                print("Donner l'id de la facture en question pour le retirer");
-                String choixEcran1 = menuScanner.next();
-
-                try {
-                    // Convertir l'entrée utilisateur en un entier (ID)
-                    int idFacture = Integer.parseInt(choixEcran1);
-
-                    // Vérifier si l'ID de la facture existe
-                    if (idFacture > 0 && idFacture <= BillsManagement.getLastBillId()) {
-                        // Appeler la fonction pour retirer la facture
-                        BillsManagement.retirerBill(idFacture,menuScanner);
-                    } else {
-                        // Afficher un message si l'ID de la facture n'est pas valide
-                        print("L'ID de la facture n'existe pas. Veuillez réessayer.");
-                        // Ajouter une logique supplémentaire si nécessaire, comme redemander l'ID.
-                    }
-                } catch (NumberFormatException e) {
-                    // Gérer une exception si l'entrée utilisateur n'est pas un entier
-                    print("Veuillez entrer un ID de facture valide (nombre entier).");
-                }
-
+                // Appelle la fonction choisir et retirer un ticket de caisse
+                BillsManagement.getSelectedBill(menuScanner);
                 break;
             case "5":
                 // Appelle la fonction de l'écran de monitoring
@@ -77,6 +56,7 @@ public class OpenedRestaurantMonitoring {
 
 
     public static void showCloseConfirmationScreen(Scanner menuScanner) throws IOException {
+        clearConsole();
         print("==========================================================================");
         print("                            FERMETURE DU RESTAURANT\n");
 
@@ -108,6 +88,7 @@ public class OpenedRestaurantMonitoring {
     }
 
     public static void showClosedRestaurantNotification(Scanner menuScanner) throws IOException{
+        clearConsole();
         print("==========================================================================");
         print("                            FERMETURE DU RESTAURANT\n");
 

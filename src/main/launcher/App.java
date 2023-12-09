@@ -14,20 +14,21 @@ import main.place.*;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        // Charge tout les fichiers de sauvegarde du projet
+        // Charge tout les fichiers de sauvegarde du projet 
+        // dès le lancement de l'application
         loadAllFile();
-        try {
-            showMainMenu(); // Affiche le menu principal
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        // Affiche le menu principal de l'application
+        showMainMenu();
     }
 
+    // Permet de charger les fichiers de sauvegarde du projet
     public static void loadAllFile() throws Exception {
         SaveEmployee.loadEmployeeListFromTheFile();
         SaveTmpTeam.loadTemporaryVariablesFromFile();
     }
 
+    // Fonction qui affiche le menu principal
     public static void showMainMenu() throws IOException {
         clearConsole();
 
@@ -77,7 +78,7 @@ public class App {
                 EmployeeScreen.showTeamScreen(menuScanner);
                 break;
             case "6":
-                GestionStockScreen.tryShowingGestionScreen(menuScanner);
+                GestionStockScreen.showGestionScreen(menuScanner);
                 // Appelle la fonction de l'écran de gestion de la réserve d'aliments
                 break;
             default:
@@ -85,10 +86,12 @@ public class App {
         }
     }
 
+    // pour écrire plus rapidement "System.out.println"
     public static void print(String text) {
         System.out.println(text);
     }
 
+    // Permet de simuler un clear console
     public static void clearConsole() {
         for (int i = 0; i < 50; ++i)
             System.out.println();

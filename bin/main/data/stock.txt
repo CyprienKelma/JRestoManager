@@ -1,7 +1,7 @@
-Champignon,63
-Tomate,233
-Salade,0
-Oignon,0
+Champignon,60
+Tomate,230
+Salade,100
+Oignon,100
 Pain,101
 Viande,101
 Fromage,190

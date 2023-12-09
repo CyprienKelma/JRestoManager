@@ -52,6 +52,13 @@ public class Restaurant {
         tablesList.add(new Table(10, 8, true));
     }
 
+    // Nombre de connexion au fonctionnalité de monitoring
+    // Cette variable est incrémentée à chaque fois que le manager
+    // se connecte à l'écran monitoring, afin qu'il n'ai pas à se réauthentifier
+    // à chaque fois qu'il souhaite accéder à l'écran monitoring
+    // Au bout de 3 fois, il doit se réauthentifier (voir MonityoringScreen.java)
+    private static int nbrConnexion = 0;
+
     Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
         // C'est une classe utilitaire puisqu'on travaille avec un seul restaurant
@@ -125,5 +132,13 @@ public class Restaurant {
 
     public static void setTablesList(List<Table> tablesList) {
         Restaurant.tablesList = tablesList;
+    }
+
+    public static int getNbrConnexion() {
+        return nbrConnexion;
+    }
+
+    public static void setNbrConnexion(int nbrConnexion) {
+        Restaurant.nbrConnexion = nbrConnexion;
     }
 }

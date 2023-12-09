@@ -20,10 +20,19 @@ public class MonitoringScreen {
 
         clearConsole();
 
+        // Permet de ne pas se réauthentifier à chaque fois qu'il souhaite accéder à l'écran monitoring
+        // Au bout de 3 fois, il doit se réauthentifier "par sécurité" ...(voir MonityoringScreen.java)
+        if(Restaurant.getNbrConnexion() <= 3 && Restaurant.getNbrConnexion() > 0){
+            Restaurant.setNbrConnexion(Restaurant.getNbrConnexion() + 1);
+            showMonitoringScreen(menuScanner);
+        }
+
         print("==========================================================================");
         print("                      AUTENTIFICATION REQUISE\n");
         print("Cette fonctionnalité est réservée aux manager du restaurant.");
-        print("Veuillez entrez vos identifiants administrateur pour accéder au menu de monitoring\n\n");
+        print("Veuillez entrez vos identifiants administrateur pour accéder à ce menu\n");
+        print("Une fois authentifié, vous pourrez accéder à l'écran de monitoring sans");
+        print("vous réauthentifier (3 fois maximum)\n");
         print("--------------------------------------------------------------------------");
         
         print("Veuillez entrer votre identifiant :\n");
@@ -33,6 +42,7 @@ public class MonitoringScreen {
         String password = menuScanner.next();
 
         if (userName.equals("ADMIN") && password.equals("1234")) {
+            Restaurant.setNbrConnexion(Restaurant.getNbrConnexion() + 1);
             showMonitoringScreen(menuScanner);
         } else {
             print("\nIdentifiants incorrects, veuillez réessayer\n");

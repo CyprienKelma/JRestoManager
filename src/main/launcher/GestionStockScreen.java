@@ -13,7 +13,7 @@ import main.carte.Stock;
 import main.carte.StockDrink;
 import main.place.Restaurant;
 
-//Classe qui gère l'écran de gestion de stock
+// Classe qui gère l'écran de gestion de stock
 public class GestionStockScreen {
 
     private GestionStockScreen() {
@@ -23,31 +23,6 @@ public class GestionStockScreen {
         throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
     }
 
-
-    // Fonction qui tente d'afficher l'écran du barman
-    // - Si l'équipe n'est pas encore créée, indique qu'il faut d'abord en créer une
-    // - Si l'équipe est créée, affiche l'écran de selection du cuisinier
-    // (showBarScreen)
-    public static void tryShowingGestionScreen(Scanner menuScanner) throws IOException {
-        if (!Restaurant.isOpen()) {
-            App.clearConsole();
-            print("==========================================================================\n");
-            print("Accés refusé : Le restaurant n'est pas encore ouvert !\n");
-            print("Pour préparer des boissons, votre manager doit d'abord créer une équipe, puis ouvrir le restaurant.\n");
-            print("1 - Retour au menu principal\n");
-
-            String choixEcran = menuScanner.next();
-
-            if (choixEcran.equals("1")) {
-                App.showMainMenu();
-            } else {
-                tryShowingGestionScreen(menuScanner);
-            }
-            
-        }
-        showGestionScreen(menuScanner);
-    }
-
     public static void showGestionScreen(Scanner menuScanner) throws IOException {
         clearConsole();
         print("==========================================================================\n");
@@ -55,27 +30,26 @@ public class GestionStockScreen {
         print("--------------------------------------------------------------------------\n");
         print("                   Quel écran souhaitez-vous afficher ?\n");
         print("--------------------------------------------------------------------------\n");
-        print("0 - Retour au menu principal\n");
-        print("1 - Gestion le Stock des aliments pour les plats\n");
+        print("1 - Gestion le Stock des aliments pour les plats");
         print("2 - Gestion le Stock des aliments pour les boissons\n");
+        print("3 - Retour au menu principal\n\n");
 
         String choixEcran = menuScanner.next();
 
         switch (choixEcran) {
-            case "0":
-                // Retour du screen
+            case "1":
+            // Appelle fontion pour gestion stock Aliment Plat
+            showGestionPlatScreen(menuScanner);
+            break;
+            case "2":
+            // Appelle fontion pour gestion stock Aliment Boissson
+            showGestionBoissonScreen(menuScanner);
+            break;
+            case "3":
                 App.showMainMenu();
                 break;
-            case "1":
-                // Appelle fontion pour gestion stock Aliment Plat
-                showGestionPlatScreen(menuScanner);
-                break;
-            case "2":
-                // Appelle fontion pour gestion stock Aliment Boissson
-                showGestionBoissonScreen(menuScanner);
-                break;
             default:
-                tryShowingGestionScreen(menuScanner);
+                showGestionScreen(menuScanner);
         }
     }
 //----------------------------------------PLATS----------------------------------------------------------
@@ -143,7 +117,7 @@ public class GestionStockScreen {
                 showGestionPlatScreen(menuScanner);
                 break;
             case "1":
-                // Rétour a la fonction
+                // Retour a la fonction
                 showAlimentPlatScreen(menuScanner);
                 break;
             default:
@@ -201,7 +175,6 @@ public class GestionStockScreen {
                 print("\nEntrez la quantité de l'aliment : \n");
                 int quantiteAliment;
                 do {
-                    // Assurez-vous que la quantité est positive
                     quantiteAliment = menuScanner.nextInt();
                     if (quantiteAliment <= 0) {
                         print("La quantité doit être positive. Veuillez réessayer.\n");

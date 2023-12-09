@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import main.launcher.App;
 import main.launcher.employee.TeamScreen;
+import main.launcher.order.BillsManagement;
 import main.place.Restaurant;
 import main.place.StatistiqueService;
 import main.place.Table;
@@ -17,11 +18,13 @@ public class ClosedRestaurantMonitoring {
         print("1 - Voir les performances du dernier service");
         print("2 - Voir la liste de course du dernier service");
         print("3 - Gérer les tables\n");
+        print("4 - Afficher les tickets de caisses enregistré");
+        print("5 - Retirer un ticket de caisse\n");
 
-        print("4 - Ouvrir le restaurant");
+        print("6 - Ouvrir le restaurant");
         print("--------------------------------------------------------------------------\n");
 
-        print("5 - Retour au menu principal\n\n");
+        print("7 - Retour au menu principal\n\n");
 
         String choixEcran = menuScanner.next();
 
@@ -39,11 +42,21 @@ public class ClosedRestaurantMonitoring {
                 showTableManagementScreen(menuScanner);
                 break;
             case "4":
+                // Appelle la fonction pour afficher les tickets de caisses
+                // => Suivi des performances du restaurant
+                // => Impression de la liste de course
+                BillsManagement.afficherTousLesTickets(menuScanner);
+                break;
+            case "5":
+                // Appelle la fonction choisir et retirer un ticket de caisse
+                BillsManagement.getSelectedBill(menuScanner);
+                break;
+            case "6":
                 // On redirige d'abord vers une fonction qui vérifie si le restaurant peut ouvrir
                 // (Si l'équipe est formée et s'il y a assez de table pour accueillir les clients)
                 tryToOpenRestaurant(menuScanner);
                 break;
-            case "5":
+            case "7":
                 // Appelle la fonction de l'écran de monitoring
                 // => Suivi des performances du restaurant
                 // => Impression de la liste de course
@@ -72,7 +85,7 @@ public class ClosedRestaurantMonitoring {
         if(choixEcran.equals("1")){
             MonitoringScreen.showMonitoringScreen(menuScanner);
         } else {
-            MonitoringScreen.showMonitoringScreen(menuScanner);
+            showLastServicePerformance(menuScanner);
         }
     }
 

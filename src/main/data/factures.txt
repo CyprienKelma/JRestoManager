@@ -78,3 +78,33 @@ TOTAL : 24.0 euros
 Par CB : 24.0 euros
 
 
+ID: 1
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°3 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 2 est bien confirmée.
+Les clients ont payé en 1 fois et la table 3 est libérée.
+
+
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°2 - Table n°3
+			Serveur : Kelma Cyprien
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Potage tomate - 8.0 euros
+1x Potage champignon - 8.0 euros
+
+
+2x Limonade - 8.0 euros
+1x Cidre doux - 5.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 29.0 euros
+Par CB : 29.0 euros
+
+

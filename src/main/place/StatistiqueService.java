@@ -44,12 +44,36 @@ public class StatistiqueService {
 
     // Affiche les statistiques actuelles du restaurant
     public static void showActualStatistique(){
+        print("Statistiques générales :");
         print("Nombre de transaction effectués : " + getNbrTransactionStat() + "\n");
+
         print("Nombre de clients venu : " + getNbrClientStat() + "\n");
+
         print("Nombre de plats vendus : " + getNbrPlatsVenduesStat());
         print("Nombre de boissons vendues : " + getNbrBoissonsVenduesStat() + "\n");
-        getMostSelectedElem(platsVendus);
-        getMostSelectedElem(boissonsVendues);
+
+        print("Produit les plus et moins appréciés par les clients :");
+        print("Plats le plus selectionné : " + getMostSelectedElem(platsVendus));
+        print("Boissons la plus selectionnée : " + getMostSelectedElem(boissonsVendues));
+
+        print("Plats le moins selectionné : " + getLessSelectedElem(platsVendus));
+        print("Boissons la moins selectionnée : " + getLessSelectedElem(boissonsVendues) + "\n");
+
+        print("Statistiques par employés :");
+        print("Nombre de transaction effectué par le serveur N°1 (" + Restaurant.getEquipeActuelle().getServeur1().getPrenom() 
+        + ") : " + Restaurant.getEquipeActuelle().getServeur1().getNbrCommandePrise());
+
+        print("Nombre de transaction effectué par le serveur N°2 (" + Restaurant.getEquipeActuelle().getServeur2().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getServeur2().getNbrCommandePrise() + "\n");
+
+        print("Nombre de plats préparés par le cuisinier N°1 (" + Restaurant.getEquipeActuelle().getCuisinier1().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier1().getNbrCommandePrise());
+
+        print("Nombre de plats préparés par le cuisinier N°2 (" + Restaurant.getEquipeActuelle().getCuisinier2().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier2().getNbrCommandePrise() + "\n");
+
+        print("Nombre de commande prise par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrCommandePrise());
     }
 
     // Fonction qui retourne l'élément le plus vendu (plats ou boissons)
@@ -70,6 +94,27 @@ public class StatistiqueService {
             return "Plat le plus apprécié : " + elemPlusVendu + " (" + maxVentes + " ventes)";
         } else {
             return "Boisson la plus appréciée : " + elemPlusVendu + " (" + maxVentes + " ventes)";
+        }
+    }
+
+    // Même chose pour fois les éléments qui ont connus le moins de succés
+    public static String getLessSelectedElem(Map<String, Integer> elements){
+        int minVentes = 0;
+        String elemMoinsVendu = null;
+
+        // On parcours la map pour trouver l'élément le moins vendu
+        for (Map.Entry<String, Integer> entry : elements.entrySet()) {
+            if (entry.getValue() < minVentes) {
+                minVentes = entry.getValue();
+                elemMoinsVendu = entry.getKey();
+            }
+        }
+
+        // En fonction de la map passée en paramètre, on retourne le bon message
+        if(elements == platsVendus){
+            return "Plat le moins apprécié : " + elemMoinsVendu + " (" + minVentes + " ventes)";
+        } else {
+            return "Boisson la moins appréciée : " + elemMoinsVendu + " (" + minVentes + " ventes)";
         }
     }
 

@@ -182,12 +182,6 @@ public class OrderTakingScreen {
                 // Une fois qu'ils ont fini de manger, redirige vers la fonction d'encaissement :
                 askForTheBill(menuScanner, selectedTransaction);
                 break;
-            case CASHED:
-
-                // Dès lors qu'ils ont payés, redirige vers la fonction de libération de la
-                // table de la transaction, et d'impression du ticket de caisse :
-
-                break;
             default:
                 break;
         }
@@ -430,13 +424,13 @@ public class OrderTakingScreen {
         print("Table n°" + transaction.getTable().getNumero() + " : "
                 + transaction.getState().getDescription());
         print("----------------------------------------------------------------------------\n\n");
-        print("0 - Retour confirmation d'addition\n");
-        print("1 - Paiement en 1 fois\n");
+        print("1 - Paiement en 1 fois");
         print("2 - Paiement en plusieurs fois\n");    
+        print("3 - Retour confirmation d'addition\n\n");
 
         String choixEcran = menuScanner.next();
 
-        if(choixEcran.equals("0")){
+        if(choixEcran.equals("3")){
             // Retour confirmation facture :
             askForTheBill(menuScanner, transaction);
         } else if(choixEcran.equals("1")){
