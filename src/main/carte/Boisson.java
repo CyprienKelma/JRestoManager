@@ -5,6 +5,8 @@ public class Boisson {
     private String nom;
     private int quantite;
 
+    //Getters et Setters
+
     public Boisson(String nom, int quantite) {
         this.nom = nom;
         this.quantite = quantite;

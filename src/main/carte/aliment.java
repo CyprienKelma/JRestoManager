@@ -4,6 +4,8 @@ public class Aliment {
     private String nom;
     private int quantite;
 
+    //Getters et Setters
+
     public Aliment(String nom, int quantite) {
         this.nom = nom;
         this.quantite = quantite;
