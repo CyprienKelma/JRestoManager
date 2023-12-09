@@ -1,9 +1,9 @@
 Champignon,60
-Tomate,230
-Salade,100
-Oignon,100
-Pain,101
-Viande,101
-Fromage,190
-Pate,187
-Chorizo,201
+Tomate,23
+Salade,10
+Oignon,10
+Pain,10
+Viande,10
+Fromage,19
+Pate,18
+Chorizo,20

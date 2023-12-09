@@ -48,7 +48,7 @@ public class ClosedRestaurantMonitoring {
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "5":
-                OpenedRestaurantMonitoring.getSelectedBill(menuScanner);
+                OpenedRestaurantMonitoring.deleteSelectedBill(menuScanner);
                 break;
             case "6":
                 // On redirige d'abord vers une fonction qui vérifie si le restaurant peut ouvrir
@@ -100,12 +100,11 @@ public class ClosedRestaurantMonitoring {
         print("stock du restaurant pour le prochain service\n\n");
 
         print("Liste de course : \n");
-        print("--------------------------------------------------------------------------\n");
+        print("--------------------------------------------------------------------------");
         
+        ShoppingList.getLastServiceShoppingList(menuScanner);
 
-
-
-        print("--------------------------------------------------------------------------\n");
+        print("--------------------------------------------------------------------------");
         print("1 - Imprimer la liste de course [BROKEN]\n");
         print("2 - Page précédente\n\n");
         String choixEcran = menuScanner.next();
@@ -118,6 +117,8 @@ public class ClosedRestaurantMonitoring {
         }
         
     }
+
+    
 
     // Permet d'afficher et de gérer les tables du restaurant
     public static void showTableManagementScreen(Scanner menuScanner) throws IOException {
