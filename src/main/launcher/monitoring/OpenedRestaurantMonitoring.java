@@ -55,6 +55,7 @@ public class OpenedRestaurantMonitoring {
                         // Afficher un message si l'ID de la facture n'est pas valide
                         print("L'ID de la facture n'existe pas. Veuillez réessayer.");
                         // Ajouter une logique supplémentaire si nécessaire, comme redemander l'ID.
+                        showOpenedRestaurantMonitoringScreen(menuScanner);
                     }
                 } catch (NumberFormatException e) {
                     // Gérer une exception si l'entrée utilisateur n'est pas un entier
