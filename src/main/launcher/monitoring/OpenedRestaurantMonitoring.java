@@ -38,7 +38,7 @@ public class OpenedRestaurantMonitoring {
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "4":
-                getSelectedBill(menuScanner);
+                deleteSelectedBill(menuScanner);
 
                 break;
             case "5":
@@ -55,7 +55,7 @@ public class OpenedRestaurantMonitoring {
     }
 
     // Fonction pour retirer un ticket de caisse
-    public static void getSelectedBill(Scanner menuScanner) throws IOException {
+    public static void deleteSelectedBill(Scanner menuScanner) throws IOException {
         print("\n--------------------------------------------------------------------------");
         print("Donner l'id de la facture en question pour le retirer");
         String choixEcran1 = menuScanner.next();
@@ -71,12 +71,12 @@ public class OpenedRestaurantMonitoring {
             } else {
                 // Affiche un message si l'ID de la facture n'est pas valide
                 print("L'ID de la facture n'existe pas. Veuillez réessayer.");
-                getSelectedBill(menuScanner);
+                deleteSelectedBill(menuScanner);
             }
         } catch (NumberFormatException e) {
             // Gére une exception si l'entrée utilisateur n'est pas un entier
             print("L'ID de la facture n'est pas valide. Veuillez réessayer.");
-            getSelectedBill(menuScanner);
+            deleteSelectedBill(menuScanner);
         }
     }
 
