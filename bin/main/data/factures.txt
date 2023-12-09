@@ -1,125 +1,29 @@
-ID: 1
+ID: 3
 ============================================================================
 CONFIRMATION D'ADDITION :
 ----------------------------------------------------------------------------
-Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
+Table n°1 : Commande encaissée et table libérée
 ----------------------------------------------------------------------------
 
-La transaction 1 est bien confirmï¿½e.
-Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
+La transaction 1 est bien confirmée.
+Les clients ont payé en 1 fois et la table 1 est libérée.
 
 
 Ticket de caisse :
 ----------------------------------------------------------------------------
-			Commande Nï¿½1 - Table nï¿½1
+			Commande N°1 - Table n°1
 			Serveur : Vitse Hugo
 ----------------------------------------------------------------------------
 			Articles : 
 
-1x Potage oignon - 8.0 euros
-2x Potage tomate - 16.0 euros
-3x Potage champignon - 24.0 euros
+3x Salade simple - 27.0 euros
+1x Salade tomate - 9.0 euros
 
 
-3x Limonade - 12.0 euros
-1x Biere sans alcool - 5.0 euros
-2x Cidre doux - 10.0 euros
+5x Biere sans alcool - 25.0 euros
 
 ----------------------------------------------------------------------------
-TOTAL : 75.0 euros
-Par CB : 75.0 euros
-
-
-============================================================================
-CONFIRMATION D'ADDITION :
-----------------------------------------------------------------------------
-Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
-----------------------------------------------------------------------------
-
-La transaction 6 est bien confirmï¿½e.
-Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
-
-
-Ticket de caisse :
-----------------------------------------------------------------------------
-			Commande Nï¿½6 - Table nï¿½1
-			Serveur : Vitse Hugo
-----------------------------------------------------------------------------
-			Articles : 
-
-1x Potage oignon - 8.0 euros
-2x Potage tomate - 16.0 euros
-3x Potage champignon - 24.0 euros
-
-
-3x Limonade - 12.0 euros
-1x Biere sans alcool - 5.0 euros
-2x Cidre doux - 10.0 euros
-
-----------------------------------------------------------------------------
-TOTAL : 75.0 euros
-Par CB : 75.0 euros
-
-
-ID: 2
-============================================================================
-CONFIRMATION D'ADDITION :
-----------------------------------------------------------------------------
-Table nï¿½1 : Commande encaissï¿½e et table libï¿½rï¿½e
-----------------------------------------------------------------------------
-
-La transaction 6 est bien confirmï¿½e.
-Les clients ont payï¿½ en 1 fois et la table 1 est libï¿½rï¿½e.
-
-
-Ticket de caisse :
-----------------------------------------------------------------------------
-			Commande Nï¿½6 - Table nï¿½1
-			Serveur : Vitse Hugo
-----------------------------------------------------------------------------
-			Articles : 
-
-1x Potage oignon - 8.0 euros
-2x Potage tomate - 16.0 euros
-3x Potage champignon - 24.0 euros
-
-
-3x Limonade - 12.0 euros
-1x Biere sans alcool - 5.0 euros
-2x Cidre doux - 10.0 euros
-
-----------------------------------------------------------------------------
-TOTAL : 75.0 euros
-Par CB : 75.0 euros
-
-
-ID: 1
-============================================================================
-CONFIRMATION D'ADDITION :
-----------------------------------------------------------------------------
-Table n°3 : Commande encaissée et table libérée
-----------------------------------------------------------------------------
-
-La transaction 2 est bien confirmée.
-Les clients ont payé en 1 fois et la table 3 est libérée.
-
-
-Ticket de caisse :
-----------------------------------------------------------------------------
-			Commande N°2 - Table n°3
-			Serveur : Kelma Cyprien
-----------------------------------------------------------------------------
-			Articles : 
-
-1x Potage tomate - 8.0 euros
-1x Potage champignon - 8.0 euros
-
-
-2x Limonade - 8.0 euros
-1x Cidre doux - 5.0 euros
-
-----------------------------------------------------------------------------
-TOTAL : 29.0 euros
-Par CB : 29.0 euros
+TOTAL : 61.0 euros
+Par CB : 61.0 euros
 
 

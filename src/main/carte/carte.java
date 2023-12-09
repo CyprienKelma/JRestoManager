@@ -143,6 +143,8 @@ public class Carte {
         return 0; // or throw an exception indicating that the price is not found
     }
 
+    private Scanner scanner;
+
     public static void passerCommandePlats(Scanner menuScanner, Transaction transaction) throws IOException {
         int choix;
         do {
@@ -321,7 +323,6 @@ public class Carte {
                 scanner.next(); // Effacer l'entrée incorrecte du scanner
             }
         }
-        scanner.close();
     }
     
     
@@ -418,18 +419,35 @@ public class Carte {
     //compare les ingrédients nécessaires avec les ingrédients disponibles dans le stock
     public static List<String> afficherBoissonsDisponibles(List<String> boissons, List<Boisson> stock) {
         List<String> boissonsDisponibles = new ArrayList<>();
-        System.out.println("\nBoissons disponibles : ");
+        print("--------------------------------------------------------------------------");
+        print("Boissons disponibles :");
+        print("--------------------------------------------------------------------------");
     
-        int numeroBoissonDisponible = 1;
+        int numeroBoissonsDisponible = 1;
     
-        for (String boisson : boissons) {
-            // Vérifie si la boisson est présente dans le stock
-            boolean boissonPresente = stock.stream().anyMatch(b -> b.getNom().equals(boisson));
+        for (int i = 0; i < boissons.size(); i++) {
+            String boisson = boissons.get(i);
+            Map<String, Integer> ingredients = new HashMap<>();
+            ingredients.put(boisson, 1);
+            boolean platDisponible = true;
     
-            if (boissonPresente) {
-                System.out.println(numeroBoissonDisponible + ". " + boisson);
-                boissonsDisponibles.add(boisson);
-                numeroBoissonDisponible++;
+            for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
+                String ingredientNom = entry.getKey();
+                int quantiteRequise = entry.getValue();
+    
+                boolean ingredientPresent = stock.stream()
+                    .anyMatch(a -> a.getNom().equals(ingredientNom) && a.getQuantite() >= quantiteRequise);
+    
+                if (!ingredientPresent) {
+                    platDisponible = false;
+                    break;
+                }
+            }
+    
+            if (platDisponible) {
+                System.out.println(numeroBoissonsDisponible + ". " + boisson);
+                boissonsDisponibles.add(boisson); // Ajouter la boisson à la liste des boissons disponibles
+                numeroBoissonsDisponible++;
             }
         }
     
@@ -459,7 +477,6 @@ public class Carte {
         } else {
             System.out.println("Numéro de boisson invalide.");
         }
-        scanner.close();
     }
 
     //affiche les commandes des plats
