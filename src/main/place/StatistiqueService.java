@@ -83,6 +83,9 @@ public class StatistiqueService {
 
         // print("Nombre de boissons préparés par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
         // + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrBoissonPrep() + "\n");
+
+
+        
     }
 
     // Fonction qui retourne l'élément le plus vendu (plats ou boissons)

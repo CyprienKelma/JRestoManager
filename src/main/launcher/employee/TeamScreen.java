@@ -286,9 +286,14 @@ public class TeamScreen {
     // Fonction qui vérifie si l'employé est déjà dans l'équipe
     // => Pour éviter d'ajouter 2 fois le même employé
     public static boolean isAlreadyChoosenFromFile(Employé employé) {
-        if (serveur1Tmp.equals(employé) || serveur2Tmp.equals(employé) || cuisinier1Tmp.equals(employé)
-                || cuisinier2Tmp.equals(employé) || cuisinier3Tmp.equals(employé) || cuisinier4Tmp.equals(employé)
-                || barmanTmp.equals(employé) || managerTmp.equals(employé)) {
+        if (serveur1Tmp != null && serveur1Tmp.equals(employé) || 
+            serveur2Tmp != null && serveur2Tmp.equals(employé) || 
+            cuisinier1Tmp != null && cuisinier1Tmp.equals(employé) ||
+            cuisinier2Tmp != null && cuisinier2Tmp.equals(employé) || 
+            cuisinier3Tmp != null && cuisinier3Tmp.equals(employé) || 
+            cuisinier4Tmp != null && cuisinier4Tmp.equals(employé) ||
+            barmanTmp != null && barmanTmp.equals(employé) || 
+            managerTmp != null && managerTmp.equals(employé)) {
             return true;
         } else {
             return false;
@@ -337,14 +342,14 @@ public class TeamScreen {
     public static void confirmFinalNewTeam(Scanner menuScanner) throws IOException {
 
         // On vérifie si l'quipe est incomplète
-        if (serveur1Tmp.getSalaire() == 0 || serveur2Tmp.getSalaire() == 0) {
+        if (serveur1Tmp == null || serveur2Tmp == null) {
             missingTeamMembers(menuScanner, "Serveur");
-        } else if (cuisinier1Tmp.getSalaire() == 0 || cuisinier2Tmp.getSalaire() == 0 || cuisinier3Tmp.getSalaire() == 0
-                || cuisinier4Tmp.getSalaire() == 0) {
+        } else if (cuisinier1Tmp == null || cuisinier2Tmp == null || cuisinier3Tmp == null
+                || cuisinier4Tmp == null ) {
             missingTeamMembers(menuScanner, "Cuisinier");
-        } else if (barmanTmp.getSalaire() == 0) {
+        } else if (barmanTmp == null) {
             missingTeamMembers(menuScanner, "Barman");
-        } else if (managerTmp.getSalaire() == 0) {
+        } else if (managerTmp == null) {
             missingTeamMembers(menuScanner, "Manager");
         }
 
