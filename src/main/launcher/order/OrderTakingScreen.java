@@ -96,7 +96,7 @@ public class OrderTakingScreen {
         print("SELECTIONNER LA TRANSACTION :");
         print("--------------------------------------------------------------------------");
         print("0 - Ajouter une nouvelle transaction");
-        print(idtable+" - Retour au choix des serveurs");
+        print(idtable + " - Retour au choix des serveurs");
         print("--------------------------------------------------------------------------\n");
 
         // Affiche la liste des transactions en cours sous le format :

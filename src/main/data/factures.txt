@@ -55,3 +55,61 @@ TOTAL : 14.0 euros
 Par CB : 14.0 euros
 
 
+ID: 3
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°1 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 1 est bien confirmée.
+Les clients ont payé en 1 fois et la table 1 est libérée.
+
+
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°1 - Table n°1
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Salade tomate - 9.0 euros
+
+
+1x Limonade - 4.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 13.0 euros
+Par CB : 13.0 euros
+
+
+ID: 4
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°5 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 2 est bien confirmée.
+Les clients ont payé en 2 fois et la table 5 est libérée.
+
+
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°2 - Table n°5
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Salade simple - 9.0 euros
+2x Salade tomate - 18.0 euros
+
+
+1x Biere sans alcool - 5.0 euros
+1x Cidre doux - 5.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 37.0 euros
+Par CB : 37.0 euros
+
+

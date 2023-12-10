@@ -154,6 +154,8 @@ public class OrderCreationScreen {
         instanciateTransaction(menuScanner, whichWaiter, selectedOne, nbrClients);
         StatistiqueService.addTransactionStat();
         StatistiqueService.addClientStat(nbrClients);
+        // On augmente les stats du nombre de table servies par le serveur
+        whichWaiter.incNbrTableServies();
 
         clearConsole();
         print("==========================================================================");

@@ -4,41 +4,28 @@ import java.io.Serializable;
 
 public class Serveur extends Employé implements Serializable {
 
-    // Sert à équilibrer le nombre de table entre les serveurs :
-    protected int nombreDeTables;
+    private static final long serialVersionUID = 123456789L;
+
 
     // Sert à mesurer le nombre total de table que le serveur a servi sur la journée
     protected int nombreDeTablesServies;
 
+    // Sert à indiquer si l'on doit l'afficher ou non dans la liste des serveurs
+    private int nbrJoursConsecutifs;
+
     public Serveur(String nom, String prenom, double salaire) {
         super(nom, prenom, salaire);
-        this.nombreDeTables = 0;
         this.nombreDeTablesServies = 0;
+        this.nbrJoursConsecutifs = 0;
     }
 
-    public void effectuerTache() {
-        System.out.println("Le serveur prend les commandes des clients");
-        nombreDeTablesServies++;
-        nombreDeTables++;
-        servirTable();
+    public void incNbrTableServies() {
+        this.nombreDeTablesServies++;
     }
+
 
     public void servirTable() {
         System.out.println("Le serveur associé à cette table apporte les boissons et plats des clients");
-    }
-
-    /**
-     * @return int return the nombreDeTables
-     */
-    public int getNombreDeTables() {
-        return nombreDeTables;
-    }
-
-    /**
-     * @param nombreDeTables the nombreDeTables to set
-     */
-    public void setNombreDeTables(int nombreDeTables) {
-        this.nombreDeTables = nombreDeTables;
     }
 
     /**

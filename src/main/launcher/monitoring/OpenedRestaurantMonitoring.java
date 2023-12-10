@@ -9,6 +9,13 @@ import main.place.Restaurant;
 import main.place.StatistiqueService;
 
 public class OpenedRestaurantMonitoring {
+
+    OpenedRestaurantMonitoring() {
+        // Constructeur privé pour empêcher l'instanciation des classes "Screen"
+        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
+        throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
+    }
     
 
     public static void showOpenedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException{
@@ -32,14 +39,14 @@ public class OpenedRestaurantMonitoring {
                 showActualServicePerformance(menuScanner);
                 break;
             case "3":
-                // Appelle la fonction pour afficher les tickets de caisses
+                // Appelle la fonction pour afficher les tickets de caisses sauvegardés
                 // => Suivi des performances du restaurant
                 // => Impression de la liste de course
                 BillsManagement.afficherTousLesTickets(menuScanner);
                 break;
             case "4":
+                // Redirige vers la fonction pour retirer un ticket de caisse de la liste
                 deleteSelectedBill(menuScanner);
-
                 break;
             case "5":
                 // Appelle la fonction de l'écran de monitoring

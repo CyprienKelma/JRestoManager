@@ -63,6 +63,8 @@ public class MonitoringScreen {
         }
     }
 
+    // Fonction qui affiche l'écran de monitoring
+    // Le menu de selction des écrans diffère selon que le magasin soit ouvert ou fermé
     public static void showMonitoringScreen(Scanner menuScanner) throws IOException{
 
         clearConsole();
