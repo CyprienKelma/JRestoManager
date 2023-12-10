@@ -24,7 +24,8 @@ public class SaveEmployee {
                 writer.println(employé.getClass().getSimpleName() + ", " +
                         employé.getNom() + ", " +
                         employé.getPrenom() + ", " +
-                        employé.getSalaire());
+                        employé.getSalaire() + ", " +
+                        employé.getNbJoursConsecutifs());
             }
             System.out.println("Liste d'employés sauvegardée avec succès.");
         } catch (IOException e) {
@@ -45,20 +46,21 @@ public class SaveEmployee {
                 String nom = parts[1]; // Nom
                 String prenom = parts[2]; // Prénom
                 double salaire = Double.parseDouble(parts[3]); // Salaire
+                int nbrJoursConsecutifs = Integer.parseInt(parts[4]);
 
                 // On ajoute ensuite l'employé, que l'on instancie en fonction de son type
                 switch (type) {
                     case "Serveur":
-                        Restaurant.getEmployésList().add(new Serveur(nom, prenom, salaire));
+                        Restaurant.getEmployésList().add(new Serveur(nom, prenom, salaire, nbrJoursConsecutifs));
                         break;
                     case "Cuisinier":
-                        Restaurant.getEmployésList().add(new Cuisinier(nom, prenom, salaire));
+                        Restaurant.getEmployésList().add(new Cuisinier(nom, prenom, salaire, nbrJoursConsecutifs));
                         break;
                     case "Barman":
-                        Restaurant.getEmployésList().add(new Barman(nom, prenom, salaire));
+                        Restaurant.getEmployésList().add(new Barman(nom, prenom, salaire, nbrJoursConsecutifs));
                         break;
                     case "Manager":
-                        Restaurant.getEmployésList().add(new Manager(nom, prenom, salaire));
+                        Restaurant.getEmployésList().add(new Manager(nom, prenom, salaire, nbrJoursConsecutifs));
                         break;
                     default:
                         System.err.println("ERREUR : Type d'employé inconnu : " + type);

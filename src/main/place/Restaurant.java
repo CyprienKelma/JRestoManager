@@ -3,6 +3,7 @@ package main.place;
 import java.util.*;
 import main.staff.*;
 import main.carte.*;
+import main.launcher.employee.SaveEmployee;
 
 /*
  * Classe pricipale qui représente le coeur du restaurant
@@ -37,8 +38,10 @@ public class Restaurant {
     private static List<Table> tablesList = new ArrayList<>();
 
     // Initialisation des tables par défaut du restaurant
-    // Dans l'écran monitoring, le manager peut (s'il le souhaite) créer sa composition
-    // de tables personnalisée, mais par défaut, le restaurant est initialisé avec 10 tables
+    // Dans l'écran monitoring, le manager peut (s'il le souhaite) créer sa
+    // composition
+    // de tables personnalisée, mais par défaut, le restaurant est initialisé avec
+    // 10 tables
     static {
         tablesList.add(new Table(1, 2, true));
         tablesList.add(new Table(2, 2, true));
@@ -77,6 +80,40 @@ public class Restaurant {
 
     public static List<Employé> getEmployésList() {
         return employésList;
+    }
+
+    public static void incrementeNbJourConsecutifs(Equipe team) {
+        List<Employé> fullTeam = getEmployésList();
+        // List<Employé> newfullTeam = new ArrayList<>();
+        List<Employé> tmpEquipe = new ArrayList<Employé>();
+        tmpEquipe.add(team.getServeur1());
+        tmpEquipe.add(team.getServeur2());
+        tmpEquipe.add(team.getCuisinier1());
+        tmpEquipe.add(team.getCuisinier2());
+        tmpEquipe.add(team.getCuisinier3());
+        tmpEquipe.add(team.getCuisinier4());
+        tmpEquipe.add(team.getBarman());
+        tmpEquipe.add(team.getManager());
+
+        for (Employé element : fullTeam) {
+            boolean isFind = false;
+            for (Employé element2 : tmpEquipe) {
+                if (element.getNom().equals(element2.getNom()) && element.getPrenom().equals(element2.getPrenom())) {
+                    element.setNbJoursConsecutifs(element.getNbJoursConsecutifs() + 1);
+                    isFind = true;
+                    break;
+                }
+            }
+            if (isFind == false) {
+                element.setNbJoursConsecutifs(0);
+            }
+            // newfullTeam.add(element);
+
+        }
+
+        // setEmployésList(newfullTeam);
+        SaveEmployee.saveEmployeeListToFile();
+
     }
 
     public static void setEmployésList(List<Employé> employésList) {
@@ -122,7 +159,6 @@ public class Restaurant {
     public static void setTransactionId(int transactionId) {
         Restaurant.transactionId = transactionId;
     }
-
 
     public static void setTransactionsList(List<Transaction> transactionsList) {
         Restaurant.transactionsList = transactionsList;

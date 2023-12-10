@@ -6,12 +6,17 @@ public class Barman extends Employé {
     private int nbrBoissonsServies;
 
     // Sert à indiquer si l'on doit l'afficher ou non dans la liste des serveurs
-    private int nbrJoursConsecutifs;
 
     public Barman(String nom, String prenom, double salaire) {
         super(nom, prenom, salaire);
         this.nbrBoissonsServies = 0;
         this.nbrJoursConsecutifs = 0;
+    }
+
+    public Barman(String nom, String prenom, double salaire, int nbrJoursConsecutifs) {
+        super(nom, prenom, salaire);
+        this.nbrBoissonsServies = 0;
+        this.nbrJoursConsecutifs = nbrJoursConsecutifs;
     }
 
     public void effectuerTache() {

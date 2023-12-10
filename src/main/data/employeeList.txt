@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Serveur, Kelma, Cyprien, 9.2
 Serveur, Hugo, Vitse, 9.2
 Serveur, Durieu, Florient, 9.2
@@ -9,3 +10,15 @@ Cuisinier, Deswarte, Wiloup, 7.8
 Barman, Serien, L�a, 13.2
 Manager, Blume, L�on, 12.2
 Cuisinier, Hage, Remi, 12.4
+=======
+Serveur, Kelma, Cyprien, 9.2, 2
+Serveur, Hugo, Vitse, 9.2, 2
+Serveur, Durieu, Florient, 9.2, 0
+Cuisinier, Marceau, L�a, 10.3, 2
+Cuisinier, Degraeve, Remi, 12.1, 2
+Cuisinier, Fruchard, Charles, 12.2, 2
+Cuisinier, Sarazin, Jean, 11.2, 0
+Cuisinier, Deswarte, Wiloup, 7.8, 2
+Barman, Serien, L�a, 13.2, 2
+Manager, Blume, L�on, 12.2, 1
+>>>>>>> 9421a0d3ba3b0db6acd7ea5c2f9e6e790b0d421a

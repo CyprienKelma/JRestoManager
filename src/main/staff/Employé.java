@@ -7,13 +7,13 @@ public abstract class Employé implements Serializable {
     protected String nom;
     protected String prenom;
     protected double salaire;
+    protected int nbrJoursConsecutifs;
 
     Employé(String nom, String prenom, double salaire) {
         this.nom = nom;
         this.prenom = prenom;
         this.salaire = salaire;
     }
-
 
     /**
      * @return String return the nom
@@ -27,6 +27,20 @@ public abstract class Employé implements Serializable {
      */
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    /**
+     * @return String return the nom
+     */
+    public int getNbJoursConsecutifs() {
+        return nbrJoursConsecutifs;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNbJoursConsecutifs(int nbrJoursConsecutifs_) {
+        this.nbrJoursConsecutifs = nbrJoursConsecutifs_;
     }
 
     /**

@@ -16,8 +16,8 @@ import java.util.*;
 
 import main.staff.*;
 
- public class SaveTmpTeam implements Serializable {
-     // src\\main\\data\\temporaryTeam.txt
+public class SaveTmpTeam implements Serializable {
+    // src\\main\\data\\temporaryTeam.txt
 
     // Sauvegarde les variables temporaires dans un fichier
     public static void saveTemporaryVariablesToFile() {
@@ -93,12 +93,25 @@ import main.staff.*;
                     TeamScreen.managerTmp = (Manager) objectInputStream.readObject();
                 }
 
-            }
-
-            catch (EOFException e) {
+            } catch (EOFException e) {
                 System.err.println(
                         "Erreur lors du chargement des variables temporaires depuis le fichier : " + e.getMessage());
             }
+            if (TeamScreen.serveur1Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.serveur1Tmp = null;
+            if (TeamScreen.serveur2Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.serveur2Tmp = null;
+            if (TeamScreen.cuisinier1Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.cuisinier1Tmp = null;
+            if (TeamScreen.cuisinier2Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.cuisinier2Tmp = null;
+            if (TeamScreen.cuisinier3Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.cuisinier3Tmp = null;
+            if (TeamScreen.cuisinier4Tmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.cuisinier4Tmp = null;
+            if (TeamScreen.barmanTmp.getNbJoursConsecutifs() >= 2)
+                TeamScreen.barmanTmp = null;
+
         }
 
     }
