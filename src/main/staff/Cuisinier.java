@@ -6,11 +6,16 @@ public class Cuisinier extends Employé {
     private int nbrPlatsCuisines;
 
     // Sert à indiquer si l'on doit l'afficher ou non dans la liste des serveurs
-    private int nbrJoursConsecutifs;
 
     public Cuisinier(String nom, String prenom, double salaire) {
         super(nom, prenom, salaire);
         this.nbrPlatsCuisines = 0;
         this.nbrJoursConsecutifs = 0;
+    }
+
+    public Cuisinier(String nom, String prenom, double salaire, int nbrJoursConsecutifs) {
+        super(nom, prenom, salaire);
+        this.nbrPlatsCuisines = 0;
+        this.nbrJoursConsecutifs = nbrJoursConsecutifs;
     }
 }

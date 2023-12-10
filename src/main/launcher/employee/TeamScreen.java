@@ -90,8 +90,10 @@ public class TeamScreen {
     }
 
     // Ecran pour choisir les employés pour former l'équipe parmis ceux requis
-    // On utilise un type générique pour pouvoir utiliser cette fonction pour tous les types d'employés
-    public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees) throws IOException {
+    // On utilise un type générique pour pouvoir utiliser cette fonction pour tous
+    // les types d'employés
+    public static <T> void showSelectEmployeesScreen(Scanner menuScanner, Class<T> type, int numberOfEmployees)
+            throws IOException {
         clearConsole();
         print("==========================================================================\n");
         if (numberOfEmployees == 1) { // Pour le barman et manager
@@ -106,13 +108,14 @@ public class TeamScreen {
         }
 
         /*
-         * Selon le type d'employé (i.e. le paramètre 'type'), on va indiquer ceux manquant et ceux déjà sélectionnés
+         * Selon le type d'employé (i.e. le paramètre 'type'), on va indiquer ceux
+         * manquant et ceux déjà sélectionnés
          * - A SELECTIONNER : Lorsque l'employé n'est pas encore sélectionné
          * - NOM PRENOM SALAIRE : Lorsque l'employé est déjà sélectionné
          * Cliquer sur un employé déjà sélectionné permet de modifier son choix
          */
 
-        if(Serveur.class.equals(type)) {
+        if (Serveur.class.equals(type)) {
             if (serveur1Tmp != null) {
                 print("1 - " + type.getSimpleName() + " 1 : " + serveur1Tmp.getPrenom() + " "
                         + serveur1Tmp.getNom());
@@ -125,7 +128,7 @@ public class TeamScreen {
             } else {
                 print("2 - " + type.getSimpleName() + " 2 : A SELECTIONNER");
             }
-        } else if(Cuisinier.class.equals(type)) {
+        } else if (Cuisinier.class.equals(type)) {
             if (cuisinier1Tmp != null) {
                 print("1 - " + type.getSimpleName() + " 1 : " + cuisinier1Tmp.getPrenom() + " "
                         + cuisinier1Tmp.getNom());
@@ -150,14 +153,14 @@ public class TeamScreen {
             } else {
                 print("4 - " + type.getSimpleName() + " 4 : A SELECTIONNER");
             }
-        } else if(Barman.class.equals(type)) {
+        } else if (Barman.class.equals(type)) {
             if (barmanTmp != null) {
                 print("1 - " + type.getSimpleName() + " : " + barmanTmp.getPrenom() + " "
                         + barmanTmp.getNom());
             } else {
                 print("1 - " + type.getSimpleName() + " : A SELECTIONNER");
             }
-        } else if(Manager.class.equals(type)) {
+        } else if (Manager.class.equals(type)) {
             if (managerTmp != null) {
                 print("1 - " + type.getSimpleName() + " : " + managerTmp.getPrenom() + " "
                         + managerTmp.getNom());
@@ -219,8 +222,8 @@ public class TeamScreen {
             // On affiche que les employés du type qui nous concerne (i.e. du paramètre
             // 'type')
             if (employé.getClass().equals(type) &&
-                    !(serveur1Tmp == employé ||
-                            serveur2Tmp == employé)) {
+                    !(serveur1Tmp == employé || serveur2Tmp == employé) &&
+                    employé.getNbJoursConsecutifs() < 2) {
 
                 // Vérifier que l'employé n'est pas déja dans l'équipe :
                 print((j + 1) + ") " + type.getSimpleName() + " : " + employé.getNom() + ", " + employé.getPrenom()
@@ -323,7 +326,8 @@ public class TeamScreen {
 
         if (serveur1Tmp.getSalaire() == 0 || serveur2Tmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Serveur");
-        } else if (cuisinier1Tmp.getSalaire() == 0 || cuisinier2Tmp.getSalaire() == 0 || cuisinier3Tmp.getSalaire() == 0 || cuisinier4Tmp.getSalaire() == 0) {
+        } else if (cuisinier1Tmp.getSalaire() == 0 || cuisinier2Tmp.getSalaire() == 0 || cuisinier3Tmp.getSalaire() == 0
+                || cuisinier4Tmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Cuisinier");
         } else if (barmanTmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Barman");
@@ -389,8 +393,18 @@ public class TeamScreen {
 
         // On définit alors l'équipe actuelle du restaurant
         Restaurant.setEquipeActuelle(newTeam);
+        Restaurant.incrementeNbJourConsecutifs(newTeam);
 
-        //SaveTmpTeam.saveTemporaryVariablesToFile();
+        serveur1Tmp.setNbJoursConsecutifs(serveur1Tmp.getNbJoursConsecutifs() + 1);
+        serveur2Tmp.setNbJoursConsecutifs(serveur2Tmp.getNbJoursConsecutifs() + 1);
+        cuisinier1Tmp.setNbJoursConsecutifs(cuisinier1Tmp.getNbJoursConsecutifs() + 1);
+        cuisinier2Tmp.setNbJoursConsecutifs(cuisinier2Tmp.getNbJoursConsecutifs() + 1);
+        cuisinier3Tmp.setNbJoursConsecutifs(cuisinier3Tmp.getNbJoursConsecutifs() + 1);
+        cuisinier4Tmp.setNbJoursConsecutifs(cuisinier4Tmp.getNbJoursConsecutifs() + 1);
+        barmanTmp.setNbJoursConsecutifs(barmanTmp.getNbJoursConsecutifs() + 1);
+        managerTmp.setNbJoursConsecutifs(managerTmp.getNbJoursConsecutifs() + 1);
+
+        SaveTmpTeam.saveTemporaryVariablesToFile();
 
         // On affiche un message de confirmation
         clearConsole();
