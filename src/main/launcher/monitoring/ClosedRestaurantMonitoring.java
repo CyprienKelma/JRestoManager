@@ -11,9 +11,22 @@ import main.place.StatistiqueService;
 import main.place.Table;
 
 public class ClosedRestaurantMonitoring {
+
+    private ClosedRestaurantMonitoring() {
+        // Constructeur privé pour empêcher l'instanciation des classes "Screen"
+        // Les classes portant l'inscription "Screen" sont des utilitaires qui ne contiennent 
+        // que des méthodes statiques d'affichage, elles ne doivent pas être instanciées
+        throw new IllegalStateException("Classe Screen : utilitaire de méthodes statiques");
+    }
+
+    // Permet de savoir si la liste de course a été enregistrée dans un fichier
+    // dans la fonction showLastServiceShoppingList
+    private static boolean isSaved = false;
     
 
-    public static void showClosedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException{
+    public static void showClosedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException {
+        isSaved = false;
+
         print("--------------------------------------------------------------------------");
         print("1 - Voir les performances du dernier service");
         print("2 - Voir la liste de course du dernier service");
@@ -105,13 +118,18 @@ public class ClosedRestaurantMonitoring {
         ShoppingList.getLastServiceShoppingList(menuScanner);
 
         print("--------------------------------------------------------------------------");
-        print("1 - Imprimer la liste de course [BROKEN]\n");
+        print("1 - Imprimer la liste de course\n");
+        if(isSaved){
+            print("La liste de course a été enregistrée avec succès !\n");
+        }
         print("2 - Page précédente\n\n");
         String choixEcran = menuScanner.next();
 
         if(choixEcran.equals("1")){
             // TODO : Imprime la liste de course
-            
+            ShoppingList.saveShoppingListToFile();
+            isSaved = true;
+            showLastServiceShoppingList(menuScanner);
         } else {
             MonitoringScreen.showMonitoringScreen(menuScanner);
         }
@@ -275,6 +293,9 @@ public class ClosedRestaurantMonitoring {
         if(choixEcran.equals("1")) {
             // On ouvre le restaurant
             Restaurant.setIsOpen(true);
+
+            // On reset l'affiche de la notification de sauvegarde du ticket de caisse
+            ShoppingList.setIsSaved(false);
             // On redirige vers l'écran de notification d'ouverture du restaurant
             showOpenedConfirmationScreen(menuScanner);
         } else if(choixEcran.equals("2")) {
@@ -299,6 +320,10 @@ public class ClosedRestaurantMonitoring {
         } else {
             showOpenedConfirmationScreen(menuScanner);
         }
+    }
+
+    public static void setSaved(boolean b){
+        isSaved = b;
     }
 
 

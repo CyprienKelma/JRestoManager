@@ -27,3 +27,31 @@ TOTAL : 61.0 euros
 Par CB : 61.0 euros
 
 
+ID: 3
+============================================================================
+CONFIRMATION D'ADDITION :
+----------------------------------------------------------------------------
+Table n°1 : Commande encaissée et table libérée
+----------------------------------------------------------------------------
+
+La transaction 1 est bien confirmée.
+Les clients ont payé en 1 fois et la table 1 est libérée.
+
+
+Ticket de caisse :
+----------------------------------------------------------------------------
+			Commande N°1 - Table n°1
+			Serveur : Vitse Hugo
+----------------------------------------------------------------------------
+			Articles : 
+
+1x Salade tomate - 9.0 euros
+
+
+1x Biere sans alcool - 5.0 euros
+
+----------------------------------------------------------------------------
+TOTAL : 14.0 euros
+Par CB : 14.0 euros
+
+

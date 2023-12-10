@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 public class Stock {
 
-    //Lecture du fichier texte stok.txt et 
-    //retourne une liste avec nom et quantité des ingrédients des plats
+    // Lecture du fichier texte stock.txt et 
+    // retourne une liste avec le nom et quantité des ingrédients des plats
     public static List<Aliment> lireFichier(String nomFichier) throws IOException {
         Path fichier = Path.of(nomFichier);
         Charset charset = Charset.forName("windows-1252");

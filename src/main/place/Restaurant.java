@@ -59,6 +59,8 @@ public class Restaurant {
     // Au bout de 3 fois, il doit se réauthentifier (voir MonityoringScreen.java)
     private static int nbrConnexion = 0;
 
+    private static Map<String, Integer> shoppingList = new HashMap<>();
+
     Restaurant() {
         // Constructeur privé pour empêcher l'instanciation des classes "Restaurant"
         // C'est une classe utilitaire puisqu'on travaille avec un seul restaurant
@@ -140,5 +142,13 @@ public class Restaurant {
 
     public static void setNbrConnexion(int nbrConnexion) {
         Restaurant.nbrConnexion = nbrConnexion;
+    }
+
+    public static Map<String, Integer> getShoppingList() {
+        return shoppingList;
+    }
+
+    public static void setShoppingList(Map<String, Integer> newShoppingList) {
+        shoppingList = newShoppingList;
     }
 }
