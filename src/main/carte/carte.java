@@ -407,34 +407,15 @@ public class Carte {
         print("Boissons disponibles :");
         print("--------------------------------------------------------------------------");
 
-        int numeroBoissonsDisponible = 1;
+        int index = 1;
 
-        for (int i = 0; i < boissons.size(); i++) {
-            String boisson = boissons.get(i);
-            Map<String, Integer> ingredients = new HashMap<>();
-            ingredients.put(boisson, 1);
-            boolean platDisponible = true;
-
-            for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
-                String ingredientNom = entry.getKey();
-                int quantiteRequise = entry.getValue();
-
-                boolean ingredientPresent = stock.stream()
-                        .anyMatch(a -> a.getNom().equals(ingredientNom) && a.getQuantite() >= quantiteRequise);
-
-                if (!ingredientPresent) {
-                    platDisponible = false;
-                    break;
-                }
-            }
-
-            if (platDisponible) {
-                System.out.println(numeroBoissonsDisponible + ". " + boisson);
-                boissonsDisponibles.add(boisson); // Ajouter la boisson à la liste des boissons disponibles
-                numeroBoissonsDisponible++;
+        for (Boisson boisson : stock) {
+            if (boisson.getQuantite() > 0) {
+                System.out.println(index + ". " + boisson.getNom());
+                index += 1;
+                boissonsDisponibles.add(boisson.getNom());
             }
         }
-
         return boissonsDisponibles;
     }
 
