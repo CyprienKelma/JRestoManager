@@ -214,6 +214,7 @@ public class TeamScreen {
         // On va utiliser une variable j pour afficher les numéros des employés
         int j = 0;
 
+        // if(Restaurant.getEmployésList().contains())
         // On affiche la liste des employés du type qui nous concerne
         // Par exemple n'afficher que les serveurs quand on selectionne nos 2 serveurs
         for (int i = 0; i < Restaurant.getEmployésList().size(); i++) {
@@ -328,7 +329,6 @@ public class TeamScreen {
             numberOfEmployees = 4;
         else
             numberOfEmployees = 1;
-
         if (choixEcran == 1) {
             showSelectEmployeesScreen(menuScanner, type, numberOfEmployees);
         } else if (choixEcran == 2) {

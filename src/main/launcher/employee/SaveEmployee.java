@@ -33,8 +33,7 @@ public class SaveEmployee {
         }
     }
 
-    // Charge la liste des employés depuis le fichier, lors du lancement de
-    // l'application
+    // Charge la liste des employés depuis le fichier, lors du lancement de l'application
     public static void loadEmployeeListFromTheFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src\\main\\data\\employeeList.txt"))) {
             String line;

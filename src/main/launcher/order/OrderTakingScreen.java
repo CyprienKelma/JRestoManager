@@ -91,12 +91,11 @@ public class OrderTakingScreen {
     public static void showOrderSelectionScreen(Scanner menuScanner, Serveur whichWaiter) throws IOException {
 
         clearConsole();
-        int idtable = Restaurant.getTransactionsListSize() +1;
+        int idtable = Restaurant.getTransactionsListSize() + 1;
         print("==========================================================================");
         print("SELECTIONNER LA TRANSACTION :");
         print("--------------------------------------------------------------------------");
         print("0 - Ajouter une nouvelle transaction");
-        print(idtable + " - Retour au choix des serveurs");
         print("--------------------------------------------------------------------------\n");
 
         // Affiche la liste des transactions en cours sous le format :
@@ -111,15 +110,15 @@ public class OrderTakingScreen {
                         + Restaurant.getTransactionsList().get(i).getState().getDescription());
             }
         }
-
-        print("\n\n");
+        print("--------------------------------------------------------------------------\n");
+        print(Restaurant.getTransactionsListSize() + 1 + " - Retour au menu principal\n\n");
+        
         String choixEcran = menuScanner.next();
         int choixEcranInt = Integer.parseInt(choixEcran);
 
         // Quand on ajoute une nouvelle transaction, on redirige vers la fonction de création de transaction
         if (choixEcran.equals("0")) {
 
-            
             /*
             On ajoute une nouvelle transaction. Le processus étant assez long, 
             il se déroule au sein de la classe OrderCreationScreen
@@ -134,8 +133,9 @@ public class OrderTakingScreen {
             (ex : Si dans la transaction les clients n'ont pas commandé, on redirige vers
             la fonction de prise de commande)
              */
-        }else if (choixEcranInt == idtable){showOrderTakingScreen(menuScanner);
+        }else if (choixEcranInt == idtable){
 
+            showOrderTakingScreen(menuScanner);
         } else if (choixEcranInt >= 1 && choixEcranInt <= Restaurant.getTransactionsListSize()) {
 
             // Désigne la transaction d'indice i (avec i = choixEcran - 1) :
@@ -145,6 +145,8 @@ public class OrderTakingScreen {
             // (selon l'état de celle-ci)
             redirectToAppropriateAction(menuScanner, whichWaiter, selectedTransaction);
 
+        } else if(choixEcranInt == Restaurant.getTransactionsListSize() + 1) {
+            App.showMainMenu();
         } else {
             // Si le choix n'est pas valide, on réaffiche l'écran de sélection des transactions
             showOrderSelectionScreen(menuScanner, whichWaiter);

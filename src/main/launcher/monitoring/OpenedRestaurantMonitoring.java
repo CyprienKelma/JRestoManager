@@ -20,8 +20,8 @@ public class OpenedRestaurantMonitoring {
 
     public static void showOpenedRestaurantMonitoringScreen(Scanner menuScanner) throws IOException{
         print("--------------------------------------------------------------------------");
-        print("1 - Mettre fin au service et fermer le restaurant");
-        print("2 - Voir les performances actuelles\n");
+        print("1 - Mettre fin au service et fermer le restaurant\n");
+        print("2 - Voir les performances actuelles du service");
         print("3 - Afficher les tickets de caisses enregistré");
         print("4 - Retirer un ticket de caisse\n");
 
@@ -130,14 +130,33 @@ public class OpenedRestaurantMonitoring {
         print("Vous pouvez désormais les consulter dans l'écran de monitoring.");
 
         print("--------------------------------------------------------------------------");
-        print("1 - Retour au menu principal\n\n");
+        print("1 - Indiquer aux employés de nettoyer le magasin\n\n");
 
         String choixEcran = menuScanner.next();
         if(choixEcran.equals("1")) {
-            // On redirige vers le menu principal
-            App.showMainMenu();
+            showCleanRestaurantConfirmation(menuScanner);
         } else {
             showClosedRestaurantNotification(menuScanner);
+        }
+    }
+
+    public static void showCleanRestaurantConfirmation(Scanner menuScanner) throws IOException {
+        clearConsole();
+        print("==========================================================================");
+        print("                            FERMETURE DU RESTAURANT\n\n");
+
+        print("A présent, le restaurant est fermé. Néanmoins, n'oubliez pas d'indiquer aux");
+        print("employés de nettoyer le magasin avant de partir.\n\n");
+
+        print("--------------------------------------------------------------------------");
+        print("1 - Indiquer que les employés ont tous bien néttoyé le magasin");
+        print("    et retourner au menu principale\n\n");
+
+        String choixEcran = menuScanner.next();
+        if(choixEcran.equals("1")) {
+            App.showMainMenu();
+        } else {
+            showCleanRestaurantConfirmation(menuScanner);
         }
     }
 
