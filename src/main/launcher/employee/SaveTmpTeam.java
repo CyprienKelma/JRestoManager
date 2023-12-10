@@ -50,14 +50,14 @@ import main.staff.*;
 
         long tailleFichier = Files.size(chemin);
         if (tailleFichier == 0) {
-            TeamScreen.serveur1Tmp = new Serveur("Nom", "Prénom", 0);
-            TeamScreen.serveur2Tmp = new Serveur("Nom", "Prénom", 0);
-            TeamScreen.cuisinier1Tmp = new Cuisinier("Nom", "Prénom", 0);
-            TeamScreen.cuisinier2Tmp = new Cuisinier("Nom", "Prénom", 0);
-            TeamScreen.cuisinier3Tmp = new Cuisinier("Nom", "Prénom", 0);
-            TeamScreen.cuisinier4Tmp = new Cuisinier("Nom", "Prénom", 0);
-            TeamScreen.barmanTmp = new Barman("Nom", "Prénom", 0);
-            TeamScreen.managerTmp = new Manager("Nom", "Prénom", 0);
+            TeamScreen.serveur1Tmp = null; // new Serveur("Nom", "Prénom", 0);
+            TeamScreen.serveur2Tmp = null; // new Serveur("Nom", "Prénom", 0);
+            TeamScreen.cuisinier1Tmp = null; // new Cuisinier("Nom", "Prénom", 0);
+            TeamScreen.cuisinier2Tmp = null; // new Cuisinier("Nom", "Prénom", 0);
+            TeamScreen.cuisinier3Tmp = null; // new Cuisinier("Nom", "Prénom", 0);
+            TeamScreen.cuisinier4Tmp = null; // new Cuisinier("Nom", "Prénom", 0);
+            TeamScreen.barmanTmp = null; // new Barman("Nom", "Prénom", 0);
+            TeamScreen.managerTmp = null; // new Manager("Nom", "Prénom", 0);
         } else {
             try (FileInputStream fileInputStream = new FileInputStream("src\\main\\data\\temporaryTeam.txt");
                     ObjectInputStream objectInputStream = new ObjectInputStream(

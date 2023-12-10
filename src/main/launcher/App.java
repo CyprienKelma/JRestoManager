@@ -25,7 +25,7 @@ public class App {
     // Permet de charger les fichiers de sauvegarde du projet
     public static void loadAllFile() throws Exception {
         SaveEmployee.loadEmployeeListFromTheFile();
-        //SaveTmpTeam.loadTemporaryVariablesFromFile();
+        SaveTmpTeam.loadTemporaryVariablesFromFile();
     }
 
     // Fonction qui affiche le menu principal
