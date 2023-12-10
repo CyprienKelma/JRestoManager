@@ -102,8 +102,10 @@ public class TeamScreen {
             print("CHOISIR LES " + type.getSimpleName().toUpperCase() + "S :\n");
             print("Vous devez choisir " + numberOfEmployees + " " + type.getSimpleName().toLowerCase()
                     + "s qui travailleront durant tout ce service.\n");
-
         }
+
+        print("RAPPEL : Conformément à la réglementation en vigueur, les employés affichés");
+        print("sont ceux n'ayant pas déja travaillés 2 jours de suite.\n");
 
         /*
          * Selon le type d'employé (i.e. le paramètre 'type'), on va indiquer ceux manquant et ceux déjà sélectionnés
@@ -186,7 +188,6 @@ public class TeamScreen {
 
             App.showMainMenu(); // Au dela de 2, on reviens au menu principale
         } else {
-
             showSelectEmployeesScreen(menuScanner, type, numberOfEmployees);
         }
     }
@@ -203,7 +204,7 @@ public class TeamScreen {
         if (whichOne == 1) {
             print("Selectionner un premier " + type.getSimpleName() + "à ajouter parmis la liste :");
         } else {
-            print("Selectionner un " + whichOne + "ème " + type.getSimpleName() + "à ajouter parmis la liste :");
+            print("Selectionner un " + whichOne + "ème " + type.getSimpleName().toLowerCase() + " à ajouter parmis la liste :");
         }
 
         // Puisque la liste va être filtrée (on ne veut que les serveurs par exemple)
@@ -216,13 +217,14 @@ public class TeamScreen {
 
             Employé employé = Restaurant.getEmployésList().get(i);
 
-            // On affiche que les employés du type qui nous concerne (i.e. du paramètre
-            // 'type')
-            if (employé.getClass().equals(type) &&
-                    !(serveur1Tmp == employé ||
-                            serveur2Tmp == employé)) {
+            // Vérifier que l'employé n'est pas déja dans l'équipe :
+            if(tmpList.contains(employé) || isAlreadyChoosenFromFile(employé)){
+                continue;
+            }
 
-                // Vérifier que l'employé n'est pas déja dans l'équipe :
+            // On affiche que les employés du type qui nous concerne (i.e. du paramètre 'type')
+            if (employé.getClass().equals(type)) {
+            
                 print((j + 1) + ") " + type.getSimpleName() + " : " + employé.getNom() + ", " + employé.getPrenom()
                         + ", "
                         + employé.getSalaire() + " euros/h net.");
@@ -278,6 +280,18 @@ public class TeamScreen {
         }
     }
 
+    // Fonction qui vérifie si l'employé est déjà dans l'équipe
+    // => Pour éviter d'ajouter 2 fois le même employé
+    public static boolean isAlreadyChoosenFromFile(Employé employé) {
+        if (serveur1Tmp.equals(employé) || serveur2Tmp.equals(employé) || cuisinier1Tmp.equals(employé)
+                || cuisinier2Tmp.equals(employé) || cuisinier3Tmp.equals(employé) || cuisinier4Tmp.equals(employé)
+                || barmanTmp.equals(employé) || managerTmp.equals(employé)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static <T extends Employé> void notifyAddTeam(Scanner menuScanner, Employé selectedOne, int whichOne,
             Class<T> type) throws IOException {
 
@@ -320,7 +334,6 @@ public class TeamScreen {
     public static void confirmFinalNewTeam(Scanner menuScanner) throws IOException {
 
         // On vérifie si l'quipe est incomplète
-
         if (serveur1Tmp.getSalaire() == 0 || serveur2Tmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Serveur");
         } else if (cuisinier1Tmp.getSalaire() == 0 || cuisinier2Tmp.getSalaire() == 0 || cuisinier3Tmp.getSalaire() == 0 || cuisinier4Tmp.getSalaire() == 0) {
@@ -330,6 +343,9 @@ public class TeamScreen {
         } else if (managerTmp.getSalaire() == 0) {
             missingTeamMembers(menuScanner, "Manager");
         }
+
+        // Ou alors s'il y a des membres en double
+        twoSameTeamate(menuScanner);
 
         clearConsole();
         print("==========================================================================\n");
@@ -381,6 +397,60 @@ public class TeamScreen {
         }
     }
 
+    // Fonction qui vérifie si l'équipe contient des doublons
+    // prendra en paramètre les employés de l'équipe (tmp)
+    public static boolean hasDuplicates(Employé... employés) {
+        // n désigne le nombre d'employés dans l'équipe
+        int n = employés.length;
+        
+        // On parcourt tous les employés de l'équipe
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                String employé1Nom = employés[i].getNom();
+                String employé2Nom = employés[j].getNom();
+
+                String employé1Prenom = employés[i].getPrenom();
+                String employé2Prenom = employés[j].getPrenom();
+                
+                // On vérifie si les deux employés sont les mêmes
+                if (employés[i] != null && employés[j] != null && employé1Nom.equals(employé2Nom) && employé1Prenom.equals(employé2Prenom)) {
+                    return true;  // Si les employés sont identiques, alors il y a un doublon
+                }
+            }
+        }
+        
+        return false;  // Si vraiment aucun doublon trouvé
+    }
+
+    // Utilisation de la méthode dans votre fonction existante
+    public static void twoSameTeamate(Scanner menuScanner) throws IOException {
+        // On vérifie si l'équipe contient des doublons
+        if (hasDuplicates(serveur1Tmp, serveur2Tmp, cuisinier1Tmp, cuisinier2Tmp, cuisinier3Tmp,
+                cuisinier4Tmp, barmanTmp, managerTmp)) {
+
+            clearConsole();
+            print("==========================================================================\n");
+            print("ERREUR : L'équipe n'est pas valide !");
+            print("Vous ne pouvez pas ajouter 2 fois le même employé dans l'équipe.\n");
+            print("Veuillez vérifier votre sélection pour voir où vous avez choisi le même en double.\n\n");
+
+            print("\n--------------------------------------------------------------------------");
+            print("1 - Page précédente");
+            print("2 - Retour au menu principal\n");
+
+            int choixEcran = menuScanner.nextInt();
+
+            if (choixEcran == 1) {
+                showTeamFormationScreen(menuScanner);
+            } else if (choixEcran == 2) {
+                App.showMainMenu();
+            } else {
+                confirmFinalNewTeam(menuScanner);
+            }
+        }
+    }
+
+
     public static void instanciateTeam() throws IOException {
         // On instancie l'équipe avec les employés temporaires
         Equipe newTeam = new Equipe(serveur1Tmp, serveur2Tmp, cuisinier1Tmp, cuisinier2Tmp, cuisinier3Tmp,
@@ -390,7 +460,7 @@ public class TeamScreen {
         // On définit alors l'équipe actuelle du restaurant
         Restaurant.setEquipeActuelle(newTeam);
 
-        //SaveTmpTeam.saveTemporaryVariablesToFile();
+        SaveTmpTeam.saveTemporaryVariablesToFile();
 
         // On affiche un message de confirmation
         clearConsole();

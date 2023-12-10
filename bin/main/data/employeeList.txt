@@ -8,3 +8,4 @@ Cuisinier, Sarazin, Jean, 11.2
 Cuisinier, Deswarte, Wiloup, 7.8
 Barman, Serien, L�a, 13.2
 Manager, Blume, L�on, 12.2
+Cuisinier, Hage, Remi, 12.4
