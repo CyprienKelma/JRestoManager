@@ -18,4 +18,19 @@ public class Cuisinier extends Employé {
         this.nbrPlatsCuisines = 0;
         this.nbrJoursConsecutifs = nbrJoursConsecutifs;
     }
+
+
+    /**
+     * @return int return the nbrPlatsCuisines
+     */
+    public int getNbrPlatsCuisines() {
+        return nbrPlatsCuisines;
+    }
+
+    /**
+     * @param nbrPlatsCuisines the nbrPlatsCuisines to set
+     */
+    public void setNbrPlatsCuisines(int nbrPlatsCuisines) {
+        this.nbrPlatsCuisines = nbrPlatsCuisines;
+    }
 }

@@ -100,7 +100,7 @@ public class Carte {
         boisson.addAll(liste5);
     }
 
-    //Obtient les ingrédients des plats avec leur quantité dans une Map
+    // Obtient les ingrédients des plats avec leur quantité dans une Map
     public static Map<String, Integer> getIngredients(String plat) {
         Map<String, Integer> ingredients = new HashMap<>();
     

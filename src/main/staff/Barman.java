@@ -5,8 +5,6 @@ public class Barman extends Employé {
     // Mesure pour les statistiques
     private int nbrBoissonsServies;
 
-    // Sert à indiquer si l'on doit l'afficher ou non dans la liste des serveurs
-
     public Barman(String nom, String prenom, double salaire) {
         super(nom, prenom, salaire);
         this.nbrBoissonsServies = 0;
@@ -21,5 +19,19 @@ public class Barman extends Employé {
 
     public void effectuerTache() {
         System.out.println("Le barman travaille");
+    }
+
+    /**
+     * @return int return the nbrBoissonsServies
+     */
+    public int getNbrBoissonsServies() {
+        return nbrBoissonsServies;
+    }
+
+    /**
+     * @param nbrBoissonsServies the nbrBoissonsServies to set
+     */
+    public void setNbrBoissonsServies(int nbrBoissonsServies) {
+        this.nbrBoissonsServies = nbrBoissonsServies;
     }
 }

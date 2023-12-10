@@ -1,14 +1,14 @@
 Pain, 70
 Champignon, 59
-Oignon, 30
 Tomate, 61
+Oignon, 30
 Viande, 49
 Pate, 62
 Chorizo, 50
 Fromage, 61
 Salade, 86
 Jus de Fruits, 30
-Cidre doux, 48
 Limonade, 44
-Verre d'eau, 2500
+Cidre doux, 48
 Biere sans alcool, 34
+Verre d'eau, 2500

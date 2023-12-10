@@ -16,12 +16,12 @@ public class StatistiqueService {
         throw new IllegalStateException("Classe Restaurant : pas d'instances requises");
     }
 
-    // Statistiques usuelles du restaurant lors d'un service
+    // Statistiques usuelles du restaurant lors d'un service :
     private static int nbrTransaction = 0;
     private static int nbrClient = 0;
     private static int nbrPlatsVendues = 0;
     private static int nbrBoissonsVendues = 0;
-
+    private static double chiffreAffaire = 0; // Chiffre d'affaire du restaurant sur la soirée
 
 
     // Map qui contient le nom des plat et les nombre de fois qu'ils ont étés vendu
@@ -40,52 +40,48 @@ public class StatistiqueService {
         nbrBoissonsVendues = 0;
         platsVendus.clear();
         boissonsVendues.clear();
+        chiffreAffaire = 0;
     }
 
     // Affiche les statistiques actuelles du restaurant
     public static void showActualStatistique(){
-        print("Statistiques générales :");
-        print("Nombre de transaction effectués : " + getNbrTransactionStat() + "\n");
+        print("Statistiques générales :\n");
 
+        print("Chiffre d'affaire : " + getChiffreAffaire() + " euros\n");
+        print("Nombre de transaction effectués : " + getNbrTransactionStat());
         print("Nombre de clients venu : " + getNbrClientStat() + "\n");
 
         print("Nombre de plats vendus : " + getNbrPlatsVenduesStat());
         print("Nombre de boissons vendues : " + getNbrBoissonsVenduesStat() + "\n");
 
-        print("Produit les plus et moins appréciés par les clients :");
-        print("Plats le plus selectionné : " + getMostSelectedElem(platsVendus));
-        print("Boissons la plus selectionnée : " + getMostSelectedElem(boissonsVendues));
+        print("Produit les plus et moins appréciés par les clients :\n");
 
-        print("Plats le moins selectionné : " + getLessSelectedElem(platsVendus));
+        print("Plats le plus selectionné : " + getMostSelectedElem(platsVendus));
+        print("Plats le moins selectionné : " + getLessSelectedElem(platsVendus) + "\n");
+        print("Boissons la plus selectionnée : " + getMostSelectedElem(boissonsVendues));
         print("Boissons la moins selectionnée : " + getLessSelectedElem(boissonsVendues) + "\n");
 
-        print("Statistiques par employés :");
+        print("Statistiques par employés :\n ");
         print("Nombre de transaction effectué par le serveur N°1 (" + Restaurant.getEquipeActuelle().getServeur1().getPrenom() 
         + ") : " + Restaurant.getEquipeActuelle().getServeur1().getNombreDeTablesServies());
 
         print("Nombre de transaction effectué par le serveur N°2 (" + Restaurant.getEquipeActuelle().getServeur2().getPrenom()
         + ") : " + Restaurant.getEquipeActuelle().getServeur2().getNombreDeTablesServies() + "\n");
 
-        // print("Nombre de plats préparés par le cuisinier N°1 (" + Restaurant.getEquipeActuelle().getCuisinier1().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier1().getNbrCommandePrise());
+        print("Nombre de plats préparés par le cuisinier N°1 (" + Restaurant.getEquipeActuelle().getCuisinier1().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier1().getNbrPlatsCuisines());
 
-        // print("Nombre de plats préparés par le cuisinier N°2 (" + Restaurant.getEquipeActuelle().getCuisinier2().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier2().getNbrCommandePrise() + "\n");
+        print("Nombre de plats préparés par le cuisinier N°2 (" + Restaurant.getEquipeActuelle().getCuisinier2().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier2().getNbrPlatsCuisines() + "\n");
 
-        // print("Nombre de plats préparés par le cuisinier N°3 (" + Restaurant.getEquipeActuelle().getCuisinier3().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier3().getNbrCommandePrise() + "\n");
+        print("Nombre de plats préparés par le cuisinier N°3 (" + Restaurant.getEquipeActuelle().getCuisinier3().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier3().getNbrPlatsCuisines() + "\n");
 
-        // print("Nombre de plats préparés par le cuisinier N°4 (" + Restaurant.getEquipeActuelle().getCuisinier4().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getCuisinier4().getNbrCommandePrise() + "\n");
+        print("Nombre de plats préparés par le cuisinier N°4 (" + Restaurant.getEquipeActuelle().getCuisinier4().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getCuisinier4().getNbrPlatsCuisines() + "\n");
 
-        // print("Nombre de commande prise par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrCommandePrise());
-
-        // print("Nombre de boissons préparés par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
-        // + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrBoissonPrep() + "\n");
-
-
-        
+        print("Nombre de commande prise par le barman (" + Restaurant.getEquipeActuelle().getBarman().getPrenom()
+        + ") : " + Restaurant.getEquipeActuelle().getBarman().getNbrBoissonsServies());
     }
 
     // Fonction qui retourne l'élément le plus vendu (plats ou boissons)
@@ -137,6 +133,26 @@ public class StatistiqueService {
         plats.forEach((key, value) -> platsVendus.put(key, platsVendus.getOrDefault(key, 0) + value));
     }
 
+
+
+    /* --------------------------- GETTER ET SETTER USUELLES :  --------------------------- */
+
+    // Fonction qui retourne le chiffre d'affaire du restaurant
+    public static double getChiffreAffaire() {
+        return chiffreAffaire;
+    }
+
+    // Fonction qui ajoute un chiffre d'affaire au restaurant
+    public static void addChiffreAffaire(double chiffreAffaire) {
+        StatistiqueService.chiffreAffaire += chiffreAffaire;
+    }
+
+
+    // Remet le chiffre d'affaire à 0 (lorsque l'on commence un nouveau service)
+    public static void resetChiffreAffaire() {
+        StatistiqueService.chiffreAffaire = 0;
+    }
+
     // Fonction qui retourne la map des plats vendus
     public static Map<String, Integer> getPlatsVendus() {
         return platsVendus;
@@ -163,10 +179,6 @@ public class StatistiqueService {
     public static void addClientStat(int number){
         nbrClient += number;
     }
-
-    
-
-    // GETTER ET SETTER USUELLES :
 
     /**
      * @return int return the nbrTransaction

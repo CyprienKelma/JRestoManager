@@ -382,8 +382,7 @@ public class OrderTakingScreen {
         }
     
         billStringBuilder.append("\n----------------------------------------------------------------------------\n");
-        double total = Carte.affichertotalPlatCommande(transaction);
-        total = total + Carte.affichertotalBoissonCommande(transaction);
+        double total = Carte.affichertotalPlatCommande(transaction) + Carte.affichertotalBoissonCommande(transaction);
         billStringBuilder.append("TOTAL : " + total + " euros\n");
         billStringBuilder.append("Par CB : " + total + " euros\n\n");
         print("\t\t Nous vous remercions de votre visite");
@@ -399,15 +398,18 @@ public class OrderTakingScreen {
         String choixEcran = menuScanner.next();
 
         if (choixEcran.equals("1")) {
+
+            StatistiqueService.addChiffreAffaire(total);
+
             // On change l'état de la transaction sur CASHED :
             // Ce qui veut dire que les clients ont payé et que la table est libérée
             transaction.setState(TransactionState.CASHED);
     
             // On libère la table :
             transaction.getTable().setDisponible(true);
-    
             // Appel de la fonction pour sauvegarder le ticket de caisse dans le fichier "facture.txt"
             BillsManagement.sauvegardeFacture(billStringBuilder.toString());
+
             // On retourne à la sélection des transactions :
             showOrderSelectionScreen(menuScanner, transaction.getServeurAssociate());
         } else {
